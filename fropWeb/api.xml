@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<api>
+	<description>
+		<![CDATA[This is an API to interact with all the simple items]]>
+	</description>
+	
+	<command id='simple' security='public'>
+		<description><![CDATA[This simple API lets you do something simple]]></description>
+		<index>
+			<description><![CDATA[This is how you can get a listing of all simple items]]></description>
+			<action file='simple.php'><![CDATA[listItems();]]></action>
+		</index>
+		<get>
+			<description><![CDATA[This is how you can get a specific simple item]]></description>
+			<action file='simple.php'><![CDATA[getItem($_REST['simple']);]]></action>
+		</get>
+		<post>
+			<description><![CDATA[This is how you can create a simple item]]></description>
+			<action file='simple.php'><![CDATA[addItem($_POST['itemValue']);]]></action>
+		</post>
+		<put>
+			<description><![CDATA[This is how you can update a simple item]]></description>
+			<action file='simple.php'><![CDATA[updateItem($_REST['simple'],$_POST['itemValue']);]]></action>
+		</put>
+		<delete>
+			<description><![CDATA[This is how you can delete a simple item]]></description>
+			<action file='simple.php'><![CDATA[deleteItem($_REST['simple']);]]></action>
+		</delete>
+	</command>
+</api>
