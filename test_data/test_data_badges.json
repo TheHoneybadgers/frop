@@ -1,0 +1,35 @@
+{
+    "badges": [
+        {
+            "BADGE_ID": "1",
+            "NAME": "Pledge",
+            "GOAL": "5",
+            "GOAL_UNITS": "Event Check-ins",
+            "DESCRIPTION": "Join the ranks of the pledges by attending 5 events put on by any organization.",
+            "CUSTOM_PIC_URL": "http://bit.ly/18rs2bI",
+            "ADDED_DATE": "2013-10-28T10:39:23",
+            "DATE_CHANGED": "2013-11-01T03:30:00"
+        },
+        {
+            "BADGE_ID": "2",
+            "NAME": "Frosh",
+            "GOAL": "20",
+            "GOAL_UNITS": "Event Check-ins",
+            "DESCRIPTION": "Attain frosh status by attending at least 20 events put on by any organization.",
+            "PRE_REQ": "1",
+            "CUSTOM_PIC_URL": "http://bit.ly/18rs2bI",
+            "ADDED_DATE": "2013-10-18T09:49:25",
+            "DATE_CHANGED": "2013-11-01T07:37:23"
+        },
+        {
+            "BADGE_ID": "3",
+            "NAME": "Al-Be Regular",
+            "GOAL": "5",
+            "GOAL_UNITS": "Al-Be Event Check-ins",
+            "DESCRIPTION": "Check-in at 5 events put on by Al-Be.",
+            "CUSTOM_PIC_URL": "http://bit.ly/18rs2bI",
+            "ADDED_DATE": "2013-10-24T13:29:26",
+            "DATE_CHANGED": "2013-10-29T05:57:20"
+        }
+    ]
+}
