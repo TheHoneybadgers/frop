@@ -1,0 +1,36 @@
+{
+    "orgs": [
+        {
+            "ORG_ID": "1",
+            "LETTERS": "Alpha Alpha",
+            "GOV_ORG_ID": "1",
+            "CHAPTER": "Alpha Beta",
+            "NICKNAME": "Al-Be",
+            "TYPE": "Fraternity",
+            "FOCUS": "Social",
+            "YEAR_FOUNDED": "1801",
+            "YEAR_CHAPTER_FOUNDED": "1886",
+            "BLURB": "Alpha Alpha has long been known as a fraternity with a rich history of involvement and character. The handsome men of Al-Be strive to be the best men they can be in and out of the classroom.",
+            "ADDRESS": "66 5th St NW|Atlanta, GA 30308",
+            "FOURSQUARE": "4adc6aabf964a5202f2c21e3",
+            "HOMEPAGE_URL": "http://bit.ly/7hNh",
+            "CUSTOM_PIC_URL": "http://bit.ly/16ECqQ8"
+        },
+        {
+            "ORG_ID": "2",
+            "LETTERS": "Beta Beta",
+            "GOV_ORG_ID": "1",
+            "CHAPTER": "Beta Beta",
+            "NICKNAME": "4-Be",
+            "TYPE": "Fraternity",
+            "FOCUS": "Social",
+            "YEAR_FOUNDED": "1869",
+            "YEAR_CHAPTER_FOUNDED": "1901",
+            "BLURB": "Beta Beta chapter of Beta Beta is one of the strongest chapters on campus, as well as in the country. 4-Be has cultivated the spirit of being the next best thing; whether it's performing in academics, or being the 2nd runner up in every homecoming event for 15 straight years. 4-Be is the place to be if you yearn to be surrounded by above average individuals.",
+            "ADDRESS": "428 Ponce de Leon Avenue NW|Atlanta, GA 30308-2015",
+            "FOURSQUARE": "4c0d7c65d64c0f47f4cc265d",
+            "HOMEPAGE_URL": "http://bit.ly/17aRau",
+            "CUSTOM_PIC_URL": "http://bit.ly/1715Nq7"
+        }
+    ]
+}
