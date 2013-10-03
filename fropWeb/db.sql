@@ -108,6 +108,18 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   PRIMARY KEY (`USER_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping test data into tables
+--
+
+--
+-- events
+--
+
+INSERT INTO `EVENTS` (`EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE` ,`SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`) VALUES
+(1, '2013-10-31', 1, 'Al-Be\'s Halloween Bash', '522f836711d26c041fd70a09', 'Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL', '2013-10-31T21:00:00', '2013-11-01T03:30:00', '2013-10-28T10:39:23', 'Come out to the Al-Be Hallow\'s Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!', 'Party', 'Halloween Costume Party', 1),
+(3, '2013-11-02', '2', '4-Be\'s Halloween Carousal', '522f836711d26c041fd70a09', 'Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL', '2013-11-02T22:00:00', '2013-11-03T04:00:00', '2013-10-30T16:32:11', 'Come party it up with 4-Be\'s annual Halloween Costume Party. Enter the judging for a chance to show off your costume and win prizes!', 'Party', 'Halloween Costume Party', 0)
+
 --REMOVE BELOW HERE (from example)--
 
 --
