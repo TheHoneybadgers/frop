@@ -1,7 +1,53 @@
 <?xml version="1.0"?>
 <api>
 	<description>
-		<![CDATA[This is an API to interact with frop db]]>
+		<![CDATA[This is an API to intEract with frop db]]>
 	</description>
-
+	
+	
+	<command id='event' security='public'>
+		<description><![CDATA[This simple API lets you add and remove events]]></description>
+		
+		<index>
+			<description><![CDATA[This is how you can get a listing of all events]]></description>
+			
+			<action file='events.php'><![CDATA[listEvents();]]></action>
+		</index>
+		
+		<get>
+			<description><![CDATA[This is how you can get a specific event]]></description>
+			
+			<action file='events.php'><![CDATA[getEvent($_REST['event']);]]></action>
+		</get>
+		
+		<post>
+			<description><![CDATA[This is how you can create an event]]></description>
+			
+			<action file='events.php'><![CDATA[addevent($_POST['eventText']);]]></action>
+			
+			<param id='eventText'>
+				<description><![CDATA[event Text]]></description>
+				<defaultValue><![CDATA[some default event text]]></defaultValue>
+				<exampleValue><![CDATA[some example event text]]></exampleValue>
+			</param>
+		</post>
+		
+		<put>
+			<description><![CDATA[This is how you can update a event]]></description>
+			
+			<action file='events.php'><![CDATA[updatEevent($_REST['event'],$_POST['eventText']);]]></action>
+			
+			<param id='eventText'>
+				<description><![CDATA[event Text To Update]]></description>
+				<defaultValue><![CDATA[some default event text update]]></defaultValue>
+				<exampleValue><![CDATA[some example event text update]]></exampleValue>
+			</param>
+		</put>
+		
+		<delete>
+			<description><![CDATA[This is how you can delete a event]]></description>
+			
+			<action file='events.php'><![CDATA[deletEevent($_REST['event']);]]></action>
+		</delete>
+	</command>
 </api>
