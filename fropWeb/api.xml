@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <api>
 	<description>
-		<![CDATA[This is an API to intEract with frop db]]>
+		<![CDATA[This is an API to interact with frop db]]>
 	</description>
 	
 	
@@ -23,7 +23,7 @@
 		<post>
 			<description><![CDATA[This is how you can create an event]]></description>
 			
-			<action file='events.php'><![CDATA[addevent($_POST['eventText']);]]></action>
+			<action file='events.php'><![CDATA[addEvent($_POST['eventText']);]]></action>
 			
 			<param id='eventText'>
 				<description><![CDATA[event Text]]></description>
@@ -35,7 +35,7 @@
 		<put>
 			<description><![CDATA[This is how you can update a event]]></description>
 			
-			<action file='events.php'><![CDATA[updatEevent($_REST['event'],$_POST['eventText']);]]></action>
+			<action file='events.php'><![CDATA[updateEvent($_REST['event'],$_POST['eventText']);]]></action>
 			
 			<param id='eventText'>
 				<description><![CDATA[event Text To Update]]></description>
@@ -47,7 +47,7 @@
 		<delete>
 			<description><![CDATA[This is how you can delete a event]]></description>
 			
-			<action file='events.php'><![CDATA[deletEevent($_REST['event']);]]></action>
+			<action file='events.php'><![CDATA[deleteEvent($_REST['event']);]]></action>
 		</delete>
 	</command>
 </api>
