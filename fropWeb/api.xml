@@ -50,5 +50,35 @@
 			<action file='events.php'><![CDATA[deleteEvent($_REST['event']);]]></action>
 		</delete>
 		-->
+		
+		<command id='badges' security='public'>
+			<description><![CDATA[This allows you to see badges]]></description>
+			
+			<get>
+				<description><![CDATA[This is how you can get details about a specific badge]]></description>
+				
+				<action file='events.php'><![CDATA[getEvent($_REST['badge']);]]></action>
+			</get>
+		</command>
+	</command>
+
+	<command id='orgs' security='public'>
+		<description><![CDATA[This allows you to see, add, and remove organizations]]></description>
+		
+		<get>
+			<description><![CDATA[This method allows you to get details about an organization]]></description>
+			
+			<action file='orgs.php'><![CDATA[getOrg($_REST['org']);]]></action>
+		</get>
+	</command>
+
+	<command id='gov_orgs' security='public'>
+		<description><![CDATA[This allows you to see, add, and remove governing organizations]]></description>
+		
+		<get>
+			<description><![CDATA[This method allows you to get details about a specific governing organization]]></description>
+			
+			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['govOrg']);]]></action>
+		</get>
 	</command>
 </api>
