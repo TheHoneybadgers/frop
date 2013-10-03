@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding = "utf-8" ?>
+<widget title="Sample Widget">
+    <library name="jquery"/>
+    <library name="gtmob"/>
+	
+    <html file="your_html.html"/>
+	<javascript file="your_html.js"/>
+    <library name="jquery.mobile"/> 
+</widget>
