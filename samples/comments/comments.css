@@ -1,0 +1,8 @@
+.comment_form{
+	width: 100%;
+}
+.comment_form textarea{
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+}
