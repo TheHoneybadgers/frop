@@ -1,0 +1,65 @@
+<div data-role="page" id="list_comments_page">
+    <div data-role='header' data-position='inline' data-theme='d'>
+	    <h1>Comment Widget</h1>
+        <a id='add_comment_page_button' href='#add_comment_page' data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+   	</div>
+	
+	<div id="content" data-role="content">
+		<ul id="comments_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="comment_list_row_template" type="text/x-jquery-tmpl">
+				<li class="comment_list_row" id="comment_${id}">
+					<a href='#edit_comment_page&comment_id=${id}' data-transition="slide">
+						<h1>${comment}</h1>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+<!--******************************************************************************************************************************-->
+<div data-role="page" id="add_comment_page">
+	<div data-role="header" data-position="inline" data-theme='d'>
+		<a href="#list_comments_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+        <h1 class='head_title'>Add Comment</h1>
+        <a id="add_button" href="#list_comments_page" data-direction="reverse" data-icon="plus" data-theme="d">Add</a>
+    </div>
+	<div id="add_comment_content" data-role="content">
+		<div class="comment_form">
+			<textarea rows="8" id="add_comment_text"></textarea>
+        </div>
+	</div>
+</div>
+<!--******************************************************************************************************************************-->
+<div data-role="page" id="edit_comment_page">
+	<div data-role="header" data-position="inline" data-theme='d'>
+		<a href="#list_comments_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+        <h1 class='head_title'>Edit Comment</h1>
+        <a id="save_button" href="#list_comments_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a>
+    </div>
+	<div id="edit_comment_content" data-role="content">		
+		<div class="comment_form">
+			<textarea rows="8" id="edit_comment_text"></textarea>
+        </div>
+		<center>
+			<a id='remove_button' href='#list_comments_page' data-direction="reverse" data-role='button' data-inline="true" data-icon="minus">Remove comment</a>
+		</center>
+	</div>
+</div>
+<!--******************************************************************************************************************************-->
+<div data-role="dialog" id="error_dialog" >
+	<div data-role="header" data-position="inline" data-theme='d'>
+        <h1 role="heading">Error</h1>
+    </div>
+	<div id="error_dialog_content" data-role="content">
+		<script id="error_message_template" type="text/x-jquery-tmpl">
+			<div id="error_message">
+				<center>
+					<p>	An unexpected error occurred<br />
+						<span id="errorName">${errorName}</span><br />
+						<span id="errorDescription">${errorDescription}</span>
+					</p>
+				</center>
+			</div>
+		</script>
+	</div><!-- /content -->
+</div><!-- /dialog -->
