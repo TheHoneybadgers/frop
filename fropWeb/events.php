@@ -15,6 +15,14 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
+	
+	function getThisWeek() {
+		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `DATE` > CURDATE() AND `DATE` < CURDATE() + 7",
+			mysql_real_escape_string($event));
+		$result=getDBResultRecord($dbQuery);
+		header("Content-type: application/json");
+		echo json_encode($result);
+	}
 
 /*	
 	function addEvent($event) {
