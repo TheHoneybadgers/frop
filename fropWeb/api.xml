@@ -14,7 +14,7 @@
 			<description><![CDATA[By designating 'badges/{BADGE_ID}', you can get details about a specific badge including how to earn it, its title and description, and when it was created.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[getEvent($_REST['badge']);]]></action>
+			<action file='badges.php'><![CDATA[getEvent($_REST['badge']);]]></action>
 		</get>
 	</command>
 	
