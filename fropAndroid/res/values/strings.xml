@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FropAndroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">History</string>
+    <string name="title_section2">Events</string>
+    <string name="title_section3">Submit</string>
+
+</resources>
