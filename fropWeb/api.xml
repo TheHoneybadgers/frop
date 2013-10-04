@@ -10,11 +10,18 @@
 		<description><![CDATA[This section reveals data about the Badges available to be earned through the use of the program.]]>
 		</description>
 		
+		<index>
+			<description><![CDATA[This returns a listing of all badges.]]>
+			</description>
+			
+			<action file='badges.php'><![CDATA[listBadges();]]></action>
+		</index>
+		
 		<get>
 			<description><![CDATA[By designating 'badges/{BADGE_ID}', you can get details about a specific badge including how to earn it, its title and description, and when it was created.]]>
 			</description>
 			
-			<action file='badges.php'><![CDATA[getEvent($_REST['badge']);]]></action>
+			<action file='badges.php'><![CDATA[getBadge($_REST['badge']);]]></action>
 		</get>
 	</command>
 	
@@ -90,6 +97,13 @@
 	<command id='gov_orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>
 		
+		<index>
+			<description><![CDATA[This returns a listing of all governing organizations.]]>
+			</description>
+			
+			<action file='gov_orgs.php'><![CDATA[listGovOrgs();]]></action>
+		</index>
+		
 		<get>
 			<description><![CDATA[This method, 'gov_orgs/{GOV_ORG_ID}', allows you to get details about a specific governing organization.]]></description>
 			
@@ -115,7 +129,7 @@
 			<get>
 				<description><![CDATA[This method, 'gov_orgs/[anything]/orgs/{ORG_ID} allows you to get a list of organizations that are governed by the specified governing organization]]></description>
 			
-				<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['govOrg']);]]></action>
+				<action file='gov_orgs.php'><![CDATA[getOrgs($_REST['govOrg']);]]></action>
 			</get>
 		
 		</command> <!-- Closes nested orgs -->
@@ -126,7 +140,14 @@
 <!-- ORGS API -->
 	<command id='orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove organizations]]></description>
-	
+		
+		<index>
+			<description><![CDATA[This returns a listing of all organizations.]]>
+			</description>
+			
+			<action file='orgs.php'><![CDATA[listOrgs();]]></action>
+		</index>
+		
 		<get>
 			<description><![CDATA[By designating 'orgs/{ORG_ID}', details about a specific organization will be returned.]]></description>
 		
@@ -173,12 +194,12 @@
 		<description><![CDATA[This week returns all events that are approved and start on or after the current day.]]>
 		</description>
 		
-		<get> <!-- TODO this might be supposed to be <index> -->
+		<index> <!-- TODO this might be supposed to be <index> -->
 			<description><![CDATA[This week returns all events that are approved and start on or after the current day.]]>
 			</description>
 			
 			<action file='events.php'><![CDATA[getThisWeek();]]></action>
-		</get>
+		</index>
 	</command>
 	
 </api>
