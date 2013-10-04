@@ -1,4 +1,4 @@
-package com.example.fropandroid;
+package com.honeybadgers.fropandroid;
 
 import java.util.Locale;
 
