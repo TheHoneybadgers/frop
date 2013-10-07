@@ -6,7 +6,7 @@
 	
 	
 <!-- Badges API -->
-	<command id='badges' security='public'>
+	<command id='badge' security='public'>
 		<description><![CDATA[This section reveals data about the Badges available to be earned through the use of the program.]]>
 		</description>
 		
@@ -27,7 +27,7 @@
 	
 	
 <!-- Events API -->
-	<command id='events' security='public'>
+	<command id='event' security='public'>
 		<description><![CDATA[This section allows you to see events and their details. If you are logged in and have the correct permissions, you will be able to add, modify, and remove events for which you are authorized. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]>
 		</description>
 		
@@ -80,7 +80,7 @@
 		
 		
 		<!-- EVENTS/ORGS API -->
-		<command id='orgs' security='public'>
+		<command id='org' security='public'>
 			<description><![CDATA[This section allows you to see event details of specific organizations. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]></description>
 		
 			<get>
@@ -94,7 +94,7 @@
 
 
 <!-- GOV_ORGS API -->
-	<command id='gov_orgs' security='public'>
+	<command id='gov_org' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>
 		
 		<index>
@@ -107,7 +107,7 @@
 		<get>
 			<description><![CDATA[This method, 'gov_orgs/{GOV_ORG_ID}', allows you to get details about a specific governing organization.]]></description>
 			
-			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['govOrg']);]]></action>
+			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['gov_org']);]]></action>
 		</get>
 		
 		<post> <!-- TODO should be private -->
@@ -123,7 +123,7 @@
 			</param>
 		</post>
 		
-		<command id='orgs' security='public'>
+		<command id='org' security='public'>
 			<description><![CDATA[This allows you to see organizations that are governed by the specified governing organization.]]></description>
 		
 			<get>
@@ -138,7 +138,7 @@
 	
 	
 <!-- ORGS API -->
-	<command id='orgs' security='public'>
+	<command id='org' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove organizations]]></description>
 		
 		<index>
