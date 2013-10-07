@@ -6,7 +6,7 @@
 	
 	
 <!-- Badges API -->
-	<command id='badge' security='public'>
+	<command id='badges' security='public'>
 		<description><![CDATA[This section reveals data about the Badges available to be earned through the use of the program.]]>
 		</description>
 		
@@ -21,13 +21,13 @@
 			<description><![CDATA[By designating 'badges/{BADGE_ID}', you can get details about a specific badge including how to earn it, its title and description, and when it was created.]]>
 			</description>
 			
-			<action file='badges.php'><![CDATA[getBadge($_REST['badge']);]]></action>
+			<action file='badges.php'><![CDATA[getBadge($_REST['badges']);]]></action>
 		</get>
 	</command>
 	
 	
 <!-- Events API -->
-	<command id='event' security='public'>
+	<command id='events' security='public'>
 		<description><![CDATA[This section allows you to see events and their details. If you are logged in and have the correct permissions, you will be able to add, modify, and remove events for which you are authorized. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]>
 		</description>
 		
@@ -42,16 +42,16 @@
 			<description><![CDATA[By designating 'events/{EVENT_ID}', a specific event will be returned along with its details, whether it has happened already or not.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[getEvent($_REST['event']);]]></action>
+			<action file='events.php'><![CDATA[getEvent($_REST['events']);]]></action>
 		</get>
 		
 		<post> <!-- TODO should be private -->
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[addEvent($_POST['eventText']);]]></action>
+			<action file='events.php'><![CDATA[addEvent($_POST['eventsText']);]]></action>
 			
-			<param id='eventText'>
+			<param id='eventsText'>
 				<description><![CDATA[Data related to the event.]]></description>
 				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
 				<exampleValue><![CDATA[{"EVENT_ID": "1","DATE": "2013-10-31","ORG_ID": "1","TITLE": "Al-Be's Halloween Bash","FOURSQUARE": "522f836711d26c041fd70a09","ADDRESS": "Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL","START_TIME": "2013-10-31T21:00:00","END_TIME": "2013-11-01T03:30:00","SUMMARY": "Come out to the Al-Be Hallow's Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!","TYPE": "Party","SPECIAL_NOTES": "Halloween Costume Party","ALCOHOL": "true"}]]>
@@ -80,13 +80,13 @@
 		
 		
 		<!-- EVENTS/ORGS API -->
-		<command id='org' security='public'>
+		<command id='orgs' security='public'>
 			<description><![CDATA[This section allows you to see event details of specific organizations. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]></description>
 		
 			<get>
 				<description><![CDATA[This method, 'events/[anything]/orgs/{ORG_ID}', allows you to narrow returned events to just those associated with a specified organization.]]></description>
 			
-				<action file='orgs.php'><![CDATA[getOrg($_REST['org']);]]></action>
+				<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
 			</get>
 		</command> <!-- Closes nested orgs -->
 	
@@ -94,7 +94,7 @@
 
 
 <!-- GOV_ORGS API -->
-	<command id='gov_org' security='public'>
+	<command id='gov_orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>
 		
 		<index>
@@ -107,29 +107,29 @@
 		<get>
 			<description><![CDATA[This method, 'gov_orgs/{GOV_ORG_ID}', allows you to get details about a specific governing organization.]]></description>
 			
-			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['gov_org']);]]></action>
+			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['gov_orgs']);]]></action>
 		</get>
 		
 		<post> <!-- TODO should be private -->
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='gov_orgs.php'><![CDATA[addGovOrg($_POST['govOrgText']);]]></action>
+			<action file='gov_orgs.php'><![CDATA[addGovOrg($_POST['gov_orgsText']);]]></action>
 			
-			<param id='govOrgText'> <!-- TODO Can the acronym be done without the need to ask for it? -->
+			<param id='gov_orgsText'> <!-- TODO Can the acronym be done without the need to ask for it? -->
 				<description><![CDATA[Add a Governing Organization by supplying its name and acronym, and get its index in return.]]></description>
 				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
 				<exampleValue><![CDATA[{"NAME": "Governing Org","ACRONYM": "GO"}]]></exampleValue>
 			</param>
 		</post>
 		
-		<command id='org' security='public'>
+		<command id='orgs' security='public'>
 			<description><![CDATA[This allows you to see organizations that are governed by the specified governing organization.]]></description>
 		
 			<get>
 				<description><![CDATA[This method, 'gov_orgs/[anything]/orgs/{ORG_ID} allows you to get a list of organizations that are governed by the specified governing organization]]></description>
 			
-				<action file='gov_orgs.php'><![CDATA[getOrgs($_REST['govOrg']);]]></action>
+				<action file='gov_orgs.php'><![CDATA[getOrgs($_REST['gov_orgs']);]]></action>
 			</get>
 		
 		</command> <!-- Closes nested orgs -->
@@ -138,7 +138,7 @@
 	
 	
 <!-- ORGS API -->
-	<command id='org' security='public'>
+	<command id='orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove organizations]]></description>
 		
 		<index>
@@ -151,14 +151,14 @@
 		<get>
 			<description><![CDATA[By designating 'orgs/{ORG_ID}', details about a specific organization will be returned.]]></description>
 		
-			<action file='orgs.php'><![CDATA[getOrg($_REST['org']);]]></action>
+			<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
 		</get>
 		
 		<post> <!-- TODO should be private -->
 			<description><![CDATA[The post method allows the posting of new orgs if the user is logged in and authorized to submit organizations.]]>
 			</description>
 			
-			<action file='orgs.php'><![CDATA[addOrg($_POST['orgText']);]]></action>
+			<action file='orgs.php'><![CDATA[addOrg($_POST['orgsText']);]]></action>
 			
 			<param id='orgsText'>
 				<description><![CDATA[Data related to the org.]]></description>
