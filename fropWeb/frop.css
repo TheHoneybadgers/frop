@@ -1,0 +1,8 @@
+.event_form{
+	width: 100%;
+}
+.event_form textarea{
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+}
