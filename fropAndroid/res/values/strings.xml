@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Frop</string>
-	<string name="action_settings">Settings</string>
-	<string name="hello_world">Hello world!</string>
+    <string name="app_name">Frop</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About Frop</string>
+    <string name="title_section1">History</string>
+    <string name="title_section2">Events</string>
+    <string name="title_section3">Submit</string>
+    
+    <string name="about_us">
+\ The Honeybadgers\n
+Devin Gonzalez - Lead, fropWeb\n
+David Greenhalgh - Project Manager\n
+David Long - Lead, fropAndroid\n
+Taylor Peet - Lead, Product Dev\n
+Sagar Raut - UI/UX Guru
+        
+    </string>
+    <string name="ok">OK</string>
 
 </resources>
