@@ -23,11 +23,11 @@
 		echo json_encode($result);
 	}
 
-## TODO make this addGovOrg()	
-#	function getGovOrg() {
-#		$dbQuery = sprintf("SELECT `GOV_ORG_ID`, `NAME`, `ACRONYM` FROM `GOV_ORGS` WHERE `GOV_ORG_ID` = '%s'", mysql_real_escape_string($gov_orgs));
-#		$result = getDBResultsArray($dbQuery);
-#		header("Content-type: application/json");
-#		echo json_encode($result);
-#	}
+	function addGovOrg($govOrgName, $govOrgAcronym) {
+		$dbQuery = sprintf("INSERT INTO `GOV_ORGS` (`NAME`, `ACRONYM`) VALUES ('%s', '%s')", mysql_real_escape_string($govOrgNameb), mysql_real_escape_string($govOrgAcronym));
+		//echo "Query " . $dbQuery . "</br>";
+		$result = getDBResultInserted($dbQuery,'GOV_ORG_ID');
+		header("Content-type: application/json");
+		echo json_encode($result) . "</br>";
+	}
 ?>

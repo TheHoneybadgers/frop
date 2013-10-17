@@ -182,12 +182,15 @@
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='gov_orgs.php'><![CDATA[addGovOrg($_POST['gov_orgsText']);]]></action>
+			<action file='gov_orgs.php'><![CDATA[addGovOrg($_POST['govOrgName'], $_POST['govOrgAcronym']);]]></action>
 			
-			<param id='gov_orgsText'> <!-- TODO Can the acronym be done without the need to ask for it? -->
-				<description><![CDATA[Add a Governing Organization by supplying its name and acronym, and get its index in return.]]></description>
-				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
-				<exampleValue><![CDATA[('Interfraternity Council', 'IFC'}]]></exampleValue>
+			<param id='govOrgName'>
+				<description><![CDATA[Governing Organization's name]]></description>
+				<exampleValue><![CDATA[Interfraternity Council]]></exampleValue>
+			</param>
+			<param id='govOrgAcronym'>
+				<description><![CDATA[Governing Organization's acronym]]></description>
+				<exampleValue><![CDATA[IFC]]></exampleValue>
 			</param>
 		</post>
 		
@@ -221,27 +224,75 @@
 		
 			<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
 		</get>
-		
-		<post> <!-- TODO should be private -->
-			<description><![CDATA[The post method allows the posting of new orgs if the user is logged in and authorized to submit organizations.]]>
+		<!-- TODO TODO TODO TODO TODO TODO -->
+		<post>
+			<description><![CDATA[The post method allows the posting of new organizations if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='orgs.php'><![CDATA[addOrg($_POST['orgsText']);]]></action>
+			`ORG_ID`, `LETTERS`, `GOV_ORG_ID`, `CHAPTER`, `NICKNAME`, `TYPE`, `FOCUS`, `YEAR_FOUNDED`, `YEAR_CHAPTER_FOUNDED`, `BLURB`, `FOURSQUARE`, `ADDRESS`, `HOMEPAGE_URL`, `CUSTOM_PIC_URL`
 			
-			<param id='orgsText'>
-				<description><![CDATA[Data related to the org.]]></description>
-				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
-				<exampleValue><![CDATA[('Alpha Alpha', '1', 'Alpha Beta', 'Al-Be', 'Fraternity', 'Social', '1801', '1886', 'Alpha Alpha has long been known as a fraternity with a rich history of involvement and character. The handsome men of Al-Be strive to be the best men they can be in and out of the classroom.', '66 5th St NW|Atlanta, GA 30308', '4adc6aabf964a5202f2c21e3', 'http://bit.ly/7hNh', 'http://bit.ly/16ECqQ8')]]>
-				</exampleValue>
+			<action file='orgs.php'><![CDATA[addOrg($_POST['orgLetters'], $_POST['orgGovOrgId'], $_POST['orgChapter'], $_POST['orgNickname'], $_POST['orgType'], $_POST['orgFocus'], $_POST['orgYearFounded'], $_POST['orgYearChapterFounded'], $_POST['orgBlurb'], $_POST['orgFoursquare'], $_POST['orgAddress'], $_POST['orgHomepageUrl'], $_POST['orgCustomPicUrl']);]]></action>
+
+			<param id='orgLetters'>
+				<description><![CDATA[Greek letters that represent the organization. Should be spelled out in the english alphabet with spaces between letters]]></description>
+				<exampleValue><![CDATA[Alpha Alpha]]></exampleValue>
+			</param>
+			<param id='orgGovOrgId'>
+				<description><![CDATA[GOV_ORG_ID of the governing organization of this organization]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+			<param id='orgChapter'>
+				<description><![CDATA[Greek letters that represent the organization's chapter. Should be spelled out in the english alphabet with spaces between letters]]></description>
+				<exampleValue><![CDATA[Alpha Beta]]></exampleValue>
+			</param>
+			<param id='orgNickname'>
+				<description><![CDATA[Common nickname of the organization]]></description>
+				<exampleValue><![CDATA[Al-Be]]></exampleValue>
+			</param>
+			<param id='orgType'>
+				<description><![CDATA[Type of organization. Enum[Fraternity, Sorority]]></description>
+				<exampleValue><![CDATA[Fraternity]]></exampleValue>
+			</param>
+			<param id='orgFocus'>
+				<description><![CDATA[Main focus for the existence of the organization. Enum[Social, Service, Honor]]]></description>
+				<exampleValue><![CDATA[Social]]></exampleValue>
+			</param>
+			<param id='orgYearFounded'>
+				<description><![CDATA[Founding year of the organization]]></description>
+				<exampleValue><![CDATA[1801]]></exampleValue>
+			</param>
+			<param id='orgYearChapterFounded'>
+				<description><![CDATA[Founding year of the chapter of the organization]]></description>
+				<exampleValue><![CDATA[1886]]></exampleValue>
+			</param>
+			<param id='orgBlurb'>
+				<description><![CDATA[Area for the organization's public relations person to go nuts]]></description>
+				<exampleValue><![CDATA[Alpha Alpha has long been known as a fraternity with a rich history of involvement and character. The handsome men of Al-Be strive to be the best men they can be in and out of the classroom.]]></exampleValue>
+			</param>
+			<param id='orgFoursquare'>
+				<description><![CDATA[Foursquare venue ID for the organization]]></description>
+				<exampleValue><![CDATA[4adc6aabf964a5202f2c21e3]]></exampleValue>
+			</param>
+			<param id='orgAddress'>
+				<description><![CDATA[The organization's home address]]></description>
+				<exampleValue><![CDATA[66 5th St NW|Atlanta, GA 30308]]></exampleValue>
+			</param>
+			<param id='orgHomepageUrl'>
+				<description><![CDATA[Organization's website homepage url]]></description>
+				<exampleValue><![CDATA[http://bit.ly/7hNh]]></exampleValue>
+			</param>
+			<param id='orgCustomPicUrl'>
+				<description><![CDATA[Common nickname of the organization]]></description>
+				<exampleValue><![CDATA[http://bit.ly/16ECqQ8]]></exampleValue>
 			</param>
 		</post>
 		
 		<put>
 			<description><![CDATA[This is how you can update an org]]></description>
 			
-			<action file='events.php'><![CDATA[updateEvent($_REST['org'],$_POST['orgText']);]]></action>
+			<action file='orgs.php'><![CDATA[updateEvent($_REST['org'],$_POST['orgText']);]]></action>
 			
-			<param id='eventText'>
+			<param id='orgText'>
 				<description><![CDATA[org Text To Update]]></description>
 				<defaultValue><![CDATA[some default event org update]]></defaultValue>
 				<exampleValue><![CDATA[some example event org update]]></exampleValue>
