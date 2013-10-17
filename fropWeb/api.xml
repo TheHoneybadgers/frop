@@ -23,6 +23,37 @@
 			
 			<action file='badges.php'><![CDATA[getBadge($_REST['badges']);]]></action>
 		</get>
+		<post> <!-- TODO should be private -->
+			<description><![CDATA[The post method allows the posting of new badges for approval if the user is logged in and authorized to submit events.]]>
+			</description>
+			
+			<action file='badges.php'><![CDATA[addBadge($_POST['badgeName'], $_POST['badgeGoal'], $_POST['badgeGoalUnits'], $_POST['badgeDescription'], $_POST['badgePreReq'], $_POST['badgeCustomPicUrl']);]]></action>
+			
+			<param id='badgeName'>
+				<description><![CDATA[Display name of the badge]]></description>
+				<exampleValue><![CDATA[Pledge]]></exampleValue>
+			</param>
+			<param id='badgeGoal'>
+				<description><![CDATA[Amount of GOAL_UNITs to earn the badge]]></description>
+				<exampleValue><![CDATA[5]]></exampleValue>
+			</param>
+			<param id='badgeGoalUnits'>
+				<description><![CDATA[Units in which the badge will be measured]]></description>
+				<exampleValue><![CDATA[Event Check-ins]]></exampleValue>
+			</param>
+			<param id='badgeDescription'>
+				<description><![CDATA[Description of the badge. Feel free to explain why the badge was made, more information about the badge, or whatever you want.]]></description>
+				<exampleValue><![CDATA[Join the ranks of the pledges by attending 5 events put on by any organization.]]></exampleValue>
+			</param>
+			<param id='badgePreReq'>
+				<description><![CDATA[BADGE_ID that must be completed before this badge. (optional)]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+			<param id='badgeCustomPicUrl'>
+				<description><![CDATA[URL for custom picture]]></description>
+				<exampleValue><![CDATA[http://bit.ly/18rs2bI]]></exampleValue>
+			</param>
+		</post>
 	</command>
 	
 	
@@ -49,34 +80,71 @@
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[addEvent($_POST['eventsText']);]]></action>
+			<action file='events.php'><![CDATA[addEvent($_POST['eventDate'], $_POST['eventOrgId'], $_POST['eventTitle'], $_POST['eventFoursquare'], $_POST['eventAddress'], $_POST['eventStartTime'], $_POST['eventEndTime'], $_POST['eventSummary'], $_POST['eventType'], $_POST['eventSpecialNotes'], $_POST['eventAlcohol']);]]></action>
 			
-			<param id='eventsText'>
-				<description><![CDATA[Data related to the event.]]></description>
-				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
-				<exampleValue><![CDATA[{"EVENT_ID": "1","DATE": "2013-10-31","ORG_ID": "1","TITLE": "Al-Be's Halloween Bash","FOURSQUARE": "522f836711d26c041fd70a09","ADDRESS": "Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL","START_TIME": "2013-10-31T21:00:00","END_TIME": "2013-11-01T03:30:00","SUMMARY": "Come out to the Al-Be Hallow's Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!","TYPE": "Party","SPECIAL_NOTES": "Halloween Costume Party","ALCOHOL": "true"}]]>
-				</exampleValue>
+			<param id='eventDate'>
+				<description><![CDATA[Date of the event]]></description>
+				<exampleValue><![CDATA[2013-10-31]]></exampleValue>
+			</param>
+			<param id='eventOrgId'>
+				<description><![CDATA[ORG_ID that is hosting the event]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+			<param id='eventTitle'>
+				<description><![CDATA[Event title. Short name that describes the event]]></description>
+				<exampleValue><![CDATA[Al-Be's Halloween Bash]]></exampleValue>
+			</param>
+			<param id='eventFoursquare'>
+				<description><![CDATA[Foursquare ID for the event]]></description>
+				<exampleValue><![CDATA[522f836711d26c041fd70a09]]></exampleValue>
+			</param>
+			<param id='eventAddress'>
+				<description><![CDATA[Address of the event, new lines are delimited by '|']]></description>
+				<exampleValue><![CDATA[Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL]]></exampleValue>
+			</param>
+			<param id='eventStartTime'>
+				<description><![CDATA[Start time of the event]]></description>
+				<exampleValue><![CDATA[2013-10-31T21:00:00]]></exampleValue>
+			</param>
+			<param id='eventEndTime'>
+				<description><![CDATA[End time of the event.]]></description>
+				<exampleValue><![CDATA[2013-11-01T03:30:00]]></exampleValue>
+			</param>
+			<param id='eventSummary'>
+				<description><![CDATA[Summary of the event. Why should we come?]]></description>
+				<exampleValue><![CDATA[Come out to the Al-Be Hallow's Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!]]></exampleValue>
+			</param>
+			<param id='eventType'>
+				<description><![CDATA[Very short description of what the event is]]></description>
+				<exampleValue><![CDATA[Party]]></exampleValue>
+			</param>
+			<param id='eventSpecialNotes'>
+				<description><![CDATA[Theme of the event, or more information than title, but less than description]]></description>
+				<exampleValue><![CDATA[Halloween Costume Party]]></exampleValue>
+			</param>
+			<param id='eventAlcohol'>
+				<description><![CDATA[If alcohol is allowed at the event]]></description>
+				<exampleValue><![CDATA[true]]></exampleValue>
 			</param>
 		</post>
-		<!--
+		
 		<put>
 			<description><![CDATA[This is how you can update an event.]]></description>
 			
-			<action file='events.php'><![CDATA[updateEvent($_REST['event'],$_POST['eventText']);]]></action>
+			<action file='events.php'><![CDATA[updateEvent($_REST['events'],$_POST['eventsText']);]]></action>
 			
-			<param id='eventText'>
+			<param id='eventsText'>
 				<description><![CDATA[event Text To update]]></description>
 				<defaultValue><![CDATA[some default event text update]]></defaultValue>
 				<exampleValue><![CDATA[some example event text update]]></exampleValue>
 			</param>
 		</put>
 		
-		<delete> <TODO> Should be private </TODO>
+		<delete>
 			<description><![CDATA[This is how you can delete a event]]></description>
 			
-			<action file='events.php'><![CDATA[deleteEvent($_REST['event']);]]></action>
+			<action file='events.php'><![CDATA[deleteEvent($_REST['events']);]]></action>
 		</delete>
-		-->
 		
 		
 		<!-- EVENTS/ORGS API -->
@@ -110,7 +178,7 @@
 			<action file='gov_orgs.php'><![CDATA[getGovOrg($_REST['gov_orgs']);]]></action>
 		</get>
 		
-		<post> <!-- TODO should be private -->
+		<post>
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
@@ -119,7 +187,7 @@
 			<param id='gov_orgsText'> <!-- TODO Can the acronym be done without the need to ask for it? -->
 				<description><![CDATA[Add a Governing Organization by supplying its name and acronym, and get its index in return.]]></description>
 				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
-				<exampleValue><![CDATA[{"NAME": "Governing Org","ACRONYM": "GO"}]]></exampleValue>
+				<exampleValue><![CDATA[('Interfraternity Council', 'IFC'}]]></exampleValue>
 			</param>
 		</post>
 		
@@ -163,11 +231,11 @@
 			<param id='orgsText'>
 				<description><![CDATA[Data related to the org.]]></description>
 				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
-				<exampleValue><![CDATA[{"LETTERS": "Alpha Alpha","GOV_ORG_ID": "1","CHAPTER": "Alpha Beta","NICKNAME": "Al-Be","TYPE": "Fraternity","FOCUS": "Social","YEAR_FOUNDED": "1801","YEAR_CHAPTER_FOUNDED": "1886","BLURB": "Alpha Alpha has long been known as a fraternity with a rich history of involvement and character. The handsome men of Al-Be strive to be the best men they can be in and out of the classroom.","ADDRESS": "66 5th St NW|Atlanta, GA 30308","FOURSQUARE": "4adc6aabf964a5202f2c21e3","HOMEPAGE_URL": "http://bit.ly/7hNh","CUSTOM_PIC_URL": "http://bit.ly/16ECqQ8"}]]>
+				<exampleValue><![CDATA[('Alpha Alpha', '1', 'Alpha Beta', 'Al-Be', 'Fraternity', 'Social', '1801', '1886', 'Alpha Alpha has long been known as a fraternity with a rich history of involvement and character. The handsome men of Al-Be strive to be the best men they can be in and out of the classroom.', '66 5th St NW|Atlanta, GA 30308', '4adc6aabf964a5202f2c21e3', 'http://bit.ly/7hNh', 'http://bit.ly/16ECqQ8')]]>
 				</exampleValue>
 			</param>
 		</post>
-		<!--
+		
 		<put>
 			<description><![CDATA[This is how you can update an org]]></description>
 			
@@ -180,12 +248,11 @@
 			</param>
 		</put>
 		
-		<delete> <TODO> Should be private </TODO>
+		<delete> <!-- <TODO> Should be private </TODO> -->
 			<description><![CDATA[This is how you can delete an org]]></description>
 			
 			<action file='orgs.php'><![CDATA[deleteEvent($_REST['org']);]]></action>
 		</delete>
-		-->
 	</command>
 	
 
