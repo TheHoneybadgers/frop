@@ -307,7 +307,7 @@
 	</command>
 	
 	<!-- USERS -->
-	<command id='users' security='public'> <!-- TODO protected? -->
+	<command id='users' security='protected'>
 		<description><![CDATA[This method exposes users if appropriate perms and authentication is satisfied]]>
 		</description>
 		
