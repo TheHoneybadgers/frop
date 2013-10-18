@@ -24,7 +24,7 @@
 	}
 
 	function addGovOrg($govOrgName, $govOrgAcronym) {
-		$dbQuery = sprintf("INSERT INTO `GOV_ORGS` (`NAME`, `ACRONYM`) VALUES ('%s', '%s')", mysql_real_escape_string($govOrgNameb), mysql_real_escape_string($govOrgAcronym));
+		$dbQuery = sprintf("INSERT INTO `GOV_ORGS` (`NAME`, `ACRONYM`) VALUES ('%s', '%s')", mysql_real_escape_string($govOrgName), mysql_real_escape_string($govOrgAcronym));
 		//echo "Query " . $dbQuery . "</br>";
 		$result = getDBResultInserted($dbQuery,'GOV_ORG_ID');
 		header("Content-type: application/json");
