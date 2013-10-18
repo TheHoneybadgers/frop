@@ -21,3 +21,6 @@ local.properties
 
 # Gedit Autosave files
 *~
+
+# OSX Desktop Services Store
+*.DS_Store
