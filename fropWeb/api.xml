@@ -224,7 +224,7 @@
 		
 			<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
 		</get>
-		<!-- TODO TODO TODO TODO TODO TODO -->
+		
 		<post>
 			<description><![CDATA[The post method allows the posting of new organizations if the user is logged in and authorized to submit events.]]>
 			</description>
@@ -306,6 +306,42 @@
 		</delete>
 	</command>
 	
+	<!-- USERS -->
+	<command id='users' security='public'> <!-- TODO protected? -->
+		<description><![CDATA[This method exposes users if appropriate perms and authentication is satisfied]]>
+		</description>
+		
+		<get>
+			<description><![CDATA[This method will return data on specific USER_IDs]]>
+			</description>
+			
+			<action file='users.php'><![CDATA[getUser($_REST['users']);]]></action>
+		</get>
+		
+		<post>
+			<description><![CDATA[This method will add a user to the system]]>
+			</description>
+			
+			<action file='users.php'><![CDATA[addUser($_POST['userGITD'], $_POST['userGovOrgId'], $_POST['userPerms'], $_POST['userOrgId']);]]></action>
+			
+			<param id='userGTID'>
+				<description><![CDATA[User's GTID (for CAS authentication verification)]]></description>
+				<exampleValue><![CDATA[gburdell3]]></exampleValue>
+			</param>
+			<param id='userGovOrgId'>
+				<description><![CDATA[User's governing organization association (to allow/disallow edits)]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+			<param id='userPerms'>
+				<description><![CDATA[User's permissions : 0 - Anonymous superuser, 1 - (Governing Org Social Chair) - Can approve/disapprove items (events, pics, etc) within events/orgs associated with user\'s GOV_ORG_ID, can add/suspend users of same or lower PERM and associated with user\'s GOV_ORG_ID, can create badges, 2 - Organization\'s Social Chair - Can submit events for approval, can submit changes for approval, can submit badges for approval]]></description>
+				<exampleValue><![CDATA[0]]></exampleValue>
+			</param>
+			<param id='userOrgId'>
+				<description><![CDATA[User's ORG_ID]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+		</post>
+	</command>
 
 <!-- EVENTS THIS WEEK -->
 	<command id='this_week' security='public'>
