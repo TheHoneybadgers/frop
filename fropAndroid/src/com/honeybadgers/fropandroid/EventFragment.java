@@ -7,11 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import com.honeybadgers.fropandroid.DetailEvent;
-
-import com.honeybadgers.fropandroid.JsonParser;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -19,11 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class EventFragment extends ListFragment {
 	
@@ -38,14 +33,14 @@ public class EventFragment extends ListFragment {
 		private static final String TAG_ORG_ID = "ORG_ID";
 		private static final String TAG_FOURSQUARE = "FOURSQUARE";
 		private static final String TAG_ADDRESS = "ADDRESS";
-		private static final String TAG_START_TIME = "START_TIME";
-		private static final String TAG_END_TIME = "END_TIME";
-		private static final String TAG_APPROVED_DATE = "APPROVED_DATE";
+	//	private static final String TAG_START_TIME = "START_TIME";
+		//private static final String TAG_END_TIME = "END_TIME";
+	//	private static final String TAG_APPROVED_DATE = "APPROVED_DATE";
 		private static final String TAG_SUMMARY = "SUMMARY";
-		private static final String TAG_TYPE = "TYPE";
-		private static final String TAG_SPECIAL_NOTES = "SPECIAL_NOTES";
-		private static final String TAG_ALCOHOL = "ALCOHOL";
-		private static final String TAG_DATE_CHANGED = "DATE_CHANGED";
+	//	private static final String TAG_TYPE = "TYPE";
+	//	private static final String TAG_SPECIAL_NOTES = "SPECIAL_NOTES";
+	//	private static final String TAG_ALCOHOL = "ALCOHOL";
+	//	private static final String TAG_DATE_CHANGED = "DATE_CHANGED";
 
 		JSONArray events = null;
 		ArrayList<HashMap<String, String>> eventList;
