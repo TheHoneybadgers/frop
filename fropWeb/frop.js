@@ -59,6 +59,31 @@ $(function() {
 		});
 	});
 
+/* -- GOV ORGS FUNCTIONS -- */
+
+	// Bind to the create so the list gov orgs page gets updated with the listing
+	$(document).on("pagebeforeshow", "#list_gov_orgs_page", function(event, ui) {
+		console.log("pagebeforeshow");
+	
+		//Remove the old rows
+		$( ".list_gov_orgs" ).remove();
+		
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/gov_orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#list_gov_orgs_row_template" ).tmpl( data ).appendTo( "#list_gov_orgs" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#list_gov_orgs").listview("refresh");
+	});
+
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
@@ -126,6 +151,15 @@ $(function() {
 				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
 	       		$( "#event_detail_template" ).tmpl( data ).appendTo( "#event_detail" );
 	       		$( "#detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
+	       		$( "#event_detail_title" )[0].innerHTML = data.TITLE;
+	       		$( "#event_detail_date" )[0].innerHTML = data.DATE;
+	       		$( "#event_detail_type_id" )[0].innerHTML = "A " + data.TYPE + " Hosted by " + data.ORG_ID;
+	       		$( "#event_detail_times" )[0].innerHTML = data.START_TIME + " to " + data.END_TIME;
+	       		$( "#event_detail_address" )[0].innerHTML = data.ADDRESS;
+	       		$( "#event_detail_foursquare_link" )[0].setAttribute("href", "http://foursquare.com/v/$" + data.FOURSQUARE);
+	       		$( "#event_detail_summary" )[0].innerHTML = data.SUMMARY;
+	       		$( "#event_detail_alcohol" )[0].innerHTML = "Alcohol: " + data.ALCOHOL;
+	       		$( "#event_detail_date_changed" )[0].innerHTML = "Date changed: " + data.DATE_CHANGED;
 	        },
 	        error: ajaxError
 		});
