@@ -4,11 +4,64 @@ console.log($("#add_event_page"));
 console.log($("#event_detail_page"));
 console.log($("#edit_event_page"));
 
+console.log($("#list_badges_page"));
+console.log($("#badge_detail_page"));
+
 $(function() {
  // Handler for .ready() called.
 	console.log("ready");
+	
+/* -- BADGE FUNCTIONS -- */
 
-	//Bind to the create so the page gets updated with the listing
+	//Bind to the create so the list badges page gets updated with the listing
+	$(document).on("pagebeforeshow", "#list_badges_page", function(event, ui) {
+		console.log("pagebeforeshow");
+	
+		//Remove the old rows
+		$( ".badges_list_row" ).remove();
+		
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/badges",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#badges_list_row_template" ).tmpl( data ).appendTo( "#badges_list" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#badges_list").listview("refresh");
+	});
+		
+	//Bind the badge detail page init text
+	$(document).on("pagebeforeshow", "#badge_detail_page", function(event, ui) {
+		console.log("Badge Detail Page");
+		var badge_id = $.url().fparam("badge_id");
+		
+		//Remove the old rows
+		$( ".badge_detail_row" ).remove();
+		
+		//Instead of passing around in JS I am doing AJAX so direct links work
+		//JQuery Fetch The Event
+		$.ajax({
+			url: "api/badges/"+badge_id,
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	       		$( "#badge_detail_template" ).tmpl( data ).appendTo( "#badge_detail" );
+	       		$( "#badge_head_title" )[0].innerHTML = data.NAME;
+	        },
+	        error: ajaxError
+		});
+	});
+
+/* -- EVENT FUNCTIONS -- */
+
+	//Bind to the create so the list events page gets updated with the listing
 //	$("#list_events_page").bind("pagebeforeshow",function(){//event, ui){
 	$(document).on("pagebeforeshow", "#list_events_page", function(event, ui) {
 		console.log("pagebeforeshow");
@@ -32,14 +85,14 @@ $(function() {
 		$("#events_list").listview("refresh");
 	});
 	
-	//Bind the add page clear text
+	//Bind the add event page clear text
 //	$("#add_event_page").bind("pagebeforeshow", function() {
 	$(document).on("pagebeforeshow", "#add_event_page", function(event, ui) {
 		console.log("Add Event Page");
 		$("#add_event_text")[0].value = "";
 	});
 		
-	//Bind the add page button
+	//Bind the add event page button
 //	$("#add_button").bind("click", function() {
 	$(document).on("pagebeforeshow", "#add_button", function(event, ui) {
 		console.log("Add Button");
@@ -53,7 +106,7 @@ $(function() {
 		});
 	});
 		
-	//Bind the detail page init text
+	//Bind the event detail page init text
 //	$("#event_detail_page").bind("pagebeforeshow", function() {
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
 		console.log("Event Detail Page");
