@@ -8,14 +8,6 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-	
-  `ADDED_BY` int(11) DEFAULT NULL,
-  `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `ORG_ID` int(11) DEFAULT NULL,
-  `SUSPENDED` tinyint(1) DEFAULT NULL,
-  `SUSPENDED_DATE` timestamp NULL DEFAULT NULL,
-  `SUSPENDED_BY` int(11) DEFAULT NULL,
-  `SUSPENDED_REASON` varchar(160) DEFAULT NULL,
 
 	function addUser($userGITD, $userGovOrgId, $userPerms, $userOrgId) {
 		$dbQuery = sprintf("INSERT INTO `USERS` (`GTID`, `GOV_ORG_ID`, `PERMS`, `ORG_ID`, `ADDED_BY`, `ADDED_DATE`, `SUSPENDED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($userGITD), mysql_real_escape_string($userGovOrgId), mysql_real_escape_string($userPerms), mysql_real_escape_string($userOrgId), $_USER['uid'], "CURRENT_TIMESTAMP()", "false");
@@ -24,6 +16,17 @@
 		$result = getDBResultInserted($dbQuery,'USER_ID');
 		
 		header("Content-type: application/json");
-		echo json_encode($result) . "</br>";
+		echo json_encode($result) //. "</br>";
+	}
+	
+	function suspendUser($userGTID, $suspendedReason) {
+		$dbQuery = sprintf("UPDATE `USERS` SET `SUSPENDED_REASON` = '%s', `SUSPENDED` = 'true', `SUSPENDED_DATE` = CURTIME() WHERE GTID = '%s'", $suspendedReason, $_USER['uid']);
+		
+		//echo "Query " . $dbQuery . "</br>";
+		$result = getDBResultAffected($dbQuery,'USER_ID');
+		
+		header("Content-type: application/json");
+		echo json_encode($result)
+	
 	}
 ?>
