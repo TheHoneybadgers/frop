@@ -31,8 +31,9 @@
 		echo json_encode($result) . "</br>";
 	}
 	
+	// TODO decide what to be able to update
 	function updateEvent($id,$event) {
-		$dbQuery = sprintf("UPDATE events SET event = '%s' WHERE id = '%s'",
+		$dbQuery = sprintf("UPDATE EVENTS SET event = '%s' WHERE id = '%s'",
 			mysql_real_escape_string($events),
 			mysql_real_escape_string($id));
 		

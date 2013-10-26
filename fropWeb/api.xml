@@ -166,8 +166,7 @@
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>
 		
 		<index>
-			<description><![CDATA[This returns a listing of all governing organizations.]]>
-			</description>
+			<description><![CDATA[This returns a listing of all governing organizations.]]></description>
 			
 			<action file='gov_orgs.php'><![CDATA[listGovOrgs();]]></action>
 		</index>
