@@ -134,7 +134,7 @@
 		<em id="event_detail_address">${ADDRESS}</em></br></br>
 		<a id="event_detail_foursquare_link" href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
 		<p id="event_detail_summary">${SUMMARY}</p>
-		<h6 id="event_detail_alcohol">Alcohol: ${ALCOHOL}</h6> <!-- TODO have this actually show not a number.. -->
+		<h6 id="event_detail_alcohol">Alcohol: ${ALCOHOL}</h6>
 		<h6><em id="event_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
 	</div>
 </div>
@@ -174,6 +174,26 @@
 
 <!-- ------ Gov_Org Pages ------ -->
 
+<div data-role="page" id="list_gov_orgs_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Gov Org List</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <!-- <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
+   	</div>
+	
+	<div id="list_gov_orgs_page_content" data-role="content">
+		<ul id="list_gov_orgs" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="list_gov_orgs_row_template" type="text/x-jquery-tmpl">
+				<li class="list_gov_orgs_row" id="gov_orgs_${GOV_ORGS_ID}">
+					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
+						<h1>${ACRONYM}</h1>
+						<p>${GOV_ORG_ID} - ${NAME}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
 
 <!-- ------ Org Pages ------ -->
 

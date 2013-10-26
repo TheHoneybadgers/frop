@@ -59,6 +59,31 @@ $(function() {
 		});
 	});
 
+/* -- GOV ORGS FUNCTIONS -- */
+
+	// Bind to the create so the list gov orgs page gets updated with the listing
+	$(document).on("pagebeforeshow", "#list_gov_orgs_page", function(event, ui) {
+		console.log("pagebeforeshow");
+	
+		//Remove the old rows
+		$( ".list_gov_orgs" ).remove();
+		
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/gov_orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#list_gov_orgs_row_template" ).tmpl( data ).appendTo( "#list_gov_orgs" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#list_gov_orgs").listview("refresh");
+	});
+
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
