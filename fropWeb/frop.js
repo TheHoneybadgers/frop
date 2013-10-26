@@ -126,20 +126,19 @@ $(function() {
 				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
 	       		$( "#event_detail_template" ).tmpl( data ).appendTo( "#event_detail" );
 	       		$( "#detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
+	       		$( "#event_detail_title" )[0].innerHTML = data.TITLE;
+	       		$( "#event_detail_date" )[0].innerHTML = data.DATE;
+	       		$( "#event_detail_type_id" )[0].innerHTML = "A " + data.TYPE + " Hosted by " + data.ORG_ID;
+	       		$( "#event_detail_times" )[0].innerHTML = data.START_TIME + " to " + data.END_TIME;
+	       		$( "#event_detail_address" )[0].innerHTML = data.ADDRESS;
+	       		$( "#event_detail_foursquare_link" )[0].setAttribute("href", "http://foursquare.com/v/$" + data.FOURSQUARE);
+	       		$( "#event_detail_summary" )[0].innerHTML = data.SUMMARY;
+	       		$( "#event_detail_alcohol" )[0].innerHTML = "Alcohol: " + data.ALCOHOL;
+	       		$( "#event_detail_date_changed" )[0].innerHTML = "Date changed: " + data.DATE_CHANGED;
 	        },
 	        error: ajaxError
 		});
 	});
-	/*
-		<h1 id="event_detail_title">${TITLE}</h1>${DATE}
-		<h3 id="event_detail_type_id">A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
-		<p id="event_detail_times">${START_TIME} to ${END_TIME}</p>
-		<em id="event_detail_address">${ADDRESS}</em></br></br>
-		<a id="event_detail_foursquare_link" href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
-		<p id="event_detail_summary">${SUMMARY}</p>
-		<h6 id="event_detail_alcohol">Alcohol: ${ALCOHOL}</h6> <!-- TODO have this actually show not a number.. -->
-		<h6><em id="event_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
-	*/
 	
 	//Bind the edit page init text
 //	$("#edit_event_page").bind("pagebeforeshow", function() {
