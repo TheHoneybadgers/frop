@@ -21,20 +21,19 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-
-/*	
-	function addEvent($event) {
-		$dbQuery = sprintf("INSERT INTO events (event) VALUES ('%s')",
-			mysql_real_escape_string($events));
-	
-		$result = getDBResultInserted($dbQuery,'personId');
+  
+	function addEvent($eventDate, $eventOrgId, $eventTitle, $eventFoursquare, $eventAddress, $eventStartTime, $eventEndTime, $eventSummary, $eventType, $eventSpecialNotes, $eventAlcohol) {
+		$dbQuery = sprintf("INSERT INTO EVENTS (`DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`, `CREATED_BY`, `DELETED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($eventDate), mysql_real_escape_string($eventOrgId), mysql_real_escape_string($eventTitle), mysql_real_escape_string($eventFoursquare), mysql_real_escape_string($eventAddress), mysql_real_escape_string($eventStartTime), mysql_real_escape_string($eventEndTime), mysql_real_escape_string($eventSummary), mysql_real_escape_string($eventType), mysql_real_escape_string($eventSpecialNotes), mysql_real_escape_string($eventAlcohol), "CURRENT_TIMESTAMP()", $_USER['uid'], "false");
+		echo "Query " . $dbQuery . "</br>";
+		$result = getDBResultInserted($dbQuery,'EVENT_ID');
 		
 		header("Content-type: application/json");
-		echo json_encode($result);
+		echo json_encode($result) . "</br>";
 	}
 	
+	// TODO decide what to be able to update
 	function updateEvent($id,$event) {
-		$dbQuery = sprintf("UPDATE events SET event = '%s' WHERE id = '%s'",
+		$dbQuery = sprintf("UPDATE EVENTS SET event = '%s' WHERE id = '%s'",
 			mysql_real_escape_string($events),
 			mysql_real_escape_string($id));
 		
@@ -43,6 +42,5 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-*/
 
 ?>
