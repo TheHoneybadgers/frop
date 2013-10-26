@@ -6,3 +6,11 @@
 	margin-left: auto;
     margin-right: auto;
 }
+
+hr {
+	height: 1px;
+	width: 75%;
+	float: left;
+	align: left;
+	margin: 1%;
+}

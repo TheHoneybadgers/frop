@@ -1,6 +1,4 @@
-<!-- -------------------------------------------------------------------------------------------- -->
 <!-- ------ Home Page ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
 <div data-role="page" id="home_page">
     <div data-role="header" data-position="inline" data-theme="d">
@@ -36,16 +34,53 @@
 	</div>
 </div>
 
-
-<!-- -------------------------------------------------------------------------------------------- -->
 <!-- ------ Badge Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
+<div data-role="page" id="list_badges_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Badges</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <a id="add_badge_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+   	</div>
+	
+	<div id="badge_list_page_content" data-role="content">
+		<ul id="badges_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="badges_list_row_template" type="text/x-jquery-tmpl">
+				<li class="badges_list_row" id="badge_${BADGE_ID}">
+					<a href="#badge_detail_page&badge_id=${BADGE_ID}" data-transition="slide">
+						<h1>${NAME}</h1><p>${GOAL} ${GOAL_UNITS}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
 
+<!-- --- -->
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<div data-role="page" id="badge_detail_page">
+	<div data-role="header" data-position="inline" data-theme="d">
+		<a href="#list_badges_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="badge_head_title">Badge Detail</h1>
+        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+    </div>
+    
+	<div id="badge_detail_content" data-role="content">
+		<ul id="badge_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="badge_detail_template" type="text/x-jquery-tmpl">
+				<li class="badge_detail_row"id="badge_detail_${BADGE_ID}">
+					<h1>${NAME}</h1><h3><em>${GOAL} ${GOAL_UNITS}</em></h3><hr />
+					<br />
+					<p>${DESCRIPTION}</p>
+					<br />
+					<em>Created ${ADDED_DATE}</em>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
 <!-- ------ Event Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
 <div data-role="page" id="list_events_page">
     <div data-role="header" data-position="inline" data-theme="d">
@@ -68,7 +103,9 @@
 		</ul>
 	</div>
 </div>
-<!--******************************************************************************************************************************-->
+
+<!-- --- -->
+
 <div data-role="page" id="event_detail_page">
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
@@ -101,7 +138,9 @@
 		<h6><em id="event_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
 	</div>
 </div>
-<!--******************************************************************************************************************************-->
+
+<!-- --- -->
+
 <div data-role="page" id="add_event_page">
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
@@ -114,7 +153,9 @@
         </div>
 	</div>
 </div>
-<!--******************************************************************************************************************************-->
+
+<!-- --- -->
+
 <div data-role="page" id="edit_event_page">
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
@@ -131,18 +172,11 @@
 	</div>
 </div>
 
-<!-- -------------------------------------------------------------------------------------------- -->
 <!-- ------ Gov_Org Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
-<!-- -------------------------------------------------------------------------------------------- -->
+
 <!-- ------ Org Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
-
-
-
-<!--******************************************************************************************************************************-->
 <div data-role="dialog" id="error_dialog" >
 	<div data-role="header" data-position="inline" data-theme="d">
         <h1 role="heading">Error</h1>
@@ -160,3 +194,5 @@
 		</script>
 	</div><!-- /content -->
 </div><!-- /dialog -->
+
+<!-- --- -->
