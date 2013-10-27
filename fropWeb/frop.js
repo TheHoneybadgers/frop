@@ -32,22 +32,45 @@ $(function() {
 		$("#events_list").listview("refresh");
 	});
 	
-	//Bind the add page clear text
+	//Bind the add event page clear text
 //	$("#add_event_page").bind("pagebeforeshow", function() {
 	$(document).on("pagebeforeshow", "#add_event_page", function(event, ui) {
 		console.log("Add Event Page");
-//		$("#add_event_text")[0].value = "";
+		$("#add_event_title")[0].value = "";
+//		$("#add_event_date")[0].value = "mm/dd/yyyy";
+//		$("#add_event_org_id")[0].value = "";
+		$("#add_event_foursquare")[0].value = "";
+		$("#add_event_address")[0].value = "";
+//		$("#add_event_start_time")[0].value = "";
+//		$("#add_event_end_time")[0].value = "";
+		$("#add_event_summary")[0].value = "";
+		$("#add_event_type")[0].value = "";
+		$("#add_event_special_notes")[0].value = "";
+//		$("#add_event_alcohol")[0].value = "";
 	});
 		
-	//Bind the add page button
-//	$("#add_button").bind("click", function() {
-	$(document).on("pagebeforeshow", "#add_button", function(event, ui) {
-		console.log("Add Button");
+	//Bind the add event page button
+//	$("#add_event_button").bind("click", function() {
+	$(document).on("pagebeforeshow", "#add_event_button", function(event, ui) {
+		console.log("Add Event Button");
 		$.ajax({
 			url: "api/events",
 			dataType: "json",
 	        async: false,
-			data: {"eventText": $("#add_event_text")[0].value},
+	        // TODO
+			data: {
+				"title": $("#add_event_title")[0].value,
+				"date": '2013-10-31',//$("#add_event_date")[0].value,
+				"org_id": $("#add_event_org_id")[0].value,
+				"foursquare": $("#add_event_foursquare")[0].value,
+				"address": $("#add_event_address")[0].value,
+				"start_time": '2013-10-31T21:00:00',//$("#add_event_start_time")[0].value,
+				"end_time": '2013-11-01T03:30:00',//$("#add_event_end_time")[0].value,
+				"summary": $("#add_event_summary")[0].value,
+				"type": $("#add_event_type")[0].value,
+				"special_notes": $("#add_event_special_notes")[0].value,
+				"alcohol": $("#add_event_alcohol")[0].value
+			},
 			type: "POST",
 	        error: ajaxError
 		});

@@ -22,17 +22,27 @@
 		echo json_encode($result);
 	}
 
-/*	
 	function addEvent($event) {
-		$dbQuery = sprintf("INSERT INTO events (event) VALUES ('%s')",
-			mysql_real_escape_string($events));
+		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+			mysql_real_escape_string($title)
+			mysql_real_escape_string($date)
+			mysql_real_escape_string($org_id)
+			mysql_real_escape_string($foursquare)
+			mysql_real_escape_string($address)
+			mysql_real_escape_string($start_time)
+			mysql_real_escape_string($end_time)
+			mysql_real_escape_string($summary)
+			mysql_real_escape_string($type)
+			mysql_real_escape_string($special_notes)
+			mysql_real_escape_string($alcohol));
 	
-		$result = getDBResultInserted($dbQuery,'personId');
+		$result = getDBResultInserted($dbQuery,'`EVENT_ID`');
 		
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-	
+
+/*	
 	function updateEvent($id,$event) {
 		$dbQuery = sprintf("UPDATE events SET event = '%s' WHERE id = '%s'",
 			mysql_real_escape_string($events),

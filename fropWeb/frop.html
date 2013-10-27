@@ -92,12 +92,12 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Add Event DEBUG</h1>
-        <a id="add_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Add</a>
+        <a id="add_event_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
     </div>
 	<div id="add_event_content" data-role="content">
 		<div class="add_event_form">
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="add_event_form_element" data-role="fieldcontain" data-type="horizontal">
 				<!--<div class="event_form_label float_left">-->
 					<label for="add_event_title">Title:</label>
 				<!--</div>-->
@@ -123,8 +123,8 @@
 				</div>
 				<div class="event_form_input float_right">
 					<select name="add_event_org_id" id="add_event_org_id">
-						<option value="TODO: org1_id">Org1 Letters</option>
-						<option value="TODO: org2_id">Org2 Letters</option>
+						<option value="1">Org1 Letters</option>
+						<option value="2">Org2 Letters</option>
 					</select>
 				</div>
 				<div class="float_clear"></div>
