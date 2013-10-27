@@ -21,26 +21,28 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
+/* TODO: Fix function
 
-	function addEvent($event) {
+	function addEvent($title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol) {
 		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-			mysql_real_escape_string($title)
-			mysql_real_escape_string($date)
-			mysql_real_escape_string($org_id)
-			mysql_real_escape_string($foursquare)
-			mysql_real_escape_string($address)
-			mysql_real_escape_string($start_time)
-			mysql_real_escape_string($end_time)
-			mysql_real_escape_string($summary)
-			mysql_real_escape_string($type)
-			mysql_real_escape_string($special_notes)
-			mysql_real_escape_string($alcohol));
+			mysql_real_escape_string($_POST[$title])
+			mysql_real_escape_string($_POST[$date])
+			mysql_real_escape_string($_POST[$org_id])
+			mysql_real_escape_string($_POST[$foursquare])
+			mysql_real_escape_string($_POST[$address])
+			mysql_real_escape_string($_POST[$start_time])
+			mysql_real_escape_string($_POST[$end_time])
+			mysql_real_escape_string($_POST[$summary])
+			mysql_real_escape_string($_POST[$type])
+			mysql_real_escape_string($_POST[$special_notes])
+			mysql_real_escape_string($_POST[$alcohol]));
 	
 		$result = getDBResultInserted($dbQuery,'`EVENT_ID`');
 		
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
+*/
 
 /*	
 	function updateEvent($id,$event) {
