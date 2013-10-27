@@ -36,7 +36,7 @@ $(function() {
 //	$("#add_event_page").bind("pagebeforeshow", function() {
 	$(document).on("pagebeforeshow", "#add_event_page", function(event, ui) {
 		console.log("Add Event Page");
-		$("#add_event_text")[0].value = "";
+//		$("#add_event_text")[0].value = "";
 	});
 		
 	//Bind the add page button
