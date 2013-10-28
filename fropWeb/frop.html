@@ -3,30 +3,27 @@
 <div data-role="page" id="home_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Frop</h1>
-	    <!--
-        <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
-        -->
    	</div>
 	
 	<div id="content" data-role="content">
 		<ul id="pages_list" data-role="listview" data-inset="true" data-filter="false" data-theme="c" data-divider-theme="b">
-			<li class="page_list_row" id="list_events_page">
-				<a href="#list_events_page" data-transition="slide" id="events_home_page_link">
+			<li class="page_list_row" id="event_list_page">
+				<a href="#event_list_page" data-transition="slide" id="event_home_page_link">
 					<h1>Events</h1><p>Find or view details of approved events</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="list_orgs_page">
-				<a href="#list_orgs_page" data-transition="slide">
+			<li class="page_list_row" id="org_list_page">
+				<a href="#org_list_page" data-transition="slide">
 					<h1>Organizations</h1><p>Find information on your favorite organization</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="list_badges_page">
-				<a href="#list_badges_page" data-transition="slide">
+			<li class="page_list_row" id="badge_list_page">
+				<a href="#badge_list_page" data-transition="slide">
 					<h1>Badges</h1><p>Earn fun badges!</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="list_gov_orgs_page">
-				<a href="#list_gov_orgs_page" data-transition="slide">
+			<li class="page_list_row" id="gov_orgs_list_page">
+				<a href="#gov_orgs_list_page" data-transition="slide">
 					<h1>Governing Organizations</h1><p>Check out the organizations that run the show</p>
 				</a>
 			</li>
@@ -36,17 +33,17 @@
 
 <!-- ------ Badge Pages ------ -->
 
-<div data-role="page" id="list_badges_page">
+<div data-role="page" id="badge_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Badges</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="add_badge_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
    	</div>
 	
 	<div id="badge_list_page_content" data-role="content">
-		<ul id="badges_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="badges_list_row_template" type="text/x-jquery-tmpl">
-				<li class="badges_list_row" id="badge_${BADGE_ID}">
+		<ul id="badge_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="badge_list_row_template" type="text/x-jquery-tmpl">
+				<li class="badge_list_row" id="badge_${BADGE_ID}">
 					<a href="#badge_detail_page&badge_id=${BADGE_ID}" data-transition="slide">
 						<h1>${NAME}</h1><p>${GOAL} ${GOAL_UNITS}</p>
 					</a>
@@ -60,8 +57,8 @@
 
 <div data-role="page" id="badge_detail_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#list_badges_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <h1 class="head_title" id="badge_head_title">Badge Detail</h1>
+		<a href="#badge_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="badge_detail_head_title">Badge Detail</h1>
         <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
     </div>
     
@@ -82,17 +79,17 @@
 
 <!-- ------ Event Pages ------ -->
 
-<div data-role="page" id="list_events_page">
+<div data-role="page" id="event_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
 	
 	<div id="event_list_page_content" data-role="content">
-		<ul id="events_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+		<ul id="event_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_list_row_template" type="text/x-jquery-tmpl">
 				<li class="event_list_row" id="event_${EVENT_ID}">
 					<a href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
@@ -108,9 +105,9 @@
 
 <div data-role="page" id="event_detail_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <h1 class="head_title" id="detail_head_title">Event Detail</h1>
-        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
+        <!-- <a id="save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
     </div>
     
 	<div id="event_detail_content" data-role="content">
@@ -143,48 +140,93 @@
 
 <div data-role="page" id="add_event_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Add Event</h1>
-        <a id="add_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Add</a>
+        <a id="event_add_page_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Add</a>
     </div>
-	<div id="add_event_content" data-role="content">
+	<div id="event_add_content" data-role="content">
 		<div class="event_form">
-			<textarea rows="8" id="add_event_text"></textarea>
+			<textarea rows="8" id="event_add_text"></textarea>
         </div>
 	</div>
 </div>
 
 <!-- --- -->
 
-<div data-role="page" id="edit_event_page">
+<div data-role="page" id="event_edit_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#list_events_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
-        <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a>
+        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a>
     </div>
-	<div id="edit_event_content" data-role="content">		
+	<div id="event_edit_content" data-role="content">		
 		<div class="event_form">
-			<textarea rows="8" id="edit_event_text"></textarea>
+			<textarea rows="8" id="event_edit_text"></textarea>
         </div>
 		<center>
-			<a id="remove_button" href="#list_events_page" data-direction="reverse" data-role="button" data-inline="true" data-icon="minus">Remove event</a>
+			<a id="event_edit_remove_button" href="#event_list_page" data-direction="reverse" data-role="button" data-inline="true" data-icon="minus">Remove event</a>
 		</center>
+	</div>
+	
+	<div id="event_edit_content" data-role="content" data-theme="a">		
+		<div class="event_form" >
+			<div data-role="fieldcontain">
+				<label for="event_edit_title">Title:</label>
+				<input type="text" name="event_edit_title" id="event_edit_title" value="" placeholder="Short but descriptive title" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_date">Date:</label>
+				<input type="datetime" name="event_edit_date" id="event_edit_date" value="" placeholder="YYYY-MM-DD" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_foursquare">Foursquare:</label>
+				<input type="text" name="event_edit_foursquare" id="event_edit_foursquare" value="" placeholder="Foursquare Venue ID or Event ID" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_address">Address:</label>
+				<input type="text" name="event_edit_address" id="event_edit_address" value="" placeholder="Address" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_start_time">Start Time:</label>
+				<input type="time" name="event_edit_start_time" id="event_edit_start_time" value="" placeholder="HH:MM" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_end_time">End Time:</label>
+				<input type="time" name="event_edit_end_time" id="event_edit_end_time" value="" placeholder="HH:MM" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_summary">Summary:</label>
+				<textarea rows="4" name="event_edit_summary" id="edit_event_summary"></textarea>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_type">Type:</label>
+				<input type="text" name="event_edit_type" id="event_edit_type" value="" placeholder="Party, Philanthropy, etc" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="event_edit_special_notes">Special Notes:</label>
+				<input type="text" name="event_edit_special_notes" id="event_edit_special_notes" value="" placeholder="" />
+			</div>
+			<div data-role="fieldcontain"> <!-- TODO should be a checkbox -->
+				<label for="event_edit_alcohol">Alcohol Allowed?</label>
+				<input type="text" name="event_edit_alcohol" id="event_edit_alcohol" value="" placeholder="true/false" />
+			</div>
+        </div>
 	</div>
 </div>
 
 <!-- ------ Gov_Org Pages ------ -->
 
-<div data-role="page" id="list_gov_orgs_page">
+<div data-role="page" id="gov_orgs_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Gov Org List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <!-- <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
    	</div>
 	
-	<div id="list_gov_orgs_page_content" data-role="content">
-		<ul id="list_gov_orgs" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="list_gov_orgs_row_template" type="text/x-jquery-tmpl">
-				<li class="list_gov_orgs_row" id="gov_orgs_${GOV_ORGS_ID}">
+	<div id="gov_orgs_list_page_content" data-role="content">
+		<ul id="gov_orgs_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="gov_orgs_list_row_template" type="text/x-jquery-tmpl">
+				<li class="gov_orgs_list_row" id="gov_orgs_${GOV_ORGS_ID}">
 					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
 						<h1>${ACRONYM}</h1>
 						<p>${GOV_ORG_ID} - ${NAME}</p>
