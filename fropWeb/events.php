@@ -21,7 +21,6 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-/* TODO: Fix function
 
 	function addEvent($title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol) {
 		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
@@ -42,7 +41,6 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-*/
 
 /*	
 	function updateEvent($id,$event) {

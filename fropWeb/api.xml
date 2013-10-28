@@ -67,9 +67,39 @@
 			
 			<param id='title'>
 				<description><![CDATA[Data related to the event.]]></description>
-				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default-->
+				<!-- <defaultValue><![CDATA[(No Default)]]></defaultValue> Taken out because no default
 				<exampleValue><![CDATA[{"EVENT_ID": "1","DATE": "2013-10-31","ORG_ID": "1","TITLE": "Al-Be's Halloween Bash","FOURSQUARE": "522f836711d26c041fd70a09","ADDRESS": "Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL","START_TIME": "2013-10-31T21:00:00","END_TIME": "2013-11-01T03:30:00","SUMMARY": "Come out to the Al-Be Hallow's Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!","TYPE": "Party","SPECIAL_NOTES": "Halloween Costume Party","ALCOHOL": "true"}]]>
-				</exampleValue>
+				</exampleValue>-->
+
+			<param id='date'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='org_id'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='foursquare'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='address'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='start_time'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='end_time'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='summary'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='type'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='special_notes'>
+				<description><![CDATA[Data related to the event.]]></description>
+			</param>
+			<param id='alcohol'>
+				<description><![CDATA[Data related to the event.]]></description>
 			</param>
 		</post>
 		<!--
