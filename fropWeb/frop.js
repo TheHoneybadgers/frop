@@ -1,6 +1,6 @@
 console.log("RUNNING FROP JAVASCRIPT");
 console.log($("#event_list_page"));
-console.log($("#event_add_page"));
+console.log($("#add_event_page"));
 console.log($("#event_detail_page"));
 console.log($("#event_edit_page"));
 
@@ -12,7 +12,7 @@ $(function() {
 	console.log("ready");
 	
 /* -- BADGE FUNCTIONS -- */
-
+/*
 	//Bind to the create so the list badges page gets updated with the listing
 	$(document).on("pagebeforeshow", "#badge_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
@@ -58,9 +58,10 @@ $(function() {
 	        error: ajaxError
 		});
 	});
+*/
 
 /* -- GOV ORGS FUNCTIONS -- */
-
+/*
 	// Bind to the create so the list gov orgs page gets updated with the listing
 	$(document).on("pagebeforeshow", "#gov_orgs_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
@@ -83,11 +84,12 @@ $(function() {
 		
 		$("#gov_orgs_list").listview("refresh");
 	});
+*/
 
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
-//	$("#list_events_page").bind("pagebeforeshow",function(){//event, ui){
+//	$("#event_list_page").bind("pagebeforeshow",function(){//event, ui){
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
 	
@@ -130,7 +132,7 @@ $(function() {
 		
 	//Bind the add event page button
 //	$("#add_event_button").bind("click", function() {
-	$(document).on("pagebeforeshow", "#add_event_button", function(event, ui) {
+	$(document).on("pagebeforeshow", "#add_event_page_button", function(event, ui) {
 		console.log("Add Event Button");
 
 		$.ajax({
@@ -192,6 +194,7 @@ $(function() {
 		});
 	});
 	
+/*
 	//Bind the edit page init text
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		console.log("Edit Event Page");
@@ -238,7 +241,8 @@ $(function() {
 	        error: ajaxError
 		});
 	});
-	
+*/
+
 	//Cleanup of URL so we can have better client URL support
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		$(this).attr("data-url",$(this).attr("id"));

@@ -80,7 +80,6 @@
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-<<<<<<< HEAD
 			<action file='events.php'>
 				<![CDATA[addEvent(
 					$_POST['title'], 
