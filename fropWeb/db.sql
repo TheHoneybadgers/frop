@@ -203,7 +203,7 @@ INSERT IGNORE INTO `FIELDS` (`TABLE`, `FIELD_NAME`, `RAW_TYPE`, `EXPECTED_VALUE`
 ('USERS', 'USER_ID', 'int(11)', 'This is an autoincremented field for use as a unique id in database', 'No'),
 ('USERS', 'GTID', 'varchar(30)', 'This is the user\'s GTID', 'No'),
 ('USERS', 'GOV_ORG_ID', 'int(11)', 'The id of the governing org this user represents', 'No'),
-('USERS', 'PERMS', 'tinyint(4)', '0 : Anonymous superuser, 1 - (Governing Org Social Chair) - Can approve/disapprove items (events, pics, etc) within events/orgs associated with user\'s GOV_ORG_ID, can add/suspend users of same or lower PERM and associated with user\'s GOV_ORG_ID, can create badges, 2 - Organization\'s Social Chair - Can submit events for approval, can submit changes for approval, can submit badges for approval', 'No'),
+('USERS', 'PERMS', 'tinyint(4)', '0 - Anonymous superuser, 1 - (Governing Org Social Chair) - Can approve/disapprove items (events, pics, etc) within events/orgs associated with user\'s GOV_ORG_ID, can add/suspend users of same or lower PERM and associated with user\'s GOV_ORG_ID, can create badges, 2 - Organization\'s Social Chair - Can submit events for approval, can submit changes for approval, can submit badges for approval', 'No'),
 ('USERS', 'ORG_ID', 'int(11)', 'Org that the user is associated with', 'No'),
 ('USERS', 'ADDED_BY', 'int(11)', 'USER_ID of user who added this row, not required, but encouraged for traceability', 'Yes'),
 ('USERS', 'ADDED_DATE', 'timestamp', 'Date the user was added, DEFAULT when undefined is CURRENT_TIMESTAMP', 'Yes'),
