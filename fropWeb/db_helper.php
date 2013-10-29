@@ -67,7 +67,7 @@ function getDBResultInserted($dbQuery,$id){
 		return array($id=>mysql_insert_id());
 	}else{
 		$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
-		die(mysql_error());
+		die(mysql_error() . " - Query: " . $dbQuery);
 	}
 }
 ?>
