@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Frop</string>
+    <string name="app_name">SocialGreek</string>
     <string name="action_settings">Settings</string>
-    <string name="action_about">About Frop</string>
+    <string name="action_about">About SocialGreek</string>
     <string name="title_section1">History</string>
     <string name="title_section2">Events</string>
     <string name="title_section3">Submit</string>
+    <string name="detail_event">Event Details</string>
     
     <string name="about_us">
 \ The Honeybadgers\n
-Devin Gonzalez - Lead, fropWeb\n
+Devin Gonzalez - Lead, SocialGreek Web\n
 David Greenhalgh - Project Manager\n
-David Long - Lead, fropAndroid\n
+David Long - Lead, SocialGreek Android\n
 Taylor Peet - Lead, Product Dev\n
 Sagar Raut - UI/UX Guru
         
