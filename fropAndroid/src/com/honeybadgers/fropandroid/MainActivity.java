@@ -3,6 +3,8 @@ package com.honeybadgers.fropandroid;
 import java.util.Locale;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -35,6 +37,7 @@ public class MainActivity extends FragmentActivity {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	static Uri data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +48,9 @@ public class MainActivity extends FragmentActivity {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
 		StrictMode.setThreadPolicy(policy); 
-
-
+		
+		Intent intent = getIntent();
+		data = intent.getData();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
