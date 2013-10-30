@@ -87,7 +87,6 @@ $(function() {
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
-//	$("#list_events_page").bind("pagebeforeshow",function(){//event, ui){
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
 	
@@ -138,7 +137,6 @@ $(function() {
 // New JS for event add page
 /////////////////////////////
 	//Bind the add event page clear text
-//	$("#event_add_page").bind("pagebeforeshow", function() {
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
 		$("#event_add_title")[0].value = "";
@@ -155,7 +153,6 @@ $(function() {
 	});
 		
 	//Bind the add event page button
-//	$("#event_add_button").bind("click", function() {
 	$(document).on("pagebeforeshow", "#event_add_page_submit_button", function(event, ui) {
 		console.log("Add Event Button");
 
