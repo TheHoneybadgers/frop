@@ -1,6 +1,6 @@
 console.log("RUNNING FROP JAVASCRIPT");
 console.log($("#event_list_page"));
-console.log($("#add_event_page"));
+console.log($("#event_add_page"));
 console.log($("#event_detail_page"));
 console.log($("#event_edit_page"));
 
@@ -12,7 +12,7 @@ $(function() {
 	console.log("ready");
 	
 /* -- BADGE FUNCTIONS -- */
-/*
+
 	//Bind to the create so the list badges page gets updated with the listing
 	$(document).on("pagebeforeshow", "#badge_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
@@ -58,10 +58,9 @@ $(function() {
 	        error: ajaxError
 		});
 	});
-*/
 
 /* -- GOV ORGS FUNCTIONS -- */
-/*
+
 	// Bind to the create so the list gov orgs page gets updated with the listing
 	$(document).on("pagebeforeshow", "#gov_orgs_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
@@ -84,12 +83,11 @@ $(function() {
 		
 		$("#gov_orgs_list").listview("refresh");
 	});
-*/
 
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
-//	$("#event_list_page").bind("pagebeforeshow",function(){//event, ui){
+//	$("#list_events_page").bind("pagebeforeshow",function(){//event, ui){
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
 	
@@ -111,28 +109,54 @@ $(function() {
 		
 		$("#event_list").listview("refresh");
 	});
-	
-	//Bind the add event page clear text
 
-//	$("#add_event_page").bind("pagebeforeshow", function() {
-	$(document).on("pagebeforeshow", "#add_event_page", function(event, ui) {
+/////////////////////////////
+// Old JS for event add page
+/////////////////////////////
+	// //Bind the add event page clear text
+	// $(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
+	// 	console.log("Add Event Page");
+	// 	$("#event_add_text")[0].value = "";
+	// });
+		
+	// //Bind the add event page button
+	// $(document).on("pagebeforeshow", "#event_add_page_button", function(event, ui) {
+	// 	console.log("Add Button");
+	// 	$.ajax({
+	// 		url: "api/events",
+	// 		dataType: "json",
+	//         async: false,
+	// 		data: {"eventText": $("#add_event_text")[0].value}, // TODO not sufficient (needs more fields and stuff)
+	// 		type: "POST",
+	//         error: ajaxError
+	// 	});
+	// });
+/////////////////////////////
+
+
+/////////////////////////////
+// New JS for event add page
+/////////////////////////////
+	//Bind the add event page clear text
+//	$("#event_add_page").bind("pagebeforeshow", function() {
+	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
-		$("#add_event_title")[0].value = "";
-//		$("#add_event_date")[0].value = "mm/dd/yyyy";
-//		$("#add_event_org_id")[0].value = "";
-		$("#add_event_foursquare")[0].value = "";
-		$("#add_event_address")[0].value = "";
-//		$("#add_event_start_time")[0].value = "";
-//		$("#add_event_end_time")[0].value = "";
-		$("#add_event_summary")[0].value = "";
-		$("#add_event_type")[0].value = "";
-		$("#add_event_special_notes")[0].value = "";
-//		$("#add_event_alcohol")[0].value = "";
+		$("#event_add_title")[0].value = "";
+//		$("#event_add_date")[0].value = "mm/dd/yyyy";
+//		$("#event_add_org_id")[0].value = "";
+		$("#event_add_foursquare")[0].value = "";
+		$("#event_add_address")[0].value = "";
+//		$("#event_add_start_time")[0].value = "";
+//		$("#event_add_end_time")[0].value = "";
+		$("#event_add_summary")[0].value = "";
+		$("#event_add_type")[0].value = "";
+		$("#event_add_special_notes")[0].value = "";
+//		$("#event_add_alcohol")[0].value = "";
 	});
 		
 	//Bind the add event page button
-//	$("#add_event_button").bind("click", function() {
-	$(document).on("pagebeforeshow", "#add_event_page_button", function(event, ui) {
+//	$("#event_add_button").bind("click", function() {
+	$(document).on("pagebeforeshow", "#event_add_page_submit_button", function(event, ui) {
 		console.log("Add Event Button");
 
 		$.ajax({
@@ -143,23 +167,25 @@ $(function() {
 	        // TODO finish
 
 			data: {
-				"title": $("#add_event_title")[0].value,
-				"date": '2013-10-31',//$("#add_event_date")[0].value,
-				"org_id": $("#add_event_org_id")[0].value,
-				"foursquare": $("#add_event_foursquare")[0].value,
-				"address": $("#add_event_address")[0].value,
-				"start_time": '2013-10-31T21:00:00',//$("#add_event_start_time")[0].value,
-				"end_time": '2013-11-01T03:30:00',//$("#add_event_end_time")[0].value,
-				"summary": $("#add_event_summary")[0].value,
-				"type": $("#add_event_type")[0].value,
-				"special_notes": $("#add_event_special_notes")[0].value,
-				"alcohol": $("#add_event_alcohol")[0].value
+				"title": $("#event_add_title")[0].value,
+				"date": '2013-10-31',//$("#event_add_date")[0].value,
+				"org_id": $("#event_add_org_id")[0].value,
+				"foursquare": $("#event_add_foursquare")[0].value,
+				"address": $("#event_add_address")[0].value,
+				"start_time": '2013-10-31T21:00:00',//$("#event_add_start_time")[0].value,
+				"end_time": '2013-11-01T03:30:00',//$("#event_add_end_time")[0].value,
+				"summary": $("#event_add_summary")[0].value,
+				"type": $("#event_add_type")[0].value,
+				"special_notes": $("#event_add_special_notes")[0].value,
+				"alcohol": $("#event_add_alcohol")[0].value
 			},
 
 			type: "POST",
 	        error: ajaxError
 		});
 	});
+/////////////////////////////
+		
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
@@ -194,7 +220,6 @@ $(function() {
 		});
 	});
 	
-/*
 	//Bind the edit page init text
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		console.log("Edit Event Page");
@@ -241,8 +266,7 @@ $(function() {
 	        error: ajaxError
 		});
 	});
-*/
-
+	
 	//Cleanup of URL so we can have better client URL support
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		$(this).attr("data-url",$(this).attr("id"));

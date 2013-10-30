@@ -1,6 +1,4 @@
-<!-- -------------------------------------------------------------------------------------------- -->
 <!-- ------ Home Page ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
 <div data-role="page" id="home_page">
     <div data-role="header" data-position="inline" data-theme="d">
@@ -33,15 +31,59 @@
 	</div>
 </div>
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<!-- ------ Badge Pages ------ -->
+
+<div data-role="page" id="badge_list_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Badges</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+   	</div>
+	
+	<div id="badge_list_page_content" data-role="content">
+		<ul id="badge_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="badge_list_row_template" type="text/x-jquery-tmpl">
+				<li class="badge_list_row" id="badge_${BADGE_ID}">
+					<a href="#badge_detail_page&badge_id=${BADGE_ID}" data-transition="slide">
+						<h1>${NAME}</h1><p>${GOAL} ${GOAL_UNITS}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
+<!-- --- -->
+
+<div data-role="page" id="badge_detail_page">
+	<div data-role="header" data-position="inline" data-theme="d">
+		<a href="#badge_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="badge_detail_head_title">Badge Detail</h1>
+        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+    </div>
+    
+	<div id="badge_detail_content" data-role="content">
+		<ul id="badge_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="badge_detail_template" type="text/x-jquery-tmpl">
+				<li class="badge_detail_row"id="badge_detail_${BADGE_ID}">
+					<h1>${NAME}</h1><h3><em>${GOAL} ${GOAL_UNITS}</em></h3><hr />
+					<br />
+					<p>${DESCRIPTION}</p>
+					<br />
+					<em>Created ${ADDED_DATE}</em>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
 <!-- ------ Event Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
 <div data-role="page" id="event_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
@@ -59,7 +101,7 @@
 	</div>
 </div>
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<!-- --- -->
 
 <div data-role="page" id="event_detail_page">
 	<div data-role="header" data-position="inline" data-theme="d">
@@ -68,7 +110,7 @@
         <!-- <a id="save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
     </div>
     
-	<div id="event_detail_page_content" data-role="content">
+	<div id="event_detail_content" data-role="content">
 		<ul id="event_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_detail_template" type="text/x-jquery-tmpl">
 				<li class="event_detail_row"id="event_detail_${EVENT_ID}">
@@ -94,43 +136,43 @@
 	</div>
 </div>
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<!-- --- -->
 
-<div data-role="page" id="add_event_page">
+<div data-role="page" id="event_add_page">
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Add Event DEBUG</h1>
-        <a id="add_event_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
+        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
     </div>
-	<div id="add_event_content" data-role="content">
-		<div class="add_event_form">
+	<div id="event_add_content" data-role="content">
+		<div class="event_add_form">
 
-			<div class="add_event_form_element" data-role="fieldcontain" data-type="horizontal">
+			<div class="event_add_form_element" data-role="fieldcontain" data-type="horizontal">
 				<!--<div class="event_form_label float_left">-->
-					<label for="add_event_title">Title:</label>
+					<label for="event_add_title">Title:</label>
 				<!--</div>-->
 				<!--<div class="event_form_input float_right">-->
-					<input type="varchar" size="75" name="add_event_title" id="add_event_title" value="" placeholder="Short but descriptive title." />
+					<input type="varchar" size="75" name="event_add_title" id="event_add_title" value="" placeholder="Short but descriptive title." />
 				<!--</div>-->
 				<!--<div class="float_clear"></div>-->
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_date">Date:</label>
+					<label for="event_add_date">Date:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="date" name="add_event_date" id="add_event_date" />
+					<input type="date" name="event_add_date" id="event_add_date" />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_org_id">Organization:</label>
+					<label for="event_add_org_id">Organization:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<select name="add_event_org_id" id="add_event_org_id">
+					<select name="event_add_org_id" id="event_add_org_id">
 						<option value="1">Org1 Letters</option>
 						<option value="2">Org2 Letters</option>
 					</select>
@@ -138,83 +180,83 @@
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_foursquare">Foursquare:</label>
+					<label for="event_add_foursquare">Foursquare:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="varchar" size="50" name="add_event_foursquare" id="add_event_foursquare" value="" placeholder="Foursquare URL (TODO ?)" />
+					<input type="varchar" size="50" name="event_add_foursquare" id="event_add_foursquare" value="" placeholder="Foursquare URL (TODO ?)" />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_address">Address:</label>
+					<label for="event_add_address">Address:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="varchar" size="160" name="add_event_address" id="add_event_address" value="" placeholder="Street address of the event location." />
+					<input type="varchar" size="160" name="event_add_address" id="event_add_address" value="" placeholder="Street address of the event location." />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_start_time">Start Time:</label>
+					<label for="event_add_start_time">Start Time:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="datetime" name="add_event_start_time" id="add_event_start_time" />
+					<input type="datetime" name="event_add_start_time" id="event_add_start_time" />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_end_time">End Time:</label>
+					<label for="event_add_end_time">End Time:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="datetime" name="add_event_end_time" id="add_event_end_time" />
+					<input type="datetime" name="event_add_end_time" id="event_add_end_time" />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_summary">Summary:</label>
+					<label for="event_add_summary">Summary:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="text" name="add_event_summary" id="add_event_summary" value="" placeholder="Descriptive summary of the event." />
+					<input type="text" name="event_add_summary" id="event_add_summary" value="" placeholder="Descriptive summary of the event." />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_type">Event Type:</label>
+					<label for="event_add_type">Event Type:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="varchar" size="30" name="add_event_type" id="add_event_type" value="" placeholder="Short but descriptive event type." />
+					<input type="varchar" size="30" name="event_add_type" id="event_add_type" value="" placeholder="Short but descriptive event type." />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_special_notes">Special Notes:</label>
+					<label for="event_add_special_notes">Special Notes:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="varchar" size="160" name="add_event_special_notes" id="add_event_special_notes" value="" placeholder="Important additional details." />
+					<input type="varchar" size="160" name="event_add_special_notes" id="event_add_special_notes" value="" placeholder="Important additional details." />
 				</div>
 				<div class="float_clear"></div>
 			</div>
 
-			<div class="add_event_form_element" data-role="fieldcontain">
+			<div class="event_add_form_element" data-role="fieldcontain">
 				<div class="event_form_label float_left">
-					<label for="add_event_alcohol">Alcohol:</label>
+					<label for="event_add_alcohol">Alcohol:</label>
 				</div>
 				<div class="event_form_input float_right">
-					<input type="radio" name="alcohol" id="add_event_alcohol_yes" value="0">Yes
-					<input type="radio" name="alcohol" id="add_event_alcohol_no" value="1">No
+					<input type="radio" name="alcohol" id="event_add_alcohol_yes" value="0">Yes
+					<input type="radio" name="alcohol" id="event_add_alcohol_no" value="1">No
 				</div>
 				<div class="float_clear"></div>
 			</div>
@@ -223,7 +265,7 @@
 	</div>
 </div>
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<!-- --- -->
 
 <div data-role="page" id="event_edit_page">
 	<div data-role="header" data-position="inline" data-theme="d">
@@ -286,10 +328,30 @@
 	</div>
 </div>
 
+<!-- ------ Gov_Org Pages ------ -->
 
-<!-- -------------------------------------------------------------------------------------------- -->
+<div data-role="page" id="gov_orgs_list_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Gov Org List</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <!-- <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
+   	</div>
+	
+	<div id="gov_orgs_list_page_content" data-role="content">
+		<ul id="gov_orgs_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="gov_orgs_list_row_template" type="text/x-jquery-tmpl">
+				<li class="gov_orgs_list_row" id="gov_orgs_${GOV_ORGS_ID}">
+					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
+						<h1>${ACRONYM}</h1>
+						<p>${GOV_ORG_ID} - ${NAME}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
 <!-- ------ Org Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
 
 <div data-role="dialog" id="error_dialog" >
 	<div data-role="header" data-position="inline" data-theme="d">
@@ -309,77 +371,4 @@
 	</div><!-- /content -->
 </div><!-- /dialog -->
 
-
-<!-- -------------------------------------------------------------------------------------------- -->
-<!-- ------ Badge Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
-
-<div data-role="page" id="badge_list_page">
-    <div data-role="header" data-position="inline" data-theme="d">
-	    <h1 class="head_title">Badges</h1>
-		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
-   	</div>
-	
-	<div id="badge_list_page_content" data-role="content">
-		<ul id="badge_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="badge_list_row_template" type="text/x-jquery-tmpl">
-				<li class="badge_list_row" id="badge_${BADGE_ID}">
-					<a href="#badge_detail_page&badge_id=${BADGE_ID}" data-transition="slide">
-						<h1>${NAME}</h1><p>${GOAL} ${GOAL_UNITS}</p>
-					</a>
-				</li>
-			</script>
-		</ul>
-	</div>
-</div>
-
-<!-- -------------------------------------------------------------------------------------------- -->
-
-<div data-role="page" id="badge_detail_page">
-	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#badge_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <h1 class="head_title" id="badge_detail_head_title">Badge Detail</h1>
-        <!-- <a id="save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
-    </div>
-    
-	<div id="badge_detail_content" data-role="content">
-		<ul id="badge_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="badge_detail_template" type="text/x-jquery-tmpl">
-				<li class="badge_detail_row"id="badge_detail_${BADGE_ID}">
-					<h1>${NAME}</h1><h3><em>${GOAL} ${GOAL_UNITS}</em></h3><hr />
-					<br />
-					<p>${DESCRIPTION}</p>
-					<br />
-					<em>Created ${ADDED_DATE}</em>
-				</li>
-			</script>
-		</ul>
-	</div>
-</div>
-
-
-<!-- -------------------------------------------------------------------------------------------- -->
-<!-- ------ Gov_Org Pages ------ -->
-<!-- -------------------------------------------------------------------------------------------- -->
-
-<div data-role="page" id="gov_orgs_list_page">
-    <div data-role="header" data-position="inline" data-theme="d">
-	    <h1 class="head_title">Gov Org List</h1>
-		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <!-- <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
-   	</div>
-	
-	<div id="gov_orgs_list_page_content" data-role="content">
-		<ul id="gov_orgs_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="gov_orgs_list_row_template" type="text/x-jquery-tmpl">
-				<li class="gov_orgs_list_row" id="gov_orgs_${GOV_ORGS_ID}">
-					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
-						<h1>${ACRONYM}</h1>
-						<p>${GOV_ORG_ID} - ${NAME}</p>
-					</a>
-				</li>
-			</script>
-		</ul>
-	</div>
-</div>
+<!-- --- -->
