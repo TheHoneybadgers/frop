@@ -1,7 +1,7 @@
 package com.honeybadgers.fropandroid;
 
 import java.util.Locale;
-import android.app.Dialog;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,18 +33,56 @@ public class MainActivity extends FragmentActivity {
 	ViewPager mViewPager;
 	static Uri data;
 
+	// Create a session manager object, which will check if a user is logged in
+	// or not
+	SessionManagement session;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("intent data", "Hi1");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		//Next two lines are required to successfully perform network operations
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-		StrictMode.setThreadPolicy(policy); 
-		
+		// Next two lines are required to successfully perform network
+		// operations
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+
+		StrictMode.setThreadPolicy(policy);
+
 		Intent intent = getIntent();
+		Log.d("intent data", "Hi2");
 		data = intent.getData();
+		Log.d("intent data", "Hi3");
+		// Log.d("intent data",data.toString());
+
+		// Check if logged in or not
+		// Session Manager
+		// Intent intent1 = this.getIntent();
+		// Log.d("Enter", "Parent intent is" + intent1.toString());
+
+		// if no data set, redirect the user to login page
+		try {
+			String sessionName = data.getQueryParameter("sessionName");
+			Log.d("intent data", "Hi4");
+		} catch (NullPointerException e) {
+			Log.d("intent data", "Hi5");
+			// session = new SessionManagement(getApplicationContext());
+			Intent i = new Intent(MainActivity.this, Login.class);
+			i.setAction("LOGIN");
+
+			// Closing all the Activities
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+			// Add new Flag to start new Activity
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			MainActivity.this.finish();
+
+			getApplicationContext().startActivity(i);
+			// session.gotoLogin();
+		}
+
+		Log.d("intent data", "returning back");
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -62,7 +101,7 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -70,7 +109,7 @@ public class MainActivity extends FragmentActivity {
 		case R.id.action_about:
 			AboutFragment dialog = new AboutFragment();
 			dialog.show(getSupportFragmentManager(), null);
-			
+
 			break;
 
 		default:
@@ -78,7 +117,6 @@ public class MainActivity extends FragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -95,18 +133,19 @@ public class MainActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			
-		if(position == 1){
-			
-			Fragment fragment = new EventFragment();
-			return fragment;
-			
-		}else{	
-		  Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+
+			if (position == 1) {
+
+				Fragment fragment = new EventFragment();
+				return fragment;
+
+			} else {
+				Fragment fragment = new DummySectionFragment();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+						position + 1);
+				fragment.setArguments(args);
+				return fragment;
 			}
 		}
 
@@ -130,7 +169,5 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 	}
-
-	
 
 }

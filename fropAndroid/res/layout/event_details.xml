@@ -20,17 +20,34 @@
       android:textStyle="bold" />
 
   <!-- Description Label -->
-  <TextView android:id="@+id/email_label"
+  <TextView android:id="@+id/eventId_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#acacac"/>
   <!-- Price Label -->
 
   <TextView
-      android:id="@+id/mobile_label"
+      android:id="@+id/date_label"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:textColor="#ffffff"
       android:textStyle="bold" />
+  
+  <TextView android:id="@+id/orgId_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac"/>
+  
+  <TextView android:id="@+id/address_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"/>
+  
+  <TextView android:id="@+id/summary_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:textColor="#ffffff"
+            android:textStyle="italic"/>
 
 </LinearLayout>

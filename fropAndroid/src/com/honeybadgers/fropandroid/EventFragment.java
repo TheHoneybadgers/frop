@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 public class EventFragment extends ListFragment {
 	
 	// url to make request
-		private static String url = "http://frop.apiary.io/events/this_week";
+		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/events";
 		
 		// JSON Node names
 		private static final String TAG_EVENTS = "events";
@@ -51,12 +52,15 @@ public class EventFragment extends ListFragment {
 		
 		 eventList = new ArrayList<HashMap<String, String>>();
 		
-		//Pass the URL to the JSON parser and get a JSON object in response
+		//Pass the URL to the JSON parser and get a JSON Array in response
 		JsonParser jParser = new JsonParser();
-		JSONObject json = jParser.getJSONFromUrl(url);
+		
+		
+		events = jParser.getJSONFromUrl(url);
 
 		try {
-			events = json.getJSONArray(TAG_EVENTS);//grab all the events
+			
+			Log.d("length of Json array",Integer.toString(events.length()));
 			for(int i = 0; i < events.length(); i++){
 				JSONObject c = events.getJSONObject(i);
 				String eventId = c.getString(TAG_EVENT_ID);
@@ -109,15 +113,15 @@ public class EventFragment extends ListFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// getting values from selected ListItem
-				String eventName = ((TextView) view.findViewById(R.id.eventName)).getText().toString();
-				String date = ((TextView) view.findViewById(R.id.eventDate)).getText().toString();
-				String description = ((TextView) view.findViewById(R.id.eventDescrip)).getText().toString();
+				Log.d("Position of clicked item", Integer.toString(position));
+				
+				
 				
 				Intent in = new Intent(getActivity().getApplicationContext(), DetailEvent.class);
-				in.putExtra(TAG_TITLE, eventName);
-				in.putExtra(TAG_DATE, date);
-				in.putExtra(TAG_SUMMARY, description);
+				
+				//pass the hashmap entry for an event to the detailevent class
+				in.putExtra("hashmap", eventList.get(position));
+
 				startActivity(in);
 
 			}
