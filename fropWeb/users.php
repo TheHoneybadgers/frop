@@ -16,7 +16,7 @@
 		$result = getDBResultInserted($dbQuery,'USER_ID');
 		
 		header("Content-type: application/json");
-		echo json_encode($result) //. "</br>";
+		echo json_encode($result); //. "</br>";
 	}
 	
 	function suspendUser($userGTID, $userSuspendedReason) {
@@ -26,7 +26,7 @@
 		$result = getDBResultAffected($dbQuery,'USER_ID');
 		
 		header("Content-type: application/json");
-		echo json_encode($result)
+		echo json_encode($result);
 	
 	}
 ?>
