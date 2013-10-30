@@ -41,7 +41,6 @@
 		);
 	
 		$result = getDBResultInserted($dbQuery,'`EVENT_ID`');
-
 		header("Content-type: application/json");
 		echo json_encode($result) . "</br>";
 	}

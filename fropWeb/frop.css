@@ -29,8 +29,9 @@ div.event_add_form_element {
     margin-right: auto;
 }
 
-input#event_add__title {
-	float: right !important;
+#event_add_title, #event_add_date, #event_add_org_id, #event_add_foursquare, #event_add_address,
+#event_add_start_time, #event_add_end_time, #event_add_summary, #event_add_type, #event_add_special_notes {
+	width: inherit;
 }
 
 /* Other */
