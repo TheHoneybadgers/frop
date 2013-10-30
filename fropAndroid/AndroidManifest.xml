@@ -14,20 +14,36 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.honeybadgers.fropandroid.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
+        <activity android:name=".Login" android:label="Login"><intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="loggedin"
+                    android:scheme="usercomments" />
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+</activity><activity
+            android:name="com.honeybadgers.fropandroid.MainActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity 
             android:name="com.honeybadgers.fropandroid.DetailEvent"
-            android:label="DetailEvent">
+            android:label="@string/detail_event">
             
         </activity>
+        
     </application>
 
 </manifest>
