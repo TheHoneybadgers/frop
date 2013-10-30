@@ -109,33 +109,6 @@ $(function() {
 		$("#event_list").listview("refresh");
 	});
 
-/////////////////////////////
-// Old JS for event add page
-/////////////////////////////
-	// //Bind the add event page clear text
-	// $(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
-	// 	console.log("Add Event Page");
-	// 	$("#event_add_text")[0].value = "";
-	// });
-		
-	// //Bind the add event page button
-	// $(document).on("pagebeforeshow", "#event_add_page_button", function(event, ui) {
-	// 	console.log("Add Button");
-	// 	$.ajax({
-	// 		url: "api/events",
-	// 		dataType: "json",
-	//         async: false,
-	// 		data: {"eventText": $("#add_event_text")[0].value}, // TODO not sufficient (needs more fields and stuff)
-	// 		type: "POST",
-	//         error: ajaxError
-	// 	});
-	// });
-/////////////////////////////
-
-
-/////////////////////////////
-// New JS for event add page
-/////////////////////////////
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
@@ -180,9 +153,7 @@ $(function() {
 			type: "POST",
 	        error: ajaxError
 		});
-	});
-/////////////////////////////
-		
+	});		
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
