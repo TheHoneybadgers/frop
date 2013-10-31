@@ -12,23 +12,25 @@ public class Login extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		Log.d("Enter", "Intent creator2");
+		
+		Log.d("Enter", "in login activity");
 
 		Intent intent1 = this.getIntent();
 		// To get the action of the intent use
 		String action = intent1.getAction();
-		Log.d("intent data", "in Login");
+		
+		
 		if (action.equals("LOGIN")) {
 			Log.d("Enter", "Intent creator" + intent1.toString());
-			Intent myIntent = new Intent(
-					Intent.ACTION_VIEW,
-					Uri.parse("http://dev.m.gatech.edu/login?url=usercomments://loggedin&sessionTransfer=window"));
+			
+			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://dev.m.gatech.edu/login?url=usercomments://loggedin&sessionTransfer=window"));
+			myIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);    					  //So that when you press back from the main activity, it dosent go back to the browser
 			startActivity(myIntent);
 		} else {
 			Log.d("Enter", "Intent creator" + intent1.toString());
 			Log.d("Enter", "Starting main activity");
-			Intent myIntent = new Intent(getApplicationContext(),
-					MainActivity.class);
+			Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+			
 			// Closing all the Activities
 			myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

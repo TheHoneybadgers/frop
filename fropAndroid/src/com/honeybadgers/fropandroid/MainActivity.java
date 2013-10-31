@@ -39,7 +39,7 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("intent data", "Hi1");
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -51,23 +51,18 @@ public class MainActivity extends FragmentActivity {
 		StrictMode.setThreadPolicy(policy);
 
 		Intent intent = getIntent();
-		Log.d("intent data", "Hi2");
 		data = intent.getData();
-		Log.d("intent data", "Hi3");
-		// Log.d("intent data",data.toString());
+		
 
-		// Check if logged in or not
-		// Session Manager
-		// Intent intent1 = this.getIntent();
-		// Log.d("Enter", "Parent intent is" + intent1.toString());
-
+	
+		
 		// if no data set, redirect the user to login page
 		try {
 			String sessionName = data.getQueryParameter("sessionName");
-			Log.d("intent data", "Hi4");
+
 		} catch (NullPointerException e) {
-			Log.d("intent data", "Hi5");
-			// session = new SessionManagement(getApplicationContext());
+			
+			
 			Intent i = new Intent(MainActivity.this, Login.class);
 			i.setAction("LOGIN");
 
@@ -76,13 +71,13 @@ public class MainActivity extends FragmentActivity {
 
 			// Add new Flag to start new Activity
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);											//Keep no record that login was started, that when you press back after ligging in, you dont go back to the Login page
 			MainActivity.this.finish();
-
-			getApplicationContext().startActivity(i);
-			// session.gotoLogin();
+			startActivity(i);
+			
 		}
 
-		Log.d("intent data", "returning back");
+		
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -106,10 +101,10 @@ public class MainActivity extends FragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
+		
 		case R.id.action_about:
 			AboutFragment dialog = new AboutFragment();
 			dialog.show(getSupportFragmentManager(), null);
-
 			break;
 
 		default:
