@@ -28,9 +28,12 @@ public class DummySectionFragment extends Fragment {
 		dummyTextView.setText(Integer.toString(getArguments().getInt(
 				ARG_SECTION_NUMBER)));
 		
-	    String sessionName = MainActivity.data.getQueryParameter("sessionName");
+		JsonParser j1 = new JsonParser();
+		
+		String sessionName = MainActivity.data.getQueryParameter("sessionName");
 	    String sessionId = MainActivity.data.getQueryParameter("sessionId");
-	    dummyTextView.setText(sessionName + "  " + sessionId);
+	    String username = j1.getUsername(sessionId);
+	    dummyTextView.setText(sessionName + "  " + sessionId+ "Username:"+ username);
 		return rootView;
 	}
 

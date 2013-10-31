@@ -173,7 +173,7 @@ $(function() {
 				console.log(data);
 				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
 	       		$( "#event_detail_template" ).tmpl( data ).appendTo( "#event_detail" );
-	       		$( "#detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
+	       		$( "#event_detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
 	       		$( "#event_detail_title" )[0].innerHTML = data.TITLE;
 	       		$( "#event_detail_date" )[0].innerHTML = data.DATE;
 	       		$( "#event_detail_type_id" )[0].innerHTML = "A " + data.TYPE + " Hosted by " + data.ORG_ID;

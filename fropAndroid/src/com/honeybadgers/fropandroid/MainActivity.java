@@ -2,7 +2,6 @@ package com.honeybadgers.fropandroid;
 
 import java.util.Locale;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,15 +10,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -39,18 +33,51 @@ public class MainActivity extends FragmentActivity {
 	ViewPager mViewPager;
 	static Uri data;
 
+	// Create a session manager object, which will check if a user is logged in
+	// or not
+	SessionManagement session;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		//Next two lines are required to successfully perform network operations
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-		StrictMode.setThreadPolicy(policy); 
-		
+		// Next two lines are required to successfully perform network
+		// operations
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+
+		StrictMode.setThreadPolicy(policy);
+
 		Intent intent = getIntent();
 		data = intent.getData();
+		
+
+	
+		
+		// if no data set, redirect the user to login page
+		try {
+			String sessionName = data.getQueryParameter("sessionName");
+
+		} catch (NullPointerException e) {
+			
+			
+			Intent i = new Intent(MainActivity.this, Login.class);
+			i.setAction("LOGIN");
+
+			// Closing all the Activities
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+			// Add new Flag to start new Activity
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);											//Keep no record that login was started, that when you press back after ligging in, you dont go back to the Login page
+			MainActivity.this.finish();
+			startActivity(i);
+			
+		}
+
+		
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -69,15 +96,15 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
+		
 		case R.id.action_about:
 			AboutFragment dialog = new AboutFragment();
 			dialog.show(getSupportFragmentManager(), null);
-			
 			break;
 
 		default:
@@ -85,7 +112,6 @@ public class MainActivity extends FragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -102,18 +128,19 @@ public class MainActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			
-		if(position == 1){
-			
-			Fragment fragment = new EventFragment();
-			return fragment;
-			
-		}else{	
-		  Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+
+			if (position == 1) {
+
+				Fragment fragment = new EventFragment();
+				return fragment;
+
+			} else {
+				Fragment fragment = new DummySectionFragment();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+						position + 1);
+				fragment.setArguments(args);
+				return fragment;
 			}
 		}
 
@@ -137,7 +164,5 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 	}
-
-	
 
 }

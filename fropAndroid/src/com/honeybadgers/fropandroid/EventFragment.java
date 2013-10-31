@@ -7,45 +7,40 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import com.honeybadgers.fropandroid.DetailEvent;
-
-import com.honeybadgers.fropandroid.JsonParser;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class EventFragment extends ListFragment {
 	
 	// url to make request
-		private static String url = "http://frop.apiary.io/events/this_week";
+		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/events";
 		
 		// JSON Node names
-		private static final String TAG_EVENTS = "events";
+		
 		private static final String TAG_TITLE = "TITLE";
 		private static final String TAG_EVENT_ID = "EVENT_ID";
 		private static final String TAG_DATE = "DATE";
 		private static final String TAG_ORG_ID = "ORG_ID";
 		private static final String TAG_FOURSQUARE = "FOURSQUARE";
 		private static final String TAG_ADDRESS = "ADDRESS";
-		private static final String TAG_START_TIME = "START_TIME";
-		private static final String TAG_END_TIME = "END_TIME";
-		private static final String TAG_APPROVED_DATE = "APPROVED_DATE";
+	//	private static final String TAG_START_TIME = "START_TIME";
+		//private static final String TAG_END_TIME = "END_TIME";
+	//	private static final String TAG_APPROVED_DATE = "APPROVED_DATE";
 		private static final String TAG_SUMMARY = "SUMMARY";
-		private static final String TAG_TYPE = "TYPE";
-		private static final String TAG_SPECIAL_NOTES = "SPECIAL_NOTES";
-		private static final String TAG_ALCOHOL = "ALCOHOL";
-		private static final String TAG_DATE_CHANGED = "DATE_CHANGED";
+	//	private static final String TAG_TYPE = "TYPE";
+	//	private static final String TAG_SPECIAL_NOTES = "SPECIAL_NOTES";
+	//	private static final String TAG_ALCOHOL = "ALCOHOL";
+	//	private static final String TAG_DATE_CHANGED = "DATE_CHANGED";
 
 		JSONArray events = null;
 		ArrayList<HashMap<String, String>> eventList;
@@ -56,12 +51,15 @@ public class EventFragment extends ListFragment {
 		
 		 eventList = new ArrayList<HashMap<String, String>>();
 		
-		//Pass the URL to the JSON parser and get a JSON object in response
+		//Pass the URL to the JSON parser and get a JSON Array in response
 		JsonParser jParser = new JsonParser();
-		JSONObject json = jParser.getJSONFromUrl(url);
+		
+		
+		events = jParser.getJSONFromUrl(url);
 
 		try {
-			events = json.getJSONArray(TAG_EVENTS);//grab all the events
+			
+			Log.d("length of Json array",Integer.toString(events.length()));
 			for(int i = 0; i < events.length(); i++){
 				JSONObject c = events.getJSONObject(i);
 				String eventId = c.getString(TAG_EVENT_ID);
@@ -114,15 +112,15 @@ public class EventFragment extends ListFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// getting values from selected ListItem
-				String eventName = ((TextView) view.findViewById(R.id.eventName)).getText().toString();
-				String date = ((TextView) view.findViewById(R.id.eventDate)).getText().toString();
-				String description = ((TextView) view.findViewById(R.id.eventDescrip)).getText().toString();
+				Log.d("Position of clicked item", Integer.toString(position));
+				
+				
 				
 				Intent in = new Intent(getActivity().getApplicationContext(), DetailEvent.class);
-				in.putExtra(TAG_TITLE, eventName);
-				in.putExtra(TAG_DATE, date);
-				in.putExtra(TAG_SUMMARY, description);
+				
+				//pass the hashmap entry for an event to the detailevent class
+				in.putExtra("hashmap", eventList.get(position));
+
 				startActivity(in);
 
 			}
