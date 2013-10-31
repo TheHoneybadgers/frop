@@ -97,11 +97,7 @@ public class SessionManagement {
 
 	}
 
-	/**
-	 * Quick check for login
-	 * **/
-	// Get Login State
-	/**
+	/*
 	 * Quick check for login
 	 * **/
 	// Get Login State
