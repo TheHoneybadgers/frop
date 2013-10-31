@@ -36,7 +36,7 @@
 			mysql_real_escape_string($special_notes),
 			mysql_real_escape_string($alcohol),
 			"CURRENT_TIMESTAMP()",
-			$_USER['uid'],
+			mysql_real_escape_string($_USER['uid']),
 			"false"
 		);
 	
