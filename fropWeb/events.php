@@ -22,15 +22,29 @@
 		echo json_encode($result);
 	}
   
-	function addEvent($eventDate, $eventOrgId, $eventTitle, $eventFoursquare, $eventAddress, $eventStartTime, $eventEndTime, $eventSummary, $eventType, $eventSpecialNotes, $eventAlcohol) {
-		$dbQuery = sprintf("INSERT INTO EVENTS (`DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`, `CREATED_BY`, `DELETED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($eventDate), mysql_real_escape_string($eventOrgId), mysql_real_escape_string($eventTitle), mysql_real_escape_string($eventFoursquare), mysql_real_escape_string($eventAddress), mysql_real_escape_string($eventStartTime), mysql_real_escape_string($eventEndTime), mysql_real_escape_string($eventSummary), mysql_real_escape_string($eventType), mysql_real_escape_string($eventSpecialNotes), mysql_real_escape_string($eventAlcohol), "CURRENT_TIMESTAMP()", $_USER['uid'], "false");
-		echo "Query " . $dbQuery . "</br>";
-		$result = getDBResultInserted($dbQuery,'EVENT_ID');
-		
+	function addEvent($title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol) {
+		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`, `CREATED_BY`, `DELETED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+			mysql_real_escape_string($title),
+			mysql_real_escape_string($date),
+			mysql_real_escape_string($org_id),
+			mysql_real_escape_string($foursquare),
+			mysql_real_escape_string($address),
+			mysql_real_escape_string($start_time),
+			mysql_real_escape_string($end_time),
+			mysql_real_escape_string($summary),
+			mysql_real_escape_string($type),
+			mysql_real_escape_string($special_notes),
+			mysql_real_escape_string($alcohol),
+			"CURRENT_TIMESTAMP()",
+			mysql_real_escape_string($_USER['uid']),
+			"false"
+		);
+	
+		$result = getDBResultInserted($dbQuery,'`EVENT_ID`');
 		header("Content-type: application/json");
 		echo json_encode($result) . "</br>";
 	}
-	
+
 	// TODO decide what to be able to update
 	function updateEvent($id,$event) {
 		$dbQuery = sprintf("UPDATE EVENTS SET event = '%s' WHERE id = '%s'",

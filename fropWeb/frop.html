@@ -138,15 +138,129 @@
 
 <!-- --- -->
 
-<div data-role="page" id="add_event_page">
+<div data-role="page" id="event_add_page">
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Add Event</h1>
-        <a id="event_add_page_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Add</a>
+        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
     </div>
 	<div id="event_add_content" data-role="content">
-		<div class="event_form">
-			<textarea rows="8" id="event_add_text"></textarea>
+		<div class="event_add_form">
+
+			<div class="event_add_form_element" data-role="fieldcontain" data-type="horizontal">
+				<div class="event_form_label float_left">
+					<label for="event_add_title">Title:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="varchar" size="75" name="event_add_title" id="event_add_title" value="" placeholder="Short but descriptive title." />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_date">Date:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="date" name="event_add_date" id="event_add_date" />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_org_id">Organization:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<select name="event_add_org_id" id="event_add_org_id">
+						<option value="1">Org1 Letters</option>
+						<option value="2">Org2 Letters</option>
+					</select>
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_foursquare">Foursquare:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="varchar" size="50" name="event_add_foursquare" id="event_add_foursquare" value="" placeholder="Foursquare Venue ID or Event ID" />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_address">Address:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="varchar" size="160" name="event_add_address" id="event_add_address" value="" placeholder="Street address of the event location." />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_start_time">Start Time:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="datetime" name="event_add_start_time" id="event_add_start_time" placeholder="HH:MM"/>
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_end_time">End Time:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="datetime" name="event_add_end_time" id="event_add_end_time" placeholder="HH:MM"/>
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_summary">Summary:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="text" name="event_add_summary" id="event_add_summary" value="" placeholder="Descriptive summary of the event." />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_type">Event Type:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="varchar" size="30" name="event_add_type" id="event_add_type" value="" placeholder="Party, Philanthropy, etc" />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_special_notes">Special Notes:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="varchar" size="160" name="event_add_special_notes" id="event_add_special_notes" value="" placeholder="Important additional details." />
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
+			<div class="event_add_form_element" data-role="fieldcontain">
+				<div class="event_form_label float_left">
+					<label for="event_add_alcohol">Alcohol:</label>
+				</div>
+				<div class="event_form_input float_right">
+					<input type="checkbox" name="alcohol" id="event_add_alcohol_yes" value="1"/>
+					<!--<input type="radio" name="alcohol" id="event_add_alcohol_no" value="0">No-->
+				</div>
+				<div class="float_clear"></div>
+			</div>
+
         </div>
 	</div>
 </div>
@@ -220,7 +334,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Gov Org List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <!-- <a id="add_event_page_button" href="#add_event_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
+        <!-- <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
    	</div>
 	
 	<div id="gov_orgs_list_page_content" data-role="content">

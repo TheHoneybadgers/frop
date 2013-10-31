@@ -87,7 +87,6 @@ $(function() {
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
-//	$("#list_events_page").bind("pagebeforeshow",function(){//event, ui){
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
 	
@@ -109,25 +108,52 @@ $(function() {
 		
 		$("#event_list").listview("refresh");
 	});
-	
+
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
-		$("#event_add_text")[0].value = "";
+		$("#event_add_title")[0].value = "";
+//		$("#event_add_date")[0].value = "mm/dd/yyyy";
+//		$("#event_add_org_id")[0].value = "";
+		$("#event_add_foursquare")[0].value = "";
+		$("#event_add_address")[0].value = "";
+//		$("#event_add_start_time")[0].value = "";
+//		$("#event_add_end_time")[0].value = "";
+		$("#event_add_summary")[0].value = "";
+		$("#event_add_type")[0].value = "";
+		$("#event_add_special_notes")[0].value = "";
+//		$("#event_add_alcohol")[0].value = "";
 	});
 		
 	//Bind the add event page button
-	$(document).on("pagebeforeshow", "#event_add_page_button", function(event, ui) {
-		console.log("Add Button");
+	$(document).on("pagebeforeshow", "#event_add_page_submit_button", function(event, ui) {
+		console.log("Add Event Button");
+
 		$.ajax({
 			url: "api/events",
 			dataType: "json",
 	        async: false,
-			data: {"eventText": $("#add_event_text")[0].value}, // TODO not sufficient (needs more fields and stuff)
+
+	        // TODO finish
+
+			data: {
+				"title": $("#event_add_title")[0].value,
+				"date": '2013-10-31',//$("#event_add_date")[0].value,
+				"org_id": $("#event_add_org_id")[0].value,
+				"foursquare": $("#event_add_foursquare")[0].value,
+				"address": $("#event_add_address")[0].value,
+				"start_time": '2013-10-31T21:00:00',//$("#event_add_start_time")[0].value,
+				"end_time": '2013-11-01T03:30:00',//$("#event_add_end_time")[0].value,
+				"summary": $("#event_add_summary")[0].value,
+				"type": $("#event_add_type")[0].value,
+				"special_notes": $("#event_add_special_notes")[0].value,
+				"alcohol": $("#event_add_alcohol")[0].value
+			},
+
 			type: "POST",
 	        error: ajaxError
 		});
-	});
+	});		
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
