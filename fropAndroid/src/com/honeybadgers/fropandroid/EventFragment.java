@@ -19,7 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 public class EventFragment extends ListFragment {
 	
@@ -27,7 +26,7 @@ public class EventFragment extends ListFragment {
 		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/events";
 		
 		// JSON Node names
-		private static final String TAG_EVENTS = "events";
+		
 		private static final String TAG_TITLE = "TITLE";
 		private static final String TAG_EVENT_ID = "EVENT_ID";
 		private static final String TAG_DATE = "DATE";
