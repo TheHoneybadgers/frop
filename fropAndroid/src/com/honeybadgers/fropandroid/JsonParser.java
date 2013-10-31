@@ -26,12 +26,7 @@ public String getUsername(String sessId){
 		
 		try {//grab the username by passing the PHPSESSID as a cookie.
 			HttpClient httpClient = new DefaultHttpClient();
-
-			CookieStore cookieStore = new BasicCookieStore();
-			Cookie cookie = new BasicClientCookie("PHPSESSID", "v2td1cgtl3i1st5sd2ja0d49g3");
-			cookieStore.addCookie(cookie);
-
-
+			
 			HttpGet httpGet = new HttpGet("http://dev.m.gatech.edu/user");
 			httpGet.setHeader("Cookie","PHPSESSID="+ sessId);
 
