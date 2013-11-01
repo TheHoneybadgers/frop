@@ -173,8 +173,11 @@
 				</div>
 				<div class="event_form_input float_right">
 					<select name="event_add_org_id" id="event_add_org_id">
-						<option value="1">Org1 Letters</option>
-						<option value="2">Org2 Letters</option>
+						<script id="event_add_org_id_row_template" type="text/x-jquery-tmpl">
+							<option class="event_add_org_id_row" id="event_org_id_${ORG_ID}" value="${ORG_ID}">
+								${LETTERS}
+							</option>
+						</script>
 					</select>
 				</div>
 				<div class="float_clear"></div>

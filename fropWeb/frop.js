@@ -112,9 +112,31 @@ $(function() {
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
+
 		$("#event_add_title")[0].value = "";
 //		$("#event_add_date")[0].value = "mm/dd/yyyy";
 //		$("#event_add_org_id")[0].value = "";
+
+
+		//Remove the org_id options
+		$( ".event_add_org_id_row" ).remove();
+		
+		//JQuery Fetch The New org_id options
+		$.ajax({
+			url: "api/orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#event_add_org_id_row_template" ).tmpl( data ).appendTo( "#event_add_org_id" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#event_add_org_id").selectmenu("refresh");
+
+
 		$("#event_add_foursquare")[0].value = "";
 		$("#event_add_address")[0].value = "";
 //		$("#event_add_start_time")[0].value = "";
