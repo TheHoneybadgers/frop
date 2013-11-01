@@ -19,5 +19,6 @@ Sagar Raut - UI/UX Guru
         
     </string>
     <string name="ok">OK</string>
+    <string name="loginActivity">Login</string>
 
 </resources>

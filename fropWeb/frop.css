@@ -1,6 +1,50 @@
+/* Floating Elements */
+
+div.float_left {
+	float: left;
+}
+
+div.float_right {
+	float: right;
+}
+
+div.float_clear {
+	clear: both;
+}
+
+div.event_form_label {
+	width: 30%;
+}
+
+div.event_form_input {
+	width: 70%;
+}
+
+/* Event Add Form */
+
+div.event_add_form_element {
+	overflow: auto;
+	width: 100%;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#event_add_title, #event_add_date, #event_add_org_id, #event_add_foursquare, #event_add_address,
+#event_add_start_time, #event_add_end_time, #event_add_summary, #event_add_type, #event_add_special_notes{
+	width: inherit;
+}
+
+#event_add_alcohol_yes {
+	margin-top: 2px;
+	margin-left: -20px;
+}
+
+/* Other */
+
 .event_form{
 	width: 100%;
 }
+
 .event_form textarea{
 	display: block;
 	margin-left: auto;

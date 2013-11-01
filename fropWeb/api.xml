@@ -80,49 +80,49 @@
 			<description><![CDATA[The post method allows the posting of new events for approval if the user is logged in and authorized to submit events.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[addEvent($_POST['eventDate'], $_POST['eventOrgId'], $_POST['eventTitle'], $_POST['eventFoursquare'], $_POST['eventAddress'], $_POST['eventStartTime'], $_POST['eventEndTime'], $_POST['eventSummary'], $_POST['eventType'], $_POST['eventSpecialNotes'], $_POST['eventAlcohol']);]]></action>
+			<action file='events.php'><![CDATA[addEvent($_POST['title'], $_POST['date'], $_POST['org_id'], $_POST['foursquare'], $_POST['address'], $_POST['start_time'], $_POST['end_time'], $_POST['summary'], $_POST['type'], $_POST['special_notes'], $_POST['alcohol']);]]></action>
 			
-			<param id='eventDate'>
-				<description><![CDATA[Date of the event]]></description>
-				<exampleValue><![CDATA[2013-10-31]]></exampleValue>
-			</param>
-			<param id='eventOrgId'>
-				<description><![CDATA[ORG_ID that is hosting the event]]></description>
-				<exampleValue><![CDATA[1]]></exampleValue>
-			</param>
-			<param id='eventTitle'>
+			<param id='title'>
 				<description><![CDATA[Event title. Short name that describes the event]]></description>
 				<exampleValue><![CDATA[Al-Be's Halloween Bash]]></exampleValue>
 			</param>
-			<param id='eventFoursquare'>
+			<param id='date'>
+				<description><![CDATA[Date of the event]]></description>
+				<exampleValue><![CDATA[2013-10-31]]></exampleValue>
+			</param>
+			<param id='org_id'>
+				<description><![CDATA[ORG_ID that is hosting the event]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+			<param id='foursquare'>
 				<description><![CDATA[Foursquare ID for the event]]></description>
 				<exampleValue><![CDATA[522f836711d26c041fd70a09]]></exampleValue>
 			</param>
-			<param id='eventAddress'>
+			<param id='address'>
 				<description><![CDATA[Address of the event, new lines are delimited by '|']]></description>
 				<exampleValue><![CDATA[Event Space, Theme Park, and Park in Bay Lake|Bay Lake, FL]]></exampleValue>
 			</param>
-			<param id='eventStartTime'>
+			<param id='start_time'>
 				<description><![CDATA[Start time of the event]]></description>
 				<exampleValue><![CDATA[2013-10-31T21:00:00]]></exampleValue>
 			</param>
-			<param id='eventEndTime'>
+			<param id='end_time'>
 				<description><![CDATA[End time of the event.]]></description>
 				<exampleValue><![CDATA[2013-11-01T03:30:00]]></exampleValue>
 			</param>
-			<param id='eventSummary'>
+			<param id='summary'>
 				<description><![CDATA[Summary of the event. Why should we come?]]></description>
 				<exampleValue><![CDATA[Come out to the Al-Be Hallow's Eve celebration! There will be drinks for those of age, and fun for all around. Bring your best costume and hang out with the gents from Al-Be!]]></exampleValue>
 			</param>
-			<param id='eventType'>
+			<param id='type'>
 				<description><![CDATA[Very short description of what the event is]]></description>
 				<exampleValue><![CDATA[Party]]></exampleValue>
 			</param>
-			<param id='eventSpecialNotes'>
+			<param id='special_notes'>
 				<description><![CDATA[Theme of the event, or more information than title, but less than description]]></description>
 				<exampleValue><![CDATA[Halloween Costume Party]]></exampleValue>
 			</param>
-			<param id='eventAlcohol'>
+			<param id='alcohol'>
 				<description><![CDATA[If alcohol is allowed at the event]]></description>
 				<exampleValue><![CDATA[true]]></exampleValue>
 			</param>
