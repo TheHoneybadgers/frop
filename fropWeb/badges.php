@@ -16,7 +16,7 @@
 	}
 	
 	function addBadge($badgeName, $badgeGoal, $badgeGoalUnits, $badgeDescription, $badgePreReq, $badgeCustomPicUrl) {
-		$dbQuery = sprintf("INSERT INTO BADGES (`NAME`, `GOAL`, `GOAL_UNITS`, `DESCRIPTION`, `PRE_REQ`, `CUSTOM_PIC_URL`, `ADDED_DATE`, `ADDED_BY`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($badgeName), mysql_real_escape_string($badgeGoal), mysql_real_escape_string($badgeGoalUnits),mysql_real_escape_string($badgeDescription), mysql_real_escape_string($badgePreReq), mysql_real_escape_string($badgeCustomPicUrl), "CURRENT_TIMESTAMP()", $_USER['uid']);
+		$dbQuery = sprintf("INSERT INTO BADGES (`NAME`, `GOAL`, `GOAL_UNITS`, `DESCRIPTION`, `PRE_REQ`, `CUSTOM_PIC_URL`, `ADDED_DATE`, `ADDED_BY`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($badgeName), mysql_real_escape_string($badgeGoal), mysql_real_escape_string($badgeGoalUnits),mysql_real_escape_string($badgeDescription), mysql_real_escape_string($badgePreReq), mysql_real_escape_string($badgeCustomPicUrl), "CURRENT_TIMESTAMP()", mysql_real_escape_string($_USER['uid']));
 		//echo "Query " . $dbQuery . "</br>";
 		$result = getDBResultInserted($dbQuery,'BADGE_ID');
 		header("Content-type: application/json");
