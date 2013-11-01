@@ -37,7 +37,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Badges</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- TODO should be hidden by default (unless logged in) -->
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a> <!-- TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<div id="badge_list_page_content" data-role="content">
@@ -59,7 +59,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#badge_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <h1 class="head_title" id="badge_detail_head_title">Badge Detail</h1>
-        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+        <!-- <a id="badge_edit_button" href="#badge_edit_page&badge_id=${BADGE_ID}" data-direction="reverse" data-icon="plus" data-theme="d" data-iconpos="notext" style="visibility:hidden">Edit</a> --> <!-- TODO make this edit button -->
     </div>
     
 	<div id="badge_detail_content" data-role="content">
@@ -83,7 +83,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a><!-- TODO should be hidden by default (unless logged in) -->
+        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a><!-- TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
@@ -107,7 +107,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
-        <!-- <a id="save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+        <!-- <a id="event_edit_button" href="#event_edit_page&event_id=${event_id}" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext" style="visibility:hidden" >Edit</a> --> <!-- TODO make this edit button -->
     </div>
     
 	<div id="event_detail_content" data-role="content">
@@ -142,7 +142,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Add Event</h1>
-        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
+        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" >Submit</a>
     </div>
 	<div id="event_add_content" data-role="content">
 		<div class="event_add_form">
@@ -271,7 +271,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
-        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a>
+        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" style="visibility:hidden" >Save</a>
     </div>
 	<div id="event_edit_content" data-role="content">		
 		<div class="event_form">
@@ -357,7 +357,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Organizations</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="org_add_page_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- TODO should be hidden by default -->
+        <a id="org_add_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a>
    	</div>
 	
 	<div id="org_list_page_content" data-role="content">
@@ -379,7 +379,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#org_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <h1 class="head_title" id="org_detail_head_title">Organization Detail</h1>
-        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+        <a id="org_edit_button" href="#org_edit_page" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext" style="visibility:hidden" />
     </div>
     
 	<div id="org_detail_content" data-role="content" data-theme="c">
