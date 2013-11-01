@@ -37,7 +37,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Badges</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<div id="badge_list_page_content" data-role="content">
@@ -83,7 +83,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a><!-- TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
@@ -267,7 +267,7 @@
 
 <!-- --- -->
 
-<div data-role="page" id="event_edit_page">
+<div data-role="page" id="event_edit_page"> <!-- TODO Can this and the event add page be merged, since they are very very similar? -->
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
@@ -352,6 +352,55 @@
 </div>
 
 <!-- ------ Org Pages ------ -->
+
+<div data-role="page" id="org_list_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Organizations</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <a id="org_add_page_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- TODO should be hidden by default -->
+   	</div>
+	
+	<div id="org_list_page_content" data-role="content">
+		<ul id="org_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="org_list_row_template" type="text/x-jquery-tmpl">
+				<li class="org_list_row" id="org_${ORG_ID}">
+					<a href="#org_detail_page&org_id=${ORG_ID}" data-transition="slide">
+						<h1>${NAME}</h1><p>${GOAL} ${GOAL_UNITS}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
+<!-- --- -->
+
+<div data-role="page" id="org_detail_page">
+	<div data-role="header" data-position="inline" data-theme="d">
+		<a href="#org_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="org_detail_head_title">Organization Detail</h1>
+        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+    </div>
+    
+	<div id="org_detail_content" data-role="content" data-theme="c">
+		<h1 id="org_detail_nickname">${NICKNAME}</h1>
+		<h3 id="org_detail_letters">${LETTERS}</h3>
+		<h3 id="org_detail_chapter">${CHAPTER}</h3>
+		<h3 id="org_detail_gov_org_id">${GOV_ORG_ID}</h3>
+		<img src="${CUSTOM_PIC_URL}" />
+		<p id="org_detail_type">${TYPE}</p>
+		<p id="org_detail_focus">${FOCUS}</p>
+		<p id="org_detail_year_founded">Founded in ${YEAR_FOUNDED}, Chapter Founded in ${YEAR_CHAPTER_FOUNDED}</p>
+		<p id="org_detail_blurb">${BLURB}</p>
+		<em id="org_detail_address">${ADDRESS}</em></br></br>
+		<a id="org_detail_foursquare_link" href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
+		<a id="org_detail_homepage_url" href="$HOMEPAGE_URL">${HOMEPAGE_URL}</a>
+		<h6 id="org_detail_alcohol">Alcohol: ${ALCOHOL}</h6>
+		<h6><em id="org_detail_org_id">Org Id: ${ORG_ID}</em><em id="org_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
+	</div>
+</div>
+
+<!-- ------ Error Dialog ------ -->
 
 <div data-role="dialog" id="error_dialog" >
 	<div data-role="header" data-position="inline" data-theme="d">

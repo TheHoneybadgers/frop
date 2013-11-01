@@ -84,6 +84,69 @@ $(function() {
 		$("#gov_orgs_list").listview("refresh");
 	});
 
+
+
+/* -- ORGS FUNCTIONS -- */
+
+	//Bind to the create so the list orgs page gets updated with the listing
+	$(document).on("pagebeforeshow", "#org_list_page", function(event, ui) {
+		console.log("pagebeforeshow");
+	
+		//Remove the old rows
+		$( ".org_list_row" ).remove();
+		
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#org_list_row_template" ).tmpl( data ).appendTo( "#org_list" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#org_list").listview("refresh");
+	});
+		
+	//Bind the org detail page init text
+	$(document).on("pagebeforeshow", "#org_detail_page", function(event, ui) {
+		console.log("Org Detail Page");
+		var org_id = $.url().fparam("org_id");
+		
+		//Remove the old rows
+		$( ".org_detail_row" ).remove();
+		
+		//Instead of passing around in JS I am doing AJAX so direct links work
+		//JQuery Fetch The Event
+		$.ajax({
+			url: "api/orgs/"+org_id,
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	       		$( "#org_detail_nickname" )[0].innerHTML = data.NICKNAME;
+	       		$( "#org_detail_letters" )[0].innerHTML = data.LETTERS;
+	       		$( "#org_detail_chapter" )[0].innerHTML = data.CHAPTER;
+	       		$( "#org_detail_gov_org_id" )[0].innerHTML = data.GOV_ORG_ID;
+	       		if (data.CUSTOM_PIC_URL) { $( "#org_detail_custom_pic" )[0].innerHTML = data.CUSTOM_PIC_URL; }
+	       		$( "#org_detail_type" )[0].innerHTML = data.TYPE;
+	       		$( "#org_detail_focus" )[0].innerHTML = data.FOCUS;
+	       		$( "#org_detail_year_founded" )[0].innerHTML = "Founded in " + data.YEAR_FOUNDED + ", Chapter Founded in " +  data.YEAR_CHAPTER_FOUNDED;
+	       		$( "#org_detail_blurb" )[0].innerHTML = data.BLURB;
+	       		$( "#org_detail_address" )[0].innerHTML = data.ADDRESS;
+	       		$( "#org_detail_foursquare_link" )[0].setAttribute("href", "http://foursquare.com/v/" + data.FOURSQUARE);
+	       		$( "#org_detail_homepage_url" )[0].setAttribute("href", data.HOMEPAGE_URL);
+	       		$( "#org_detail_org_id" )[0].innerHTML = data.ORG_ID;
+	       		$( "#org_detail_date_changed" )[0].innerHTML = data.DATE_CHANGED;
+	        },
+	        error: ajaxError
+		});
+	});
+		
+		
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
