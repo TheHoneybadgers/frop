@@ -47,7 +47,6 @@ public class EventFragment extends ListFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		
 		 eventList = new ArrayList<HashMap<String, String>>();
 		
@@ -94,33 +93,27 @@ public class EventFragment extends ListFragment {
 		ListAdapter adapter = new SimpleAdapter(getActivity(), eventList,
 				R.layout.list_item,
 				new String[] { TAG_TITLE, TAG_DATE, TAG_SUMMARY }, new int[] {
-						R.id.eventName, R.id.eventDate, R.id.eventDescrip });//Parsed JSON into an actual list
+						R.id.eventName, R.id.eventDate, R.id.eventDescrip
+						});//Parsed JSON into an actual list
 		setListAdapter(adapter);
-		
-		
 		
 		return view;
 	}
 	
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
+		
 		ListView lv = getListView();
-
-		lv.setOnItemClickListener(new OnItemClickListener() {//Goto the details of the event
+		lv.setOnItemClickListener(new OnItemClickListener() {					//Goto the details of the event
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.d("Position of clicked item", Integer.toString(position));
-				
-				
 				
 				Intent in = new Intent(getActivity().getApplicationContext(), DetailEvent.class);
 				
 				//pass the hashmap entry for an event to the detailevent class
 				in.putExtra("hashmap", eventList.get(position));
-
 				startActivity(in);
 
 			}
