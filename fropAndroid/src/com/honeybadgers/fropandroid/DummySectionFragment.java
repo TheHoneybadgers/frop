@@ -8,30 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DummySectionFragment extends Fragment {
-	
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
+		
+	//The fragment argument representing the section number for this fragment.
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
 	public DummySectionFragment() {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_main_dummy,
-				container, false);
-		TextView dummyTextView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		dummyTextView.setText(Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+		
+		View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+		TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+		dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 		
 		JsonParser j1 = new JsonParser();
-		
-		String sessionName = MainActivity.data.getQueryParameter("sessionName");
-	    String sessionId = MainActivity.data.getQueryParameter("sessionId");
+		String sessionName =MainActivity.session.getName();
+	    String sessionId = MainActivity.session.getSessId();
 	    String username = j1.getUsername(sessionId);
 	    dummyTextView.setText(sessionName + "  " + sessionId+ "Username:"+ username);
 		return rootView;

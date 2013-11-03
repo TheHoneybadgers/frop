@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.2.1"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://dev.m.gatech.edu/d/tpeet3/api/comments/comment</URL><method>POST</method><body><string content-type="application/x-www-form-urlencoded" charset="UTF-8">commentText=hi+test</string></body></request></rest-client>
