@@ -24,7 +24,7 @@ public class SessionManagement {
 	int PRIVATE_MODE = 0;
 
 	// Sharedpref file name
-	private static final String PREF_NAME = "AndroidHivePref";
+	private static final String PREF_NAME = "SocialGreekPref";
 
 	// All Shared Preferences Keys
 	private static final String IS_LOGIN = "IsLoggedIn";
@@ -33,7 +33,7 @@ public class SessionManagement {
 	public static final String KEY_NAME = "name";
 
 	// Email address (make variable public to access from outside)
-	public static final String KEY_EMAIL = "email";
+	public static final String SESS_ID = "sessionId";
 
 	// Constructor
 	public SessionManagement(Context context) {
@@ -46,17 +46,33 @@ public class SessionManagement {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String name) {
+	public void createLoginSession(String name, String sessionId) {
 		// Storing login value as TRUE
 		editor.putBoolean(IS_LOGIN, true);
 
 		// Storing name in pref
 		editor.putString(KEY_NAME, name);
 
+		// Storing sessionId in pref
+		editor.putString(SESS_ID, sessionId);
+
 		// commit changes
 		editor.commit();
 	}
 
+	//Retrieve the stored username
+	String getName(){
+		String name = pref.getString(KEY_NAME, null);
+		return name;
+	}
+	
+	//Retrieve the stored session Id
+	String getSessId(){
+		String sessId = pref.getString(SESS_ID, null);
+		return sessId;
+	}
+	
+	
 	/**
 	 * Check login method wil check user login status If false it will redirect
 	 * user to login page Else won't do anything
@@ -98,8 +114,8 @@ public class SessionManagement {
 	}
 
 	/*
-	 * Quick check for login
-	 * **/
+	 * Quick check for login *
+	 */
 	// Get Login State
 	public boolean isLoggedIn(String sessId) {
 		String result = j1.getUsername(sessId);

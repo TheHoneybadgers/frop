@@ -35,11 +35,13 @@ public class MainActivity extends FragmentActivity {
 
 	// Create a session manager object, which will check if a user is logged in
 	// or not
-	SessionManagement session;
+	static SessionManagement session;
+	String userName; // The GT username recieved from the API
+	String sessionId; // The session ID received after logging in
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -52,30 +54,67 @@ public class MainActivity extends FragmentActivity {
 
 		Intent intent = getIntent();
 		data = intent.getData();
-		
+		session = new SessionManagement(getApplicationContext());
 
-	
-		
+		 
+
 		// if no data set, redirect the user to login page
 		try {
-			String sessionName = data.getQueryParameter("sessionName");
+			
+			// Logging to check if sharedprefs work
+						Log.d("stored username", session.getName());
+						Log.d("stored session Id", session.getSessId());
+			
 
 		} catch (NullPointerException e) {
 			
-			
-			Intent i = new Intent(MainActivity.this, Login.class);
-			i.setAction("LOGIN");
+			try{
+				
+				sessionId = data.getQueryParameter("sessionId");
+				}catch(NullPointerException e2){
+					
+					Intent i = new Intent(MainActivity.this, Login.class);
+					i.setAction("LOGIN");
 
-			// Closing all the Activities
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					// Closing all the Activities
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-			// Add new Flag to start new Activity
-			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);											//Keep no record that login was started, that when you press back after ligging in, you dont go back to the Login page
-			MainActivity.this.finish();
-			startActivity(i);
+					// Add new Flag to start new Activity
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY); // Keep no record that
+																	// login was
+																	// started, so that
+																	// when you press
+																	// back after
+																	// logging in, you
+																	// don't go back to
+																	// the Login page
+					MainActivity.this.finish();
+					startActivity(i);
+				}
 			
+			try {
+				// Get the username and session id and put them in shared
+				// preferences
+				
+				JsonParser j1 = new JsonParser();
+
+				userName = j1.getUsername(sessionId);
+				session.createLoginSession(userName, sessionId);
+				Log.d("before setting pref", "haha");
+
+				// Logging to check if sharedprefs work
+				Log.d("stored username", session.getName());
+				Log.d("stored session Id", session.getSessId());
+			} catch (NullPointerException e3) {
+
+			}
+
+			
+
 		}
+
+		Log.d("continue", "back to main");
 
 		
 
@@ -101,7 +140,7 @@ public class MainActivity extends FragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
-		
+
 		case R.id.action_about:
 			AboutFragment dialog = new AboutFragment();
 			dialog.show(getSupportFragmentManager(), null);
