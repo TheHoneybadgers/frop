@@ -22,8 +22,8 @@
 					<h1>Badges</h1><p>Earn fun badges!</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="gov_orgs_list_page">
-				<a href="#gov_orgs_list_page" data-transition="slide">
+			<li class="page_list_row" id="gov_org_list_page">
+				<a href="#gov_org_list_page" data-transition="slide">
 					<h1>Governing Organizations</h1><p>Check out the organizations that run the show</p>
 				</a>
 			</li>
@@ -330,18 +330,18 @@
 
 <!-- ------ Gov_Org Pages ------ -->
 
-<div data-role="page" id="gov_orgs_list_page">
+<div data-role="page" id="gov_org_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Gov Org List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <!-- <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
    	</div>
 	
-	<div id="gov_orgs_list_page_content" data-role="content">
-		<ul id="gov_orgs_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="gov_orgs_list_row_template" type="text/x-jquery-tmpl">
-				<li class="gov_orgs_list_row" id="gov_orgs_${GOV_ORGS_ID}">
-					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
+	<div id="gov_org_list_page_content" data-role="content">
+		<ul id="gov_org_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="gov_org_list_row_template" type="text/x-jquery-tmpl">
+				<li class="gov_org_list_row" id="gov_org_${GOV_ORG_ID}">
+					<a href="#org_list_page&gov_org_id=${GOV_ORG_ID}" data-transition="slide">
 						<h1>${ACRONYM}</h1>
 						<p>${GOV_ORG_ID} - ${NAME}</p>
 					</a>
