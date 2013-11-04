@@ -112,6 +112,21 @@ var event_id;
 		$("#event_list").listview("refresh");
 	});
 
+	//Bind the event list row links
+	$(document).on("click", ".event_list_row_link", function(event, ui) {
+		console.log("Event List Row Link clicked");
+
+		var target = event.target || event.srcElement;
+		while (target && !target.id) {
+		    target = target.parentNode;
+		}
+
+		// Substring: remove ID prefix to get event_id
+		event_id = target.id.substring(20, target.id.length);
+		console.log("New Event ID from clicked element:");
+		console.log(event_id);
+	});		
+
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
@@ -179,9 +194,7 @@ var event_id;
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
 		console.log("pagebeforeshow #event_detail_page");
-		console.log($.mobile.activePage.data('url'));
-		event_id = $.url().fparam("event_id");
-		console.log("Event ID: ");
+		console.log("Current Event ID: ");
 		console.log(event_id);
 
 		//Remove the old rows
