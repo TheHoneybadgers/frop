@@ -11,6 +11,9 @@ $(function() {
  // Handler for .ready() called.
 	console.log("ready");
 	
+// Global Variables
+var event_id;
+
 /* -- BADGE FUNCTIONS -- */
 
 	//Bind to the create so the list badges page gets updated with the listing
@@ -88,7 +91,7 @@ $(function() {
 
 	//Bind to the create so the list events page gets updated with the listing
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("pagebeforeshow #event_list_page");
 	
 		//Remove the old rows
 		$( ".event_list_row" ).remove();
@@ -175,9 +178,12 @@ $(function() {
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
-		console.log("Event Detail Page");
-		var event_id = $.url().fparam("event_id");
-		
+		console.log("pagebeforeshow #event_detail_page");
+		console.log($.mobile.activePage.data('url'));
+		event_id = $.url().fparam("event_id");
+		console.log("Event ID: ");
+		console.log(event_id);
+
 		//Remove the old rows
 		$( ".event_detail_row" ).remove();
 		
@@ -191,16 +197,6 @@ $(function() {
 				console.log(data);
 				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
 	       		$( "#event_detail_template" ).tmpl( data ).appendTo( "#event_detail" );
-	       		$( "#event_detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
-	       		$( "#event_detail_title" )[0].innerHTML = data.TITLE;
-	       		$( "#event_detail_date" )[0].innerHTML = data.DATE;
-	       		$( "#event_detail_type_id" )[0].innerHTML = "A " + data.TYPE + " Hosted by " + data.ORG_ID;
-	       		$( "#event_detail_times" )[0].innerHTML = data.START_TIME + " to " + data.END_TIME;
-	       		$( "#event_detail_address" )[0].innerHTML = data.ADDRESS;
-	       		$( "#event_detail_foursquare_link" )[0].setAttribute("href", "http://foursquare.com/v/$" + data.FOURSQUARE);
-	       		$( "#event_detail_summary" )[0].innerHTML = data.SUMMARY;
-	       		$( "#event_detail_alcohol" )[0].innerHTML = "Alcohol: " + data.ALCOHOL;
-	       		$( "#event_detail_date_changed" )[0].innerHTML = "Date changed: " + data.DATE_CHANGED;
 	        },
 	        error: ajaxError
 		});
@@ -209,7 +205,7 @@ $(function() {
 	//Bind the edit page init text
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		console.log("Edit Event Page");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		
 		//Instead of passing around in JS I am doing AJAX so direct links work
 		//JQuery Fetch The Event
@@ -228,14 +224,14 @@ $(function() {
 	//Bind the edit page save button
 	$(document).on("pagebeforeshow", "#event_edit_save_button", function(event, ui) {
 		console.log("Save Button");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		$.ajax({
 			url: "api/events/"+event_id,
 			dataType: "json",
 	        async: false,
 			data: {"eventText": $("#event_edit_text")[0].value}, // TODO might need more fields
 			headers: {"X-HTTP-Method-Override": "PUT"},
-			type: "POST",
+			type: "PUT",
 	        error: ajaxError
 		});
 	});
@@ -243,7 +239,7 @@ $(function() {
 	//Bind the edit page remove button
 	$(document).on("pagebeforeshow", "#event_edit_remove_button", function(event, ui) {
 		console.log("Remove Button");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		$.ajax({
 			url: "api/events/"+event_id,
 			dataType: "json",
