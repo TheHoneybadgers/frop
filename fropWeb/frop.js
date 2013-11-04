@@ -114,13 +114,11 @@ $(function() {
 		console.log("Add Event Page");
 
 		$("#event_add_title")[0].value = "";
-//		$("#event_add_date")[0].value = "mm/dd/yyyy";
-//		$("#event_add_org_id")[0].value = "";
-
+		$("#event_add_date")[0].value = "mm/dd/yyyy";
 
 		//Remove the org_id options
 		$( ".event_add_org_id_row" ).remove();
-		
+
 		//JQuery Fetch The New org_id options
 		$.ajax({
 			url: "api/orgs",
@@ -136,15 +134,15 @@ $(function() {
 		
 		$("#event_add_org_id").selectmenu("refresh");
 
-
 		$("#event_add_foursquare")[0].value = "";
 		$("#event_add_address")[0].value = "";
-//		$("#event_add_start_time")[0].value = "";
-//		$("#event_add_end_time")[0].value = "";
+		$("#event_add_start_time")[0].value = "HH:MM";
+		$("#event_add_end_time")[0].value = "HH:MM";
 		$("#event_add_summary")[0].value = "";
 		$("#event_add_type")[0].value = "";
 		$("#event_add_special_notes")[0].value = "";
-//		$("#event_add_alcohol")[0].value = "";
+
+		$("#event_add_alcohol_yes").prop('checked', false).checkboxradio("refresh");
 	});
 		
 	//Bind the add event page button
