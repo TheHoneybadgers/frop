@@ -146,7 +146,7 @@ $(function() {
 	});
 		
 	//Bind the add event page button
-	$(document).on("pagebeforeshow", "#event_add_page_submit_button", function(event, ui) {
+	$(document).on("click", "#event_add_page_submit_button", function() {
 		console.log("Add Event Button");
 
 		$.ajax({
@@ -154,23 +154,21 @@ $(function() {
 			dataType: "json",
 	        async: false,
 
-	        // TODO finish
-
 			data: {
-				"title": $("#event_add_title")[0].value,
-				"date": '2013-10-31',//$("#event_add_date")[0].value,
-				"org_id": $("#event_add_org_id")[0].value,
-				"foursquare": $("#event_add_foursquare")[0].value,
-				"address": $("#event_add_address")[0].value,
-				"start_time": '2013-10-31T21:00:00',//$("#event_add_start_time")[0].value,
-				"end_time": '2013-11-01T03:30:00',//$("#event_add_end_time")[0].value,
-				"summary": $("#event_add_summary")[0].value,
-				"type": $("#event_add_type")[0].value,
-				"special_notes": $("#event_add_special_notes")[0].value,
-				"alcohol": $("#event_add_alcohol")[0].value
+				'title': $('#event_add_title')[0].value,
+				'date': '2013-10-31',//$('#event_add_date')[0].value,
+				'org_id': '1',//$('#event_add_org_id')[0].value,
+				'foursquare': $('#event_add_foursquare')[0].value,
+				'address': $('#event_add_address')[0].value,
+				'start_time': '2013-10-31T21:00:00',//$('#event_add_start_time')[0].value,
+				'end_time': '2013-11-01T03:30:00',//$('#event_add_end_time')[0].value,
+				'summary': $('#event_add_summary')[0].value,
+				'type': $('#event_add_type')[0].value,
+				'special_notes': $('#event_add_special_notes')[0].value,
+				'alcohol': '1'//$('#event_add_alcohol_yes')[0].value
 			},
 
-			type: "POST",
+			type: 'POST',
 	        error: ajaxError
 		});
 	});		
