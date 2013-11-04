@@ -62,11 +62,11 @@ $(function() {
 /* -- GOV ORGS FUNCTIONS -- */
 
 	// Bind to the create so the list gov orgs page gets updated with the listing
-	$(document).on("pagebeforeshow", "#gov_orgs_list_page", function(event, ui) {
+	$(document).on("pagebeforeshow", "#gov_org_list_page", function(event, ui) {
 		console.log("pagebeforeshow");
 	
 		//Remove the old rows
-		$( ".gov_orgs_list" ).remove();
+		$( ".gov_org_list" ).remove();
 		
 		//JQuery Fetch The New Ones
 		$.ajax({
@@ -76,12 +76,12 @@ $(function() {
 	        success: function(data, textStatus, jqXHR) {
 				console.log(data);
 	        	//Create The New Rows From Template
-	        	$( "#gov_orgs_list_row_template" ).tmpl( data ).appendTo( "#gov_orgs_list" );
+	        	$( "#gov_org_list_row_template" ).tmpl( data ).appendTo( "#gov_org_list" );
 	        },
 	        error: ajaxError
 		});
 		
-		$("#gov_orgs_list").listview("refresh");
+		$("#gov_org_list").listview("refresh");
 	});
 
 
@@ -95,6 +95,11 @@ $(function() {
 		//Remove the old rows
 		$( ".org_list_row" ).remove();
 		
+		var url = "api/orgs";
+		var gov_org = $.url().fparam("gov_org_id");
+		if (gov_org > 0) {
+			url = "api/gov_orgs/"+gov_org+"/orgs/1";
+		}
 		//JQuery Fetch The New Ones
 		$.ajax({
 			url: "api/orgs",
@@ -104,10 +109,10 @@ $(function() {
 				console.log(data);
 	        	//Create The New Rows From Template
 	        	$( "#org_list_row_template" ).tmpl( data ).appendTo( "#org_list" );
+				gov_org = -1;
 	        },
 	        error: ajaxError
 		});
-		
 		$("#org_list").listview("refresh");
 	});
 		
@@ -131,7 +136,7 @@ $(function() {
 	       		$( "#org_detail_letters" )[0].innerHTML = data.LETTERS;
 	       		$( "#org_detail_chapter" )[0].innerHTML = data.CHAPTER;
 	       		$( "#org_detail_gov_org_id" )[0].innerHTML = data.GOV_ORG_ID;
-	       		if (data.CUSTOM_PIC_URL) { $( "#org_detail_custom_pic" )[0].innerHTML = data.CUSTOM_PIC_URL; }
+	       		if (data.CUSTOM_PIC_URL && data.PIC_APPROVED==="true") { $( "#org_detail_custom_pic" )[0].innerHTML = data.CUSTOM_PIC_URL; }
 	       		$( "#org_detail_type" )[0].innerHTML = data.TYPE;
 	       		$( "#org_detail_focus" )[0].innerHTML = data.FOCUS;
 	       		$( "#org_detail_year_founded" )[0].innerHTML = "Founded in " + data.YEAR_FOUNDED + ", Chapter Founded in " +  data.YEAR_CHAPTER_FOUNDED;
