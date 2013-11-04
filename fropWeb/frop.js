@@ -11,6 +11,9 @@ $(function() {
  // Handler for .ready() called.
 	console.log("ready");
 	
+// Global Variables
+var event_id;
+
 /* -- BADGE FUNCTIONS -- */
 
 	//Bind to the create so the list badges page gets updated with the listing
@@ -88,7 +91,7 @@ $(function() {
 
 	//Bind to the create so the list events page gets updated with the listing
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("pagebeforeshow #event_list_page");
 	
 		//Remove the old rows
 		$( ".event_list_row" ).remove();
@@ -109,24 +112,59 @@ $(function() {
 		$("#event_list").listview("refresh");
 	});
 
+	//Bind the event list row links
+	$(document).on("click", ".event_list_row_link", function(event, ui) {
+		console.log("Event List Row Link clicked");
+
+		var target = event.target || event.srcElement;
+		while (target && !target.id) {
+		    target = target.parentNode;
+		}
+
+		// Substring: remove ID prefix to get event_id
+		event_id = target.id.substring(20, target.id.length);
+		console.log("New Event ID from clicked element:");
+		console.log(event_id);
+	});		
+
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
+
 		$("#event_add_title")[0].value = "";
-//		$("#event_add_date")[0].value = "mm/dd/yyyy";
-//		$("#event_add_org_id")[0].value = "";
+		$("#event_add_date")[0].value = "mm/dd/yyyy";
+
+		//Remove the org_id options
+		$( ".event_add_org_id_row" ).remove();
+
+		//JQuery Fetch The New org_id options
+		$.ajax({
+			url: "api/orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#event_add_org_id_row_template" ).tmpl( data ).appendTo( "#event_add_org_id" );
+	        },
+	        error: ajaxError
+		});
+		
+		$("#event_add_org_id").selectmenu("refresh");
+
 		$("#event_add_foursquare")[0].value = "";
 		$("#event_add_address")[0].value = "";
-//		$("#event_add_start_time")[0].value = "";
-//		$("#event_add_end_time")[0].value = "";
+		$("#event_add_start_time")[0].value = "HH:MM";
+		$("#event_add_end_time")[0].value = "HH:MM";
 		$("#event_add_summary")[0].value = "";
 		$("#event_add_type")[0].value = "";
 		$("#event_add_special_notes")[0].value = "";
-//		$("#event_add_alcohol")[0].value = "";
+
+		$("#event_add_alcohol_yes").prop('checked', false).checkboxradio("refresh");
 	});
 		
 	//Bind the add event page button
-	$(document).on("pagebeforeshow", "#event_add_page_submit_button", function(event, ui) {
+	$(document).on("click", "#event_add_page_submit_button", function(event, ui) {
 		console.log("Add Event Button");
 
 		$.ajax({
@@ -134,32 +172,31 @@ $(function() {
 			dataType: "json",
 	        async: false,
 
-	        // TODO finish
-
 			data: {
-				"title": $("#event_add_title")[0].value,
-				"date": '2013-10-31',//$("#event_add_date")[0].value,
-				"org_id": $("#event_add_org_id")[0].value,
-				"foursquare": $("#event_add_foursquare")[0].value,
-				"address": $("#event_add_address")[0].value,
-				"start_time": '2013-10-31T21:00:00',//$("#event_add_start_time")[0].value,
-				"end_time": '2013-11-01T03:30:00',//$("#event_add_end_time")[0].value,
-				"summary": $("#event_add_summary")[0].value,
-				"type": $("#event_add_type")[0].value,
-				"special_notes": $("#event_add_special_notes")[0].value,
-				"alcohol": $("#event_add_alcohol")[0].value
+				'title': $('#event_add_title')[0].value,
+				'date': '2013-10-31',//$('#event_add_date')[0].value,
+				'org_id': '1',//$('#event_add_org_id')[0].value,
+				'foursquare': $('#event_add_foursquare')[0].value,
+				'address': $('#event_add_address')[0].value,
+				'start_time': '2013-10-31T21:00:00',//$('#event_add_start_time')[0].value,
+				'end_time': '2013-11-01T03:30:00',//$('#event_add_end_time')[0].value,
+				'summary': $('#event_add_summary')[0].value,
+				'type': $('#event_add_type')[0].value,
+				'special_notes': $('#event_add_special_notes')[0].value,
+				'alcohol': '1'//$('#event_add_alcohol_yes')[0].value
 			},
 
-			type: "POST",
+			type: 'POST',
 	        error: ajaxError
 		});
 	});		
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
-		console.log("Event Detail Page");
-		var event_id = $.url().fparam("event_id");
-		
+		console.log("pagebeforeshow #event_detail_page");
+		console.log("Current Event ID: ");
+		console.log(event_id);
+
 		//Remove the old rows
 		$( ".event_detail_row" ).remove();
 		
@@ -173,16 +210,6 @@ $(function() {
 				console.log(data);
 				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
 	       		$( "#event_detail_template" ).tmpl( data ).appendTo( "#event_detail" );
-	       		$( "#event_detail_head_title" )[0].innerHTML = data.DATE + " - " + data.TITLE;
-	       		$( "#event_detail_title" )[0].innerHTML = data.TITLE;
-	       		$( "#event_detail_date" )[0].innerHTML = data.DATE;
-	       		$( "#event_detail_type_id" )[0].innerHTML = "A " + data.TYPE + " Hosted by " + data.ORG_ID;
-	       		$( "#event_detail_times" )[0].innerHTML = data.START_TIME + " to " + data.END_TIME;
-	       		$( "#event_detail_address" )[0].innerHTML = data.ADDRESS;
-	       		$( "#event_detail_foursquare_link" )[0].setAttribute("href", "http://foursquare.com/v/$" + data.FOURSQUARE);
-	       		$( "#event_detail_summary" )[0].innerHTML = data.SUMMARY;
-	       		$( "#event_detail_alcohol" )[0].innerHTML = "Alcohol: " + data.ALCOHOL;
-	       		$( "#event_detail_date_changed" )[0].innerHTML = "Date changed: " + data.DATE_CHANGED;
 	        },
 	        error: ajaxError
 		});
@@ -191,7 +218,7 @@ $(function() {
 	//Bind the edit page init text
 	$(document).on("pagebeforeshow", "#event_edit_page", function(event, ui) {
 		console.log("Edit Event Page");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		
 		//Instead of passing around in JS I am doing AJAX so direct links work
 		//JQuery Fetch The Event
@@ -210,14 +237,14 @@ $(function() {
 	//Bind the edit page save button
 	$(document).on("pagebeforeshow", "#event_edit_save_button", function(event, ui) {
 		console.log("Save Button");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		$.ajax({
 			url: "api/events/"+event_id,
 			dataType: "json",
 	        async: false,
 			data: {"eventText": $("#event_edit_text")[0].value}, // TODO might need more fields
 			headers: {"X-HTTP-Method-Override": "PUT"},
-			type: "POST",
+			type: "PUT",
 	        error: ajaxError
 		});
 	});
@@ -225,7 +252,7 @@ $(function() {
 	//Bind the edit page remove button
 	$(document).on("pagebeforeshow", "#event_edit_remove_button", function(event, ui) {
 		console.log("Remove Button");
-		var event_id = $.url().fparam("event_id");
+		event_id = $.url().fparam("event_id");
 		$.ajax({
 			url: "api/events/"+event_id,
 			dataType: "json",

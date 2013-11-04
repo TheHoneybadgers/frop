@@ -92,7 +92,7 @@
 		<ul id="event_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_list_row_template" type="text/x-jquery-tmpl">
 				<li class="event_list_row" id="event_${EVENT_ID}">
-					<a href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
+					<a class="event_list_row_link" id="event_list_row_link_${EVENT_ID}" href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
 						<h1>${TITLE}</h1><p>${DATE}</p>
 					</a>
 				</li>
@@ -114,7 +114,8 @@
 		<ul id="event_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_detail_template" type="text/x-jquery-tmpl">
 				<li class="event_detail_row"id="event_detail_${EVENT_ID}">
-					<h1>${TITLE}</h1>${DATE}
+					<h1>${TITLE}</h1>
+					${DATE}
 					<h3>A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
 					<p>${START_TIME} to ${END_TIME}</p>
 					<em>${ADDRESS}</em></br></br>
@@ -125,14 +126,7 @@
 				</li>
 			</script>
 		</ul>
-		<h1 id="event_detail_title">${TITLE}</h1><p id="event_detail_date">${DATE}</p>
-		<h3 id="event_detail_type_id">A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
-		<p id="event_detail_times">${START_TIME} to ${END_TIME}</p>
-		<em id="event_detail_address">${ADDRESS}</em></br></br>
-		<a id="event_detail_foursquare_link" href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
-		<p id="event_detail_summary">${SUMMARY}</p>
-		<h6 id="event_detail_alcohol">Alcohol: ${ALCOHOL}</h6>
-		<h6><em id="event_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
+
 	</div>
 </div>
 
@@ -173,8 +167,11 @@
 				</div>
 				<div class="event_form_input float_right">
 					<select name="event_add_org_id" id="event_add_org_id">
-						<option value="1">Org1 Letters</option>
-						<option value="2">Org2 Letters</option>
+						<script id="event_add_org_id_row_template" type="text/x-jquery-tmpl">
+							<option class="event_add_org_id_row" id="event_org_id_${ORG_ID}" value="${ORG_ID}">
+								${LETTERS}
+							</option>
+						</script>
 					</select>
 				</div>
 				<div class="float_clear"></div>

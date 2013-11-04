@@ -124,7 +124,7 @@
 			</param>
 			<param id='alcohol'>
 				<description><![CDATA[If alcohol is allowed at the event]]></description>
-				<exampleValue><![CDATA[true]]></exampleValue>
+				<exampleValue><![CDATA[1]]></exampleValue>
 			</param>
 		</post>
 		
