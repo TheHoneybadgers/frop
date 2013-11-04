@@ -146,7 +146,7 @@ $(function() {
 	});
 		
 	//Bind the add event page button
-	$(document).on("click", "#event_add_page_submit_button", function() {
+	$(document).on("click", "#event_add_page_submit_button", function(event, ui) {
 		console.log("Add Event Button");
 
 		$.ajax({
