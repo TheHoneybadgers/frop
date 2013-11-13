@@ -29,7 +29,7 @@ div.event_add_form_element {
     margin-right: auto;
 }
 
-#event_add_title, #event_add_date, #event_add_org_id, #event_add_foursquare, #event_add_address,
+#event_add_title, #event_add_date, #event_add_foursquare, #event_add_address,
 #event_add_start_time, #event_add_end_time, #event_add_summary, #event_add_type, #event_add_special_notes{
 	width: inherit;
 }
@@ -37,6 +37,12 @@ div.event_add_form_element {
 #event_add_alcohol_yes {
 	margin-top: 2px;
 	margin-left: -20px;
+}
+
+/* May cause conflicts: */
+/* Auto generated class (by JQuery I think, for round corners and stuff) */
+.ui-select {
+	width: inherit !important;
 }
 
 /* Other */
