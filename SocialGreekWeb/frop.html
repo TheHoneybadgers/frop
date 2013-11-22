@@ -2,7 +2,7 @@
 
 <div data-role="page" id="home_page">
     <div data-role="header" data-position="inline" data-theme="d">
-	    <h1 class="head_title">Frop</h1>
+	    <h1 class="head_title">SocialGreek</h1>
    	</div>
 	
 	<div id="content" data-role="content">
@@ -36,8 +36,8 @@
 <div data-role="page" id="badge_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Badges</h1>
-		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a> <!-- TODO should be hidden by default (unless logged in) -->
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- style="visibility:hidden"></a>  TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<div id="badge_list_page_content" data-role="content">
@@ -82,8 +82,8 @@
 <div data-role="page" id="event_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
-		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a><!-- TODO should be hidden by default (unless logged in) -->
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
+        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- style="visibility:hidden"></a> TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
@@ -92,7 +92,7 @@
 		<ul id="event_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_list_row_template" type="text/x-jquery-tmpl">
 				<li class="event_list_row" id="event_${EVENT_ID}">
-					<a href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
+					<a class="event_list_row_link" id="event_list_row_link_${EVENT_ID}" href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
 						<h1>${TITLE}</h1><p>${DATE}</p>
 					</a>
 				</li>
@@ -105,7 +105,7 @@
 
 <div data-role="page" id="event_detail_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
         <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
         <!-- <a id="event_edit_button" href="#event_edit_page&event_id=${event_id}" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext" style="visibility:hidden" >Edit</a> --> <!-- TODO make this edit button -->
     </div>
@@ -114,7 +114,8 @@
 		<ul id="event_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_detail_template" type="text/x-jquery-tmpl">
 				<li class="event_detail_row"id="event_detail_${EVENT_ID}">
-					<h1>${TITLE}</h1>${DATE}
+					<h1>${TITLE}</h1>
+					${DATE}
 					<h3>A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
 					<p>${START_TIME} to ${END_TIME}</p>
 					<em>${ADDRESS}</em></br></br>
@@ -125,14 +126,7 @@
 				</li>
 			</script>
 		</ul>
-		<h1 id="event_detail_title">${TITLE}</h1><p id="event_detail_date">${DATE}</p>
-		<h3 id="event_detail_type_id">A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
-		<p id="event_detail_times">${START_TIME} to ${END_TIME}</p>
-		<em id="event_detail_address">${ADDRESS}</em></br></br>
-		<a id="event_detail_foursquare_link" href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
-		<p id="event_detail_summary">${SUMMARY}</p>
-		<h6 id="event_detail_alcohol">Alcohol: ${ALCOHOL}</h6>
-		<h6><em id="event_detail_date_changed">Date changed: ${DATE_CHANGED}</em></h6>
+
 	</div>
 </div>
 
@@ -140,7 +134,7 @@
 
 <div data-role="page" id="event_add_page">
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Add Event</h1>
         <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" >Submit</a>
     </div>
@@ -173,8 +167,11 @@
 				</div>
 				<div class="event_form_input float_right">
 					<select name="event_add_org_id" id="event_add_org_id">
-						<option value="1">Org1 Letters</option>
-						<option value="2">Org2 Letters</option>
+						<script id="event_add_org_id_row_template" type="text/x-jquery-tmpl">
+							<option class="event_add_org_id_row" id="event_org_id_${ORG_ID}" value="${ORG_ID}">
+								${LETTERS}
+							</option>
+						</script>
 					</select>
 				</div>
 				<div class="float_clear"></div>
@@ -269,7 +266,7 @@
 
 <div data-role="page" id="event_edit_page"> <!-- TODO Can this and the event add page be merged, since they are very very similar? -->
 	<div data-role="header" data-position="inline" data-theme="d">
-		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d">Cancel</a>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
         <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" style="visibility:hidden" >Save</a>
     </div>
@@ -333,7 +330,7 @@
 <div data-role="page" id="gov_org_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Gov Org List</h1>
-		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
         <!-- <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
    	</div>
 	
