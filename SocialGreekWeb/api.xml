@@ -66,7 +66,7 @@
 			<description><![CDATA[This returns a listing of all events that are approved.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[listEvents();]]></action>
+			<action file='events.php'><![CDATA[listApprovedEvents();]]></action>
 		</index>
 		
 		<get>
@@ -145,8 +145,7 @@
 			
 			<action file='events.php'><![CDATA[deleteEvent($_REST['events']);]]></action>
 		</delete>
-		
-		
+
 		<!-- EVENTS/ORGS API -->
 		<command id='orgs' security='public'>
 			<description><![CDATA[This section allows you to see event details of specific organizations. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]></description>
@@ -160,7 +159,18 @@
 	
 	</command> <!-- Closes events -->
 
-
+	<!-- EVENTS/APPROVALS API -->
+	<command id='approvals' security='public'>
+		<description><![CDATA[This section allows you to see a list of unapproved events.]]></description>
+	
+		<index>
+			<description><![CDATA[This returns a listing of all events that are not approved.]]>
+			</description>
+			
+			<action file='events.php'><![CDATA[listUnapprovedEvents();]]></action>
+		</index>
+	</command> <!-- Closes approvals -->		
+	
 <!-- GOV_ORGS API -->
 	<command id='gov_orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>

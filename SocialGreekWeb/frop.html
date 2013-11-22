@@ -80,10 +80,13 @@
 <!-- ------ Event Pages ------ -->
 
 <div data-role="page" id="event_list_page">
-    <div data-role="header" data-position="inline" data-theme="d">
+    <div class="ui-bar" data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Event List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
-        <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+		<div class="ui-btn-right">
+			<a id="event_approval_page_button" href="#event_approval_page" data-transition="slide" data-icon="grid" data-role="button">Approvals</a>
+			<a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-role="button">Registration</a>
+		</div>
    	</div>
 	
 	<!-- TODO should have centered buttons that switch between all events and this week -->
@@ -95,6 +98,29 @@
 					<a class="event_list_row_link" id="event_list_row_link_${EVENT_ID}" href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
 						<h1>${TITLE}</h1><p>${DATE}</p>
 					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
+<!-- --- -->
+
+<div data-role="page" id="event_approval_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Event Approval</h1>
+		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
+   	</div>
+		
+	<div id="event_approval_page_content" data-role="content">
+		<ul id="event_approval_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="event_approval_list_row_template" type="text/x-jquery-tmpl">
+				<li class="event_approval_list_row" id="event_${EVENT_ID}">
+
+					<a class="event_approval_list_row_link" id="event_approval_list_row_link_${EVENT_ID}" href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
+						<h1>${TITLE}</h1><p>${DATE}</p>
+					</a>
+
 				</li>
 			</script>
 		</ul>
@@ -136,7 +162,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Add Event</h1>
-        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Submit</a>
+        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="check" data-iconpos="right" data-theme="d">Submit</a>
     </div>
 	<div id="event_add_content" data-role="content">
 		<div class="event_add_form">

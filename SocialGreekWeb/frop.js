@@ -127,6 +127,28 @@ var event_id;
 		console.log(event_id);
 	});		
 
+	//Bind the event approval list
+	$(document).on("pagebeforeshow", "#event_approval_page", function(event, ui) {
+		console.log("pagebeforeshow #event_approval_page");
+
+		//Remove the old rows
+		$( ".event_approval_list_row" ).remove();
+
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/approvals",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#event_approval_list_row_template" ).tmpl( data ).appendTo( "#event_approval_list" );
+	        },
+	        error: ajaxError
+		});
+		$("#event_approval_list").listview("refresh");
+	});
+
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");
@@ -163,7 +185,7 @@ var event_id;
 		$("#event_add_alcohol_yes").prop('checked', false).checkboxradio("refresh");
 	});
 		
-	//Bind the add event page button
+	//Bind the add event submit button
 	$(document).on("click", "#event_add_page_submit_button", function(event, ui) {
 		console.log("Add Event Button");
 
