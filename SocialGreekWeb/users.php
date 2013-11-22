@@ -18,7 +18,7 @@
 			mysql_real_escape_string($id)
 		);
 		echo $dbQuery;
-		$result = getDB// ResultsArray($dbQuery);
+//		$result = ResultsArray($dbQuery);
 // 		header("Content-type: application/json");
 // 		echo json_encode($result);
 	}
