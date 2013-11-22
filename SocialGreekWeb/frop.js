@@ -149,6 +149,63 @@ var event_id;
 		$("#event_approval_list").listview("refresh");
 	});
 
+	//Bind the event approval list row links
+	$(document).on("click", ".event_approval_list_row_link", function(event, ui) {
+		console.log("Event Approval List Row Link clicked");
+
+		var target = event.target || event.srcElement;
+		while (target && !target.id) {
+		    target = target.parentNode;
+		}
+
+		// Substring: remove ID prefix to get event_id
+		event_id = target.id.substring(29, target.id.length);
+		console.log("New Event ID from clicked element:");
+		console.log(event_id);
+	});		
+
+	//Bind the event approval detail page init text
+	$(document).on("pagebeforeshow", "#event_approval_detail_page", function(event, ui) {
+		console.log("pagebeforeshow #event_approval_detail_page");
+		console.log("Current Event ID: ");
+		console.log(event_id);
+
+		//Remove the old rows
+		$( ".event_approval_detail_row" ).remove();
+		
+		//Instead of passing around in JS I am doing AJAX so direct links work
+		//JQuery Fetch The Event
+		$.ajax({
+			url: "api/approvals/"+event_id,
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+				data.ALCOHOL = (data.ALCOHOL == 1) ? "Yes" : "No";
+	       		$( "#event_approval_detail_template" ).tmpl( data ).appendTo( "#event_approval_detail" );
+	        },
+	        error: ajaxError
+		});
+	});
+
+	// //Bind the event approval button
+	// $(document).on("click", "#event_approve_button", function(event, ui) {
+	// 	console.log("Approve Event Button");
+
+	// 	$.ajax({
+	// 		url: "api/events",
+	// 		dataType: "json",
+	//         async: false,
+
+	// 		data: {
+	// 			'approved': '1'
+	// 		},
+
+	// 		type: 'PUT',
+	//         error: ajaxError
+	// 	});
+	// });		
+
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
 		console.log("Add Event Page");

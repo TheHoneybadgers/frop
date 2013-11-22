@@ -116,14 +116,41 @@
 		<ul id="event_approval_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_approval_list_row_template" type="text/x-jquery-tmpl">
 				<li class="event_approval_list_row" id="event_${EVENT_ID}">
-
-					<a class="event_approval_list_row_link" id="event_approval_list_row_link_${EVENT_ID}" href="#event_detail_page&event_id=${EVENT_ID}" data-transition="slide">
+					<a class="event_approval_list_row_link" id="event_approval_list_row_link_${EVENT_ID}" href="#event_approval_detail_page&event_id=${EVENT_ID}" data-transition="slide">
 						<h1>${TITLE}</h1><p>${DATE}</p>
 					</a>
-
 				</li>
 			</script>
 		</ul>
+	</div>
+</div>
+
+<!-- --- -->
+
+<div data-role="page" id="event_approval_detail_page">
+	<div data-role="header" data-position="inline" data-theme="d">
+		<a href="#event_approval_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
+        <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
+        <a id="event_approve_button" href="#event_approval_page" data-direction="reverse" data-icon="check" data-theme="d">Approve</a>
+    </div>
+    
+	<div id="event_approval_detail_content" data-role="content">
+		<ul id="event_approval_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="event_approval_detail_template" type="text/x-jquery-tmpl">
+				<li class="event_approval_detail_row" id="event_approval_detail_${EVENT_ID}">
+					<h1>${TITLE}</h1>
+					${DATE}
+					<h3>A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
+					<p>${START_TIME} to ${END_TIME}</p>
+					<em>${ADDRESS}</em></br></br>
+					<a href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
+					<p>${SUMMARY}</p>
+					<h6>Alcohol: ${ALCOHOL}</h6> <!-- TODO have this actually show not a number.. -->
+					<h6><em>Date changed: ${DATE_CHANGED}</em></h6>
+				</li>
+			</script>
+		</ul>
+
 	</div>
 </div>
 

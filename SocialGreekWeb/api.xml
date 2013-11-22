@@ -169,6 +169,14 @@
 			
 			<action file='events.php'><![CDATA[listUnapprovedEvents();]]></action>
 		</index>
+
+		<get>
+			<description><![CDATA[By designating 'approvals/{EVENT_ID}', a specific event will be returned along with its details, whether it has happened already or not.]]>
+			</description>
+			
+			<action file='events.php'><![CDATA[getEvent($_REST['approvals']);]]></action>
+		</get>
+
 	</command> <!-- Closes approvals -->		
 	
 <!-- GOV_ORGS API -->
