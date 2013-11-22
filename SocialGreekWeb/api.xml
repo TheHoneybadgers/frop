@@ -177,6 +177,13 @@
 			<action file='events.php'><![CDATA[getEvent($_REST['approvals']);]]></action>
 		</get>
 
+		<put>
+			<description><![CDATA[This is how you can approve an event.]]></description>
+			
+			<action file='events.php'><![CDATA[approveEvent($_REST['approvals']);]]></action>
+			
+		</put>
+
 	</command> <!-- Closes approvals -->		
 	
 <!-- GOV_ORGS API -->

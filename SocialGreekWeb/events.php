@@ -68,6 +68,16 @@
 		echo json_encode($result);// . "</br>";
 	}
 
+	function approveEvent($id) {
+		$dbQuery = sprintf("UPDATE EVENTS SET APPROVED = 1 WHERE id = '%s'",
+			mysql_real_escape_string($id));
+		
+		$result = getDBResultAffected($dbQuery);
+		
+		header("Content-type: application/json");
+		echo json_encode($result);
+	}
+
 	// TODO decide what to be able to update
 	function updateEvent($id,$event) {
 		$dbQuery = sprintf("UPDATE EVENTS SET event = '%s' WHERE id = '%s'",

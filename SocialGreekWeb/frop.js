@@ -188,23 +188,23 @@ var event_id;
 		});
 	});
 
-	// //Bind the event approval button
-	// $(document).on("click", "#event_approve_button", function(event, ui) {
-	// 	console.log("Approve Event Button");
+	//Bind the event approval button
+	$(document).on("click", "#event_approve_button", function(event, ui) {
+		console.log("Approve Event Button");
 
-	// 	$.ajax({
-	// 		url: "api/events",
-	// 		dataType: "json",
-	//         async: false,
+		$.ajax({
+			url: "api/approvals/"+event_id,
+			dataType: "json",
+	        async: false,
 
-	// 		data: {
-	// 			'approved': '1'
-	// 		},
+			data: {
+				'approved': '1'
+			},
 
-	// 		type: 'PUT',
-	//         error: ajaxError
-	// 	});
-	// });		
+			type: 'PUT',
+	        error: ajaxError
+		});
+	});		
 
 	//Bind the add event page clear text
 	$(document).on("pagebeforeshow", "#event_add_page", function(event, ui) {
