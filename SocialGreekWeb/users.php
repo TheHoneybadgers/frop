@@ -17,8 +17,9 @@
 			mysql_real_escape_string($id), 
 			mysql_real_escape_string($id)
 		);
-		echo $dbQuery;
-//		$result = ResultsArray($dbQuery);
+// 		echo $dbQuery;
+		$result = getDBResultRecord($dbQuery);
+		echo $result["PERMS"];
 // 		header("Content-type: application/json");
 // 		echo json_encode($result);
 	}
