@@ -2,10 +2,8 @@ package com.honeybadgers.fropandroid;
 
 import java.io.IOException;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -18,31 +16,6 @@ public class JsonParser {
 
 	}
 
-public String getUsername(String sessId){
-		
-		try {//grab the username by passing the PHPSESSID as a cookie.
-			HttpClient httpClient = new DefaultHttpClient();
-			
-			HttpGet httpGet = new HttpGet("http://dev.m.gatech.edu/user");
-			httpGet.setHeader("Cookie","PHPSESSID="+ sessId);
-
-			HttpResponse response = httpClient.execute(httpGet);
-			return EntityUtils.toString( response.getEntity());
-
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		
-	}
 	
 	public JSONArray getJSONFromUrl(String url) {
 

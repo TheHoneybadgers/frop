@@ -4,6 +4,7 @@
     <string name="app_name">SocialGreek</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About SocialGreek</string>
+    <string name="action_logout">Logout</string>
     <string name="title_section1">History</string>
     <string name="title_section2">Events</string>
     <string name="title_section3">Submit</string>
