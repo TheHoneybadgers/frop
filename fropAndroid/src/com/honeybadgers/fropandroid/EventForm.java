@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.R.array;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -27,9 +29,11 @@ public class EventForm extends Activity {
 	EditText title,address;
 	TimePicker start, end;
 	Button submit;
-	CalendarView cal;
+	DatePicker cal;
 	Spinner spin;
     private String array_spinner[];
+    
+    String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,20 +46,22 @@ public class EventForm extends Activity {
 		start = (TimePicker)findViewById(R.id.timeStart);
 		end = (TimePicker) findViewById(R.id.timeStop);
 		
-		cal = (CalendarView) findViewById(R.id.calendarView1);
+		cal = (DatePicker) findViewById(R.id.datePicker1);
 		spin = (Spinner) findViewById(R.id.spinner1);
-		array_spinner=new String[5];
-        array_spinner[0]="Party";
-        array_spinner[1]="Philanthropy";
-
-        ArrayAdapter adapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, array_spinner);
-        spin.setAdapter(adapter);
 		
+       		
 		Button submit = (Button) findViewById(R.id.submitButton);
 
 		submit.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				
+				titleVal = title.getText().toString();
+				dateVal = cal.getYear()+"-"+cal.getMonth()+"-"+cal.getDayOfMonth();
+				start_timeVal = dateVal+"T"+start.getCurrentHour() + ":"+ start.getCurrentMinute()+":00";
+				end_timeVal = dateVal+"T"+end.getCurrentHour() + ":"+ end.getCurrentMinute()+":00";
+				addressVal = address.getText().toString();
+				typeVal =  spin.getSelectedItem().toString();
+				
 				Log.d("EVENT FORM", "Button Pressed");
 				postData();
 				Log.d("EVENT FORM", "Data Posted");
@@ -75,15 +81,15 @@ public class EventForm extends Activity {
 			
 			//TODO: Get the value fields in the following name-value pairs to form input fields
 			
-			nameValuePairs.add(new BasicNameValuePair("title","Party number 2"));
-			nameValuePairs.add(new BasicNameValuePair("date","2013-10-31"));
+			nameValuePairs.add(new BasicNameValuePair("title",titleVal));
+			nameValuePairs.add(new BasicNameValuePair("date",dateVal));
 			nameValuePairs.add(new BasicNameValuePair("org_id","1"));
 			nameValuePairs.add(new BasicNameValuePair("foursquare","ab45454"));
-			nameValuePairs.add(new BasicNameValuePair("address","College of computing"));
-			nameValuePairs.add(new BasicNameValuePair("start_time","2013-10-31T21:00:00"));
-			nameValuePairs.add(new BasicNameValuePair("end_time","2013-10-31T21:00:00"));
+			nameValuePairs.add(new BasicNameValuePair("address",addressVal));
+			nameValuePairs.add(new BasicNameValuePair("start_time",start_timeVal));
+			nameValuePairs.add(new BasicNameValuePair("end_time",end_timeVal));
 			nameValuePairs.add(new BasicNameValuePair("summary","This is a summary"));
-			nameValuePairs.add(new BasicNameValuePair("type","Rave"));
+			nameValuePairs.add(new BasicNameValuePair("type",typeVal));
 			nameValuePairs.add(new BasicNameValuePair("special_notes	","none"));
 			nameValuePairs.add(new BasicNameValuePair("alcohol","1"));
 			

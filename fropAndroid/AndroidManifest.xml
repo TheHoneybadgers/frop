@@ -67,7 +67,13 @@
             android:value="AIzaSyDr_I_yBBfSAzJFOUAkMTPMG8UkQ8BjMzg" />
          <meta-data android:name="com.google.android.gms.version" 
              android:value="@integer/google_play_services_version" />
-         <activity android:name=".EventForm" android:label="EventForm"></activity>
+         <activity 
+             android:name=".EventForm" 
+             android:label="EventForm"
+             android:windowSoftInputMode="stateHidden"
+             >
+             
+         </activity>
         
     </application>
 
