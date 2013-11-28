@@ -221,8 +221,7 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public int getCount() {
-			Log.d("At function", "getcount");
-			
+						
 			// show 4 pages if permission above normal user, show 2 otherwise.
 			if(session.getPerms() < 3 ){
 				return 4;
