@@ -1,9 +1,10 @@
 package com.honeybadgers.fropandroid;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -11,15 +12,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.R.array;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -32,6 +30,7 @@ public class EventForm extends Activity {
 	DatePicker cal;
 	Spinner spin;
     private String array_spinner[];
+    Date date = new Date();
     
     String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal;
 
@@ -48,6 +47,21 @@ public class EventForm extends Activity {
 		
 		cal = (DatePicker) findViewById(R.id.datePicker1);
 		spin = (Spinner) findViewById(R.id.spinner1);
+		
+		 // get the current date
+	    final Calendar c = Calendar.getInstance();
+	   
+	    c.add(Calendar.DAY_OF_MONTH, 1);
+	    int mYear = c.get(Calendar.YEAR);
+	    int mMonth = c.get(Calendar.MONTH);
+	    int mDay = c.get(Calendar.DAY_OF_MONTH);
+	    cal.init(mYear, mMonth, mDay, null);							//Set the datepicker to the tomorrow's date
+	    c.add(Calendar.DAY_OF_MONTH, -1);
+	    cal.setMinDate(c.getTimeInMillis());								//Set the minimum choosable date as today
+	     c.add(Calendar.YEAR, 1);														
+	    cal.setMaxDate(c.getTimeInMillis());						  //Set the maximum choosable date as 1 year after today
+	    
+	    
 		
        		
 		Button submit = (Button) findViewById(R.id.submitButton);

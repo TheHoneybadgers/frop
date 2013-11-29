@@ -70,7 +70,8 @@
          <activity 
              android:name=".EventForm" 
              android:label="EventForm"
-             android:windowSoftInputMode="stateHidden"
+             android:windowSoftInputMode="stateHidden|adjustPan"
+             android:theme="@style/FormTheme"
              >
              
          </activity>

@@ -146,14 +146,11 @@ public class MainActivity extends FragmentActivity {
 			dialog.show(getSupportFragmentManager(), null);
 			break;
 		case R.id.action_settings:
-			
-			session.gotoLogin();
-			System.exit(0);
 			break;
 		case R.id.action_logout:
 			session.clear();
 			Intent i = new Intent(MainActivity.this, Login.class);
-			i.setAction("LOGIN");
+			i.setAction("LOGOUT");
 
 			// Closing all the Activities
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
