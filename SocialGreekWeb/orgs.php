@@ -36,10 +36,10 @@
 			"false"
 		);
 		
-		echo "Query " . $dbQuery . "</br>";
+		// echo "Query " . $dbQuery;
 		$result = getDBResultInserted($dbQuery,'ORG_ID');
 		
 		header("Content-type: application/json");
-		echo json_encode($result) . "</br>";
+		echo json_encode($result);
 	}
 ?>

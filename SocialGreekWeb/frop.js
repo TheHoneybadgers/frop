@@ -18,7 +18,7 @@ var event_id;
 
 	//Bind to the create so the list badges page gets updated with the listing
 	$(document).on("pagebeforeshow", "#badge_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("badge list page");
 	
 		//Remove the old rows
 		$( ".badge_list_row" ).remove();
@@ -66,7 +66,7 @@ var event_id;
 
 	// Bind to the create so the list gov orgs page gets updated with the listing
 	$(document).on("pagebeforeshow", "#gov_org_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("gov org list page");
 	
 		//Remove the old rows
 		$( ".gov_org_list" ).remove();
@@ -93,7 +93,7 @@ var event_id;
 
 	//Bind to the create so the list orgs page gets updated with the listing
 	$(document).on("pagebeforeshow", "#org_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("Org List Page");
 	
 		//Remove the old rows
 		$( ".org_list_row" ).remove();
@@ -111,7 +111,7 @@ var event_id;
 	        success: function(data, textStatus, jqXHR) {
 				console.log(data);
 	        	//Create The New Rows From Template
-	        	$( "#org_list_row_template" ).tmpl( data ).appendTo( "#org_list" );
+	        	$( "#org_list_row_template" ).tmpl( data ).appendTo( "#org_list" ); // TODO is there a way to check for nulls?
 				gov_org = -1;
 	        },
 	        error: ajaxError
@@ -123,6 +123,7 @@ var event_id;
 	$(document).on("pagebeforeshow", "#org_detail_page", function(event, ui) {
 		console.log("Org Detail Page");
 		var org_id = $.url().fparam("org_id");
+		var urls="api/orgs/"+org_id;
 		
 		//Remove the old rows
 		$( ".org_detail_row" ).remove();
@@ -134,9 +135,10 @@ var event_id;
 			dataType: "json",
 	        async: false,
 	        success: function(data, textStatus, jqXHR) {
+				console.log(urls);
 				console.log(data);
-	       		$( "#org_detail_nickname" )[0].innerHTML = data.NICKNAME;
-	       		$( "#org_detail_letters" )[0].innerHTML = data.LETTERS;
+	       		$( "#org_detail_nickname" )[0].innerHTML = "Nickname: " . data.NICKNAME;
+	       		$( "#org_detail_letters" )[0].innerHTML = "Letters: ".data.LETTERS;
 	       		$( "#org_detail_chapter" )[0].innerHTML = data.CHAPTER;
 	       		$( "#org_detail_gov_org_id" )[0].innerHTML = data.GOV_ORG_ID;
 	       		if (data.CUSTOM_PIC_URL && data.PIC_APPROVED==="true") { $( "#org_detail_custom_pic" )[0].innerHTML = data.CUSTOM_PIC_URL; }
@@ -159,7 +161,7 @@ var event_id;
 
 	//Bind to the create so the list events page gets updated with the listing
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
-		console.log("pagebeforeshow #event_list_page");
+		console.log("event list page");
 	
 		//Remove the old rows
 		$( ".event_list_row" ).remove();
@@ -261,7 +263,7 @@ var event_id;
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
-		console.log("pagebeforeshow #event_detail_page");
+		console.log("event detail page");
 		console.log("Current Event ID: ");
 		console.log(event_id);
 

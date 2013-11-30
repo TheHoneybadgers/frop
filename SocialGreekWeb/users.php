@@ -11,7 +11,19 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-
+	
+	function getUserPerm($id) {
+		$dbQuery = sprintf("SELECT `PERMS` FROM `USERS` WHERE USER_ID = '%s' OR GTID = '%s'", 
+			mysql_real_escape_string($id), 
+			mysql_real_escape_string($id)
+		);
+// 		echo $dbQuery;
+		$result = getDBResultRecord($dbQuery);
+		echo $result["PERMS"];
+// 		header("Content-type: application/json");
+// 		echo json_encode($result);
+	}
+	
 	function addUser($userGTID, $userGovOrgId, $userPerms, $userOrgId) {
 		$dbQuery = sprintf("INSERT INTO `USERS` (`GTID`, `GOV_ORG_ID`, `PERMS`, `ORG_ID`, `ADDED_BY`, `ADDED_DATE`, `SUSPENDED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", 
 			mysql_real_escape_string($userGTID), 

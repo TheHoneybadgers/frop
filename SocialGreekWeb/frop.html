@@ -268,7 +268,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
-        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" style="visibility:hidden" >Save</a>
+        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" > <!-- style="visibility:hidden" >-->Save</a>
     </div>
 	<div id="event_edit_content" data-role="content">		
 		<div class="event_form">
@@ -354,7 +354,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Organizations</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
-        <a id="org_add_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right" style="visibility:hidden"></a>
+        <a id="org_add_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- style="visibility:hidden"></a> -->
    	</div>
 	
 	<div id="org_list_page_content" data-role="content">
@@ -362,7 +362,7 @@
 			<script id="org_list_row_template" type="text/x-jquery-tmpl">
 				<li class="org_list_row" id="org_${ORG_ID}">
 					<a href="#org_detail_page&org_id=${ORG_ID}" data-transition="slide">
-						<h1>${NICKNAME}</h1><p>${LETTERS}-${CHAPTER}</p>
+						<h1>${NICKNAME}</h1><p>${LETTERS} - ${CHAPTER}</p>
 					</a>
 				</li>
 			</script>
@@ -376,7 +376,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#org_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <h1 class="head_title" id="org_detail_head_title">Organization Detail</h1>
-        <a id="org_edit_button" href="#org_edit_page" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext" style="visibility:hidden" />
+        <a id="org_edit_button" href="#org_edit_page" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext"></a> <!-- style="visibility:hidden" /> -->
     </div>
     
 	<div id="org_detail_content" data-role="content" data-theme="c">

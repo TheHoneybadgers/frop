@@ -340,6 +340,22 @@
 				<exampleValue><![CDATA[1]]></exampleValue>
 			</param>
 		</post>
+		
+		
+		<command id='perms' security='protected'>
+			<description><![CDATA[This method exposes users if appropriate perms and authentication is satisfied]]>
+			</description>
+			<index>
+				<description><![CDATA[This method exposes users if appropriate perms and authentication is satisfied]]>
+				</description>
+				<action file='users.php'><![CDATA[getUserPerm($_REST['users']);]]></action>
+			</index>
+			<get>
+				<description><![CDATA[This method will return data on specific USER_IDs]]>
+				</description>
+				<action file='users.php'><![CDATA[getUserPerm($_REST['users']);]]></action>
+			</get>
+		</command>
 	</command>
 
 <!-- EVENTS THIS WEEK -->
