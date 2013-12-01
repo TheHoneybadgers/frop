@@ -13,8 +13,13 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 public class QueryAPI {
+	String url;
 	
 	public QueryAPI(){};
+	
+	public QueryAPI(String link){
+		url = link+"users/";
+	};
 
 	public String getUsername(String sessId) {
 
@@ -48,7 +53,7 @@ public class QueryAPI {
 			try{
 
 			HttpClient client = new DefaultHttpClient();
-			HttpGet request = new HttpGet("http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/users/"+ UserName + "/perms");
+			HttpGet request = new HttpGet(url+ UserName + "/perms");
 
 			Log.d("making request to", UserName);
 

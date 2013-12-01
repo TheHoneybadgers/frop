@@ -23,7 +23,7 @@ import android.widget.SimpleAdapter;
 public class EventFragmentLiked extends ListFragment {
 
 	// url to make request
-	private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/events";
+	private static String url = MainActivity.base_url+"events";
 
 	// JSON Node names
 	private static final String TAG_EVENT_ID = "EVENT_ID";

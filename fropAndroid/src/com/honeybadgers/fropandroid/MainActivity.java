@@ -44,6 +44,8 @@ public class MainActivity extends FragmentActivity {
 	String userName; // The GT username recieved from the API
 	String sessionId; // The session ID received after logging in
 	static UserCache user = new UserCache();
+	static String base_url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/";
+	
 	
 	
 	@Override
@@ -60,8 +62,8 @@ public class MainActivity extends FragmentActivity {
 
 		Intent intent = getIntent();
 		data = intent.getData();
-		session = new SessionManagement(getApplicationContext());
-		api = new QueryAPI();
+		session = new SessionManagement(getApplicationContext(), base_url);
+		api = new QueryAPI(base_url);
 
 		// if no data set, redirect the user to login page
 		try {

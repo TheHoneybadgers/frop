@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class SessionManagement {
 	
-	QueryAPI api = new QueryAPI();
+	QueryAPI api;
 
 	// Shared Preferences
 	SharedPreferences pref;
@@ -38,10 +38,11 @@ public class SessionManagement {
 	public static final String USER_PERM = "permissions";
 
 	// Constructor
-	public SessionManagement(Context context) {
+	public SessionManagement(Context context, String link) {
 		this._context = context;
 		pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
 		editor = pref.edit();
+		QueryAPI api = new QueryAPI(link);
 
 	}
 

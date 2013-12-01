@@ -41,8 +41,10 @@ public class EventForm extends Activity {
     private static final String TAG_ORG_ID = "ORG_ID";
     String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal,orgID;
     int alcohol_present = 0;
- // url to make request
- 		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/users/";
+    // url's to make request
+  		private String base_url = MainActivity.base_url;
+ 		private  String user_url = base_url + "users/";
+ 		private String post_url = base_url + "events/";
  		JSONArray user_details = null;
 
 	@Override
@@ -50,12 +52,12 @@ public class EventForm extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_subform);
 		
-		session = new SessionManagement(getApplicationContext());
+		session = new SessionManagement(getApplicationContext(), base_url);
 		
 		//Pass the URL to the JSON parser and get a JSON Array in response
 		JsonParser jParser = new JsonParser();
 		
-		user_details = jParser.getJSONFromUrl(url + session.getName(), session.getSessId());
+		user_details = jParser.getJSONFromUrl(user_url + session.getName(), session.getSessId());
 		
 		JSONObject o;
 		
@@ -141,7 +143,7 @@ public class EventForm extends Activity {
 	
 	public void postData(){
 		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost("http://dev.m.gatech.edu/d/dgonzalez33/api/fropWeb/events/");
+		HttpPost post = new HttpPost(post_url);
 		
 		try {
 			

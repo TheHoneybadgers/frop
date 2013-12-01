@@ -23,8 +23,8 @@ import android.widget.SimpleAdapter;
 public class EventFragment extends ListFragment {
 	
 	// url to make request
-		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/events";
-		
+		private static String url = MainActivity.base_url+"events";
+				
 		// JSON Node names
 		private static final String TAG_EVENT_ID = "EVENT_ID";
 		private static final String TAG_DATE = "DATE";
@@ -100,6 +100,8 @@ public class EventFragment extends ListFragment {
 		setListAdapter(adapter);
 		
 		return view;
+		
+		
 	}
 	
 	@Override
