@@ -45,10 +45,79 @@ public class EventFragmentLiked extends ListFragment {
 	JSONArray events = null;
 	ArrayList<HashMap<String, String>> eventList;
 	String eventId;
+	
+	ListAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		getData();
+		super.onCreate(savedInstanceState);
+	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_event, container, false);
+
+//		adapter  = new SimpleAdapter(getActivity(), eventList,
+//				R.layout.list_item, new String[] { TAG_TYPE, TAG_TITLE,
+//						TAG_DATE, TAG_SUMMARY }, new int[] { R.id.eventType,
+//						R.id.eventName, R.id.eventDate, R.id.eventDescrip });// Parsed
+//																				// JSON
+//																				// into
+//																				// an
+//																				// actual
+//																				// list
+//		setListAdapter(adapter);
+		return view;
+	}
+
+	@Override
+	public void onResume() {
+		//Fetches the data and creates a new adapter everytime fragment is resumed 
+		//TODO: A more efficient way to refresh the listView
+		
+		Log.d("Liked fragment", "resume");
+		getData();
+		
+		  adapter = new SimpleAdapter(getActivity(), eventList,
+				R.layout.list_item, new String[] { TAG_TYPE, TAG_TITLE,
+						TAG_DATE, TAG_SUMMARY }, new int[] { R.id.eventType,
+						R.id.eventName, R.id.eventDate, R.id.eventDescrip });// Parsed
+																				// JSON
+																				// into
+																				// an
+																				// actual
+																				// list
+		setListAdapter(adapter);
+
+		ListView lv = getListView();
+		lv.setOnItemClickListener(new OnItemClickListener() { // Goto the
+																// details of
+																// the event
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Log.d("Position of clicked item", Integer.toString(position));
+
+				Intent in = new Intent(getActivity().getApplicationContext(),
+						DetailEvent.class);
+
+				// pass the hashmap entry for an event to the detailevent class
+				in.putExtra("hashmap", eventList.get(position));
+				Log.d("EVENT LIST PASSED: ",
+						String.valueOf(eventList.get(position)));
+
+				startActivity(in);
+
+			}
+		});
+
+		super.onResume();
+	}
+
+	void getData(){
 		eventList = new ArrayList<HashMap<String, String>>();
 
 		// Pass the URL to the JSON parser and get a JSON Array in response
@@ -88,55 +157,5 @@ public class EventFragmentLiked extends ListFragment {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
-		super.onCreate(savedInstanceState);
 	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_event, container, false);
-
-		ListAdapter adapter = new SimpleAdapter(getActivity(), eventList,
-				R.layout.list_item, new String[] { TAG_TYPE, TAG_TITLE,
-						TAG_DATE, TAG_SUMMARY }, new int[] { R.id.eventType,
-						R.id.eventName, R.id.eventDate, R.id.eventDescrip });// Parsed
-																				// JSON
-																				// into
-																				// an
-																				// actual
-																				// list
-		setListAdapter(adapter);
-		return view;
-	}
-
-	@Override
-	public void onResume() {
-
-		ListView lv = getListView();
-		lv.setOnItemClickListener(new OnItemClickListener() { // Goto the
-																// details of
-																// the event
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Log.d("Position of clicked item", Integer.toString(position));
-
-				Intent in = new Intent(getActivity().getApplicationContext(),
-						DetailEvent.class);
-
-				// pass the hashmap entry for an event to the detailevent class
-				in.putExtra("hashmap", eventList.get(position));
-				Log.d("EVENT LIST PASSED: ",
-						String.valueOf(eventList.get(position)));
-
-				startActivity(in);
-
-			}
-		});
-
-		super.onResume();
-	}
-
 }
