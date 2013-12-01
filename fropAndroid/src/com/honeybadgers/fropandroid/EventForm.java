@@ -11,6 +11,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,10 +21,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class EventForm extends Activity {
 	EditText title,address;
@@ -29,16 +34,59 @@ public class EventForm extends Activity {
 	Button submit;
 	DatePicker cal;
 	Spinner spin;
-    private String array_spinner[];
+	CheckBox alc;
     Date date = new Date();
+    SessionManagement session;
     
-    String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal;
+    private static final String TAG_ORG_ID = "ORG_ID";
+    String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal,orgID;
+    int alcohol_present = 0;
+ // url to make request
+ 		private static String url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/users/";
+ 		JSONArray user_details = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_subform);
+		
+		session = new SessionManagement(getApplicationContext());
+		
+		//Pass the URL to the JSON parser and get a JSON Array in response
+		JsonParser jParser = new JsonParser();
+		
+		user_details = jParser.getJSONFromUrl(url + session.getName(), session.getSessId());
+		
+		JSONObject o;
+		
+		try {
+			o = user_details.getJSONObject(0);
+			Log.d("length of Json array",Integer.toString(user_details.length()));
+			orgID = o.getString(TAG_ORG_ID);					//Extract the user's org id from the returned JSON
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(NullPointerException n){
+			Log.d("exception", "NullPointer");
+			Toast.makeText(getApplicationContext(), "Not logged In, Please login to create an event", Toast.LENGTH_SHORT).show();
+			Intent i = new Intent(EventForm.this, Login.class);
+			i.setAction("LOGIN");
 
+			// Closing all the Activities
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+			// Add new Flag to start new Activity
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			/*
+			 * Keep no record that login was started, so that when you press
+			 * back after logging in, you don't go back to the Login page
+			 */
+			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+			EventForm.this.finish();
+			startActivity(i);
+		}
+		
+		
 		title = (EditText) findViewById(R.id.titleText);
 		address = (EditText)findViewById(R.id.addressText);
 
@@ -47,6 +95,9 @@ public class EventForm extends Activity {
 		
 		cal = (DatePicker) findViewById(R.id.datePicker1);
 		spin = (Spinner) findViewById(R.id.spinner1);
+		
+		alc = (CheckBox)findViewById(R.id.AlcoholBox);
+		
 		
 		 // get the current date
 	    final Calendar c = Calendar.getInstance();
@@ -75,6 +126,9 @@ public class EventForm extends Activity {
 				end_timeVal = dateVal+"T"+end.getCurrentHour() + ":"+ end.getCurrentMinute()+":00";
 				addressVal = address.getText().toString();
 				typeVal =  spin.getSelectedItem().toString();
+				if(alc.isChecked()){
+					alcohol_present = 1;
+				}
 				
 				Log.d("EVENT FORM", "Button Pressed");
 				postData();
@@ -97,7 +151,7 @@ public class EventForm extends Activity {
 			
 			nameValuePairs.add(new BasicNameValuePair("title",titleVal));
 			nameValuePairs.add(new BasicNameValuePair("date",dateVal));
-			nameValuePairs.add(new BasicNameValuePair("org_id","1"));
+			nameValuePairs.add(new BasicNameValuePair("org_id",orgID));
 			nameValuePairs.add(new BasicNameValuePair("foursquare","ab45454"));
 			nameValuePairs.add(new BasicNameValuePair("address",addressVal));
 			nameValuePairs.add(new BasicNameValuePair("start_time",start_timeVal));
@@ -105,7 +159,7 @@ public class EventForm extends Activity {
 			nameValuePairs.add(new BasicNameValuePair("summary","This is a summary"));
 			nameValuePairs.add(new BasicNameValuePair("type",typeVal));
 			nameValuePairs.add(new BasicNameValuePair("special_notes	","none"));
-			nameValuePairs.add(new BasicNameValuePair("alcohol","1"));
+			nameValuePairs.add(new BasicNameValuePair("alcohol",Integer.toString(alcohol_present)));
 			
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			
