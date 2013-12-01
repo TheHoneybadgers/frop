@@ -25,10 +25,8 @@ Sagar Raut - UI/UX Guru
     <string-array name="event_types">
         <item>Party</item>
         <item>Philanthropy</item>
-        <item>Discussion</item>
-        <item>Seminar</item>
-        <item>Workshop</item>
-        <item>Sweet Sixteen</item>    
+        <item>Mixer</item>
+        <item>Rush</item>    
     </string-array>
 
 </resources>
