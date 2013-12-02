@@ -65,5 +65,29 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-
+	
+	function approveEvent($event_id) {
+		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
+			mysql_real_escape_string("true"),
+			mysql_real_escape_string($_USER['uid']),
+			mysql_real_escape_string($event_id));
+		
+		$result = getDBResultAffected($dbQuery);
+		
+		header("Content-type: application/json");
+		echo json_encode($result);
+	}
+	
+	function disapproveEvent($event_id) {
+		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
+			mysql_real_escape_string("false"),
+			mysql_real_escape_string("null"),
+			mysql_real_escape_string($event_id));
+		
+		$result = getDBResultAffected($dbQuery);
+		
+		header("Content-type: application/json");
+		echo json_encode($result);
+	}
+	
 ?>

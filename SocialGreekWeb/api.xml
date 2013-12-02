@@ -147,7 +147,7 @@
 		</delete>
 		
 		
-		<!-- EVENTS/ORGS API -->
+		<!-- EVENTS/ORGS API --> <!-- TODO this is a fine method, but doesn't seem to work as advertised -->
 		<command id='orgs' security='public'>
 			<description><![CDATA[This section allows you to see event details of specific organizations. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]></description>
 		
@@ -155,6 +155,28 @@
 				<description><![CDATA[This method, 'events/[anything]/orgs/{ORG_ID}', allows you to narrow returned events to just those associated with a specified organization.]]></description>
 			
 				<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
+			</get>
+		</command> <!-- Closes nested orgs -->
+		
+		
+		<!-- EVENTS APPROVE API -->
+		<command id='a' security='public'> <!-- TODO secure this -->
+			<description><![CDATA[Method for approving an event.]]></description>
+		
+			<get>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/a/[anything]', allows you to approve an event.]]></description>
+			
+				<action file='events.php'><![CDATA[approveEvent($_REST['events']);]]></action>
+			</get>
+		</command> <!-- Closes nested orgs -->
+		<!-- EVENTS DISAPPROVE API -->
+		<command id='d' security='public'> <!-- TODO secure this -->
+			<description><![CDATA[Method for disapproving an event.]]></description>
+		
+			<get>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/d/[anything]', allows you to approve an event.]]></description>
+			
+				<action file='events.php'><![CDATA[disapproveEvent($_REST['events']);]]></action>
 			</get>
 		</command> <!-- Closes nested orgs -->
 	
