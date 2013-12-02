@@ -64,3 +64,17 @@ hr {
 	align: left;
 	margin: 1%;
 }
+
+img {
+	display: block;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ui-page.ui-body-c {
+    background: url(bg.jpg);
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:cover;  
+}
