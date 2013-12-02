@@ -137,8 +137,8 @@ var event_id;
 	        success: function(data, textStatus, jqXHR) {
 				console.log(urls);
 				console.log(data);
-	       		$( "#org_detail_nickname" )[0].innerHTML = "Nickname: " . data.NICKNAME;
-	       		$( "#org_detail_letters" )[0].innerHTML = "Letters: ".data.LETTERS;
+	       		$( "#org_detail_nickname" )[0].innerHTML = "Nickname: " + data["NICKNAME"];
+	       		$( "#org_detail_letters" )[0].innerHTML = "Letters: " + data.LETTERS;
 	       		$( "#org_detail_chapter" )[0].innerHTML = data.CHAPTER;
 	       		$( "#org_detail_gov_org_id" )[0].innerHTML = data.GOV_ORG_ID;
 	       		if (data.CUSTOM_PIC_URL && data.PIC_APPROVED==="true") { $( "#org_detail_custom_pic" )[0].innerHTML = data.CUSTOM_PIC_URL; }
