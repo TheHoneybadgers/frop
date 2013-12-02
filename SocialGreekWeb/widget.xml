@@ -10,4 +10,12 @@
 	
     <library name="jquery.mobile"/> 
     <library name="gtmob"/>
+    <manifest>
+        <text><![CDATA[
+NETWORK:
+*
+]]>
+        </text>
+        <directory recursive="false" filter="*.jpg">img</directory>  
+    </manifest>
 </widget>
