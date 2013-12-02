@@ -23,6 +23,17 @@
             android:textColor="#ff9e00"
             android:textSize="18sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/eventType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dip"
+            android:paddingBottom="2dip"
+            android:paddingTop="6dip"
+            android:background="#33000000"
+            android:textColor="#00adee"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 		<!-- Description label -->
         <TextView

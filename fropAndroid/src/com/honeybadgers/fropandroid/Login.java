@@ -26,7 +26,17 @@ public class Login extends Activity {
 			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://dev.m.gatech.edu/login?url=usercomments://loggedin&sessionTransfer=window"));
 			myIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);    					  //So that when you press back from the main activity, it dosent go back to the browser
 			startActivity(myIntent);
-		} else {
+		} else if(action.equals("LOGOUT")){
+			
+Log.d("Enter", "Logging out");
+			
+			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://dev.m.gatech.edu/logout"));
+			myIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);    					  //So that when you press back from the main activity, it dosent go back to the browser
+			startActivity(myIntent);
+			
+			
+			
+		}else {
 			Log.d("Enter", "Intent creator" + intent1.toString());
 			Log.d("Enter", "Starting main activity");
 			Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
