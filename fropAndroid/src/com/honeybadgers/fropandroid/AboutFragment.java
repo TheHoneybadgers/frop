@@ -6,7 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 
 public class AboutFragment extends DialogFragment{
 	
@@ -14,9 +14,15 @@ public class AboutFragment extends DialogFragment{
 	    public Dialog onCreateDialog(Bundle savedInstanceState) {
 	        // Use the Builder class for convenient dialog construction
 		
-	        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(
-	        		getActivity(), R.style.AppBaseTheme));
-	        builder.setMessage(R.string.about_us)
+	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	        
+	        //Get the layout inflater
+	        LayoutInflater inflater = getActivity().getLayoutInflater();
+	        
+	        //Set the view
+	        builder.setView(inflater.inflate(R.layout.dialog_about, null));
+	        
+	        builder//.setMessage(R.string.about_us)
 	               .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 	                   public void onClick(DialogInterface dialog, int id) {
 	                   }

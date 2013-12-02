@@ -22,11 +22,30 @@ public class DummySectionFragment extends Fragment {
 		TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
 		dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 		
-		JsonParser j1 = new JsonParser();
-		String sessionName =MainActivity.session.getName();
+		String userName =MainActivity.session.getName();
 	    String sessionId = MainActivity.session.getSessId();
-	    String username = j1.getUsername(sessionId);
-	    dummyTextView.setText(sessionName + "  " + sessionId+ "Username:"+ username);
+	    int permissions = MainActivity.session.getPerms();
+	    String role;
+	    switch(permissions){
+		case 1:
+			role = "IFC chair";
+			break;
+		case 2:
+			role = "fraternity social chair";
+			break;
+		case 3:
+			role = "normal user";
+			break;
+		default:
+			role = "normal user";
+			break;
+			
+		
+		
+		}
+	    
+	   // String username =api.getUsername(sessionId);
+	    dummyTextView.setText("Username:"+userName + " Session ID: " + sessionId+" Role: "+role);
 		return rootView;
 	}
 

@@ -2,7 +2,6 @@ package com.honeybadgers.fropandroid;
 
 import java.io.IOException;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -18,22 +17,20 @@ public class JsonParser {
 
 	}
 
-public String getUsername(String sessId){
-		
-		try {//grab the username by passing the PHPSESSID as a cookie.
-			HttpClient httpClient = new DefaultHttpClient();
-			
-			HttpGet httpGet = new HttpGet("http://dev.m.gatech.edu/user");
-			httpGet.setHeader("Cookie","PHPSESSID="+ sessId);
+	
+	public JSONArray getJSONFromUrl(String url) {
 
-			HttpResponse response = httpClient.execute(httpGet);
-			return EntityUtils.toString( response.getEntity());
-
-
+		try {//grab the JSON data from the URL and return the entities of it.
+			HttpClient client = new DefaultHttpClient();
+			HttpGet request = new HttpGet(url);
+			return new JSONArray(EntityUtils.toString(client.execute(request).getEntity()));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -41,13 +38,16 @@ public String getUsername(String sessId){
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 	
-	public JSONArray getJSONFromUrl(String url) {
+	public JSONArray getJSONFromUrl(String url, String sessID) {
 
 		try {//grab the JSON data from the URL and return the entities of it.
-			return new JSONArray(EntityUtils.toString(new DefaultHttpClient().execute(new HttpGet(url)).getEntity()));
+			HttpClient client = new DefaultHttpClient();
+			HttpGet request = new HttpGet(url);
+			request.setHeader("Cookie", "PHPSESSID=" + sessID);
+			return new JSONArray(EntityUtils.toString(client.execute(request).getEntity()));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

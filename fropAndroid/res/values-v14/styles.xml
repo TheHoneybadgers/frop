@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme for API 14+. This theme completely replaces
@@ -17,6 +17,13 @@
            parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@android:color/transparent</item>
         
+    </style>
+    
+    <style name="FormTheme" parent="android:Theme.Holo">
+        
+         <item name="android:actionBarStyle">@style/MyActionBar</item>
+         <item name="android:windowActionBarOverlay">true</item>
+                
     </style>
     
     
