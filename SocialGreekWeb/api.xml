@@ -66,7 +66,7 @@
 			<description><![CDATA[This returns a listing of all events that are approved.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[listEvents();]]></action>
+			<action file='events.php'><![CDATA[listEvents(1);]]></action>
 		</index>
 		
 		<get>
@@ -129,7 +129,7 @@
 		</post>
 		
 		<put>
-			<description><![CDATA[This is how you can update an event.]]></description>
+			<description><![CDATA[This is how you can update an event.]]></description> <!-- TODO -->
 			
 			<action file='events.php'><![CDATA[updateEvent($_REST['events'],$_POST['eventsText']);]]></action>
 			
@@ -164,20 +164,33 @@
 			<description><![CDATA[Method for approving an event.]]></description>
 		
 			<get>
-				<description><![CDATA[This method, 'events/{EVENT_ID}/a/[anything]', allows you to approve an event.]]></description>
+				<description><![CDATA[This method, 'events/[anything]/a/{APPROVAL_LEVEL}', allows you to narrow returned events to just those approved. 0 for new or modified, 1 for approved, 2 for disapproved.]]></description>
 			
-				<action file='events.php'><![CDATA[approveEvent($_REST['events']);]]></action>
+				<action file='events.php'><![CDATA[listEvents($_REST['a']);]]></action>
 			</get>
+			
+			<post>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/a/{APPROVAL_LEVEL}', allows you to approve an event.]]></description>
+			
+				<action file='events.php'><![CDATA[approveEvent($_REST['events'], $_REST['a']);]]></action>
+			</post>
+			
 		</command> <!-- Closes nested orgs -->
 		<!-- EVENTS DISAPPROVE API -->
 		<command id='d' security='public'> <!-- TODO secure this -->
 			<description><![CDATA[Method for disapproving an event.]]></description>
 		
 			<get>
-				<description><![CDATA[This method, 'events/{EVENT_ID}/d/[anything]', allows you to approve an event.]]></description>
+				<description><![CDATA[This method, 'events/[anything]/d/{APPROVAL_LEVEL}', allows you to narrow returned events to just those disapproved. 0 for new or modified, 1 for approved, 2 for disapproved.]]></description>
 			
-				<action file='events.php'><![CDATA[disapproveEvent($_REST['events']);]]></action>
+				<action file='events.php'><![CDATA[listEvents($_REST['d']);]]></action>
 			</get>
+			
+			<post>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/d/{APPROVAL_LEVEL}', allows you to disapprove an event.]]></description>
+			
+				<action file='events.php'><![CDATA[disapproveEvent($_REST['events'], $_REST['d']);]]></action>
+			</post>
 		</command> <!-- Closes nested orgs -->
 	
 	</command> <!-- Closes events -->
