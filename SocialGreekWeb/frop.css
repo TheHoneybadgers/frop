@@ -73,8 +73,47 @@ img {
 }
 
 .ui-page.ui-body-c {
-    background: url(bg.jpg);
+    background: url("img/bg.jpg");
     background-repeat:no-repeat;
     background-position:center center;
     background-size:cover;  
 }
+
+.list_theme {
+	color: #EEEEEE;
+	text-shadow: none;
+	padding: 2%;
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(102,102,102) transparent;
+    /* RGBa with 0.6 opacity */
+    background: rgba(102,102,102, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99666666, endColorstr=#99666666);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99666666, endColorstr=#99666666)";
+	
+}
+.ui-content {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* Brute force does all lists (doesn't look great...)
+.ui-li {
+	color: #FFFFFF;
+	padding: 2%;
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(102,102,102) transparent;
+    /* RGBa with 0.6 opacity */
+    background: rgba(102,102,102, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99666666, endColorstr=#99666666);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99666666, endColorstr=#99666666)";
+}
+*/
+/*
+.ui-li-heading, .ui-li-desc {
+	color: #FFFFFF;
+}
+*/
