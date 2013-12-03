@@ -1,54 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@drawable/bg"
-  android:paddingTop="?android:attr/actionBarSize" >
-  
-  <!-- Name Label -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
 
-  <TextView
-      android:id="@+id/name_label"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:paddingBottom="10dip"
-      android:paddingTop="10dip"
-      android:textColor="#ff9e00"
-      android:textSize="25dip"
-      android:textStyle="bold" />
+    <!-- Name Label -->
 
-  <!-- Description Label -->
-  <TextView android:id="@+id/eventId_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#acacac"/>
-  <!-- Price Label -->
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="#ff9e00"
+        android:textSize="25dip"
+        android:textStyle="bold" />
 
-  <TextView
-      android:id="@+id/date_label"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:textColor="#ffffff"
-      android:textStyle="bold" />
-  
-  <TextView android:id="@+id/orgId_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#acacac"/>
-  
-  <TextView android:id="@+id/address_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"/>
-  
-  <TextView android:id="@+id/summary_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dip"
-            android:textColor="#ffffff"
-            android:textStyle="italic"/>
+    <!-- Description Label -->
+
+    <TextView
+        android:id="@+id/eventId_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#acacac" />
+    <!-- Price Label -->
+
+    <TextView
+        android:id="@+id/date_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/orgId_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#acacac" />
+
+    <TextView
+        android:id="@+id/address_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/summary_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:textColor="#ffffff"
+        android:textStyle="italic" />
+
+    <CheckBox
+        android:id="@+id/checkInterested"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Interested" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.MapFragment" />
 
 </LinearLayout>
 
