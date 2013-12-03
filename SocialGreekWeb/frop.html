@@ -7,22 +7,22 @@
 	
 	<div id="content" data-role="content">
 		<ul id="pages_list" data-role="listview" data-inset="true" data-filter="false" data-theme="c" data-divider-theme="b">
-			<li class="page_list_row" id="event_list_page">
+			<li class="page_list_row list_theme" id="event_list_page">
 				<a href="#event_list_page" data-transition="slide" id="event_home_page_link">
 					<h1>Events</h1><p>Find or view details of approved events</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="org_list_page">
+			<li class="page_list_row list_theme" id="org_list_page">
 				<a href="#org_list_page" data-transition="slide">
 					<h1>Organizations</h1><p>Find information on your favorite organization</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="badge_list_page">
+			<li class="page_list_row list_theme" id="badge_list_page">
 				<a href="#badge_list_page" data-transition="slide">
 					<h1>Badges</h1><p>Earn fun badges!</p>
 				</a>
 			</li>
-			<li class="page_list_row" id="gov_org_list_page">
+			<li class="page_list_row list_theme" id="gov_org_list_page">
 				<a href="#gov_org_list_page" data-transition="slide">
 					<h1>Governing Organizations</h1><p>Check out the organizations that run the show</p>
 				</a>
@@ -113,7 +113,7 @@
 	<div id="event_detail_content" data-role="content">
 		<ul id="event_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="event_detail_template" type="text/x-jquery-tmpl">
-				<li class="event_detail_row"id="event_detail_${EVENT_ID}">
+				<li class="event_detail_row list_theme ui-corner-tl ui-corner-tr ui-corner-bl ui-corner-br ui-corner-top ui-corner-bottom ui-corner-right ui-corner-left ui-corner-all"id="event_detail_${EVENT_ID}">
 					<h1>${TITLE}</h1>
 					${DATE}
 					<h3>A ${TYPE} Hosted by ${ORG_ID}</h3> <!-- want to have LETTERS here -->
