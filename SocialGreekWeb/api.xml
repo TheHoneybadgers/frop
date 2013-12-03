@@ -131,12 +131,13 @@
 		<put>
 			<description><![CDATA[This is how you can update an event.]]></description>
 			
-			<action file='events.php'><![CDATA[updateEvent($_REST['events'],$_POST['eventsText']);]]></action>
-			
-			<param id='eventsText'>
-				<description><![CDATA[event Text To update]]></description>
-				<defaultValue><![CDATA[some default event text update]]></defaultValue>
-				<exampleValue><![CDATA[some example event text update]]></exampleValue>
+			<action file='events.php'><![CDATA[updateEvent($_REST['events'], $_POST['approved']);]]></action>
+			<!-- 
+			, $_POST['title'], $_POST['date'], $_POST['org_id'], $_POST['foursquare'], $_POST['address'], $_POST['start_time'], $_POST['end_time'], $_POST['summary'], $_POST['type'], $_POST['special_notes'], $_POST['alcohol']
+			-->
+			<param id='approved'>
+				<description><![CDATA[If event is approved]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
 			</param>
 		</put>
 		
@@ -178,10 +179,16 @@
 		</get>
 
 		<put>
-			<description><![CDATA[This is how you can approve an event.]]></description>
+			<description><![CDATA[This is how you can update an event.]]></description>
 			
-			<action file='events.php'><![CDATA[approveEvent($_REST['approvals']);]]></action>
-			
+			<action file='events.php'><![CDATA[updateEvent($_REST['approvals'], $_POST['approved']);]]></action>
+			<!-- 
+			, $_POST['title'], $_POST['date'], $_POST['org_id'], $_POST['foursquare'], $_POST['address'], $_POST['start_time'], $_POST['end_time'], $_POST['summary'], $_POST['type'], $_POST['special_notes'], $_POST['alcohol']
+			-->
+			<param id='approved'>
+				<description><![CDATA[If event is approved]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
 		</put>
 
 	</command> <!-- Closes approvals -->		

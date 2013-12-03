@@ -193,15 +193,17 @@ var event_id;
 		console.log("Approve Event Button");
 
 		$.ajax({
-			url: "api/approvals/"+event_id,
+			url: "api/events/"+event_id,
 			dataType: "json",
 	        async: false,
 
 			data: {
-				'approved': '1'
+				// 'event_id': event_id,
+				'approved': 1
 			},
 
-			type: 'PUT',
+			headers: {'X-HTTP-Method-Override': 'PUT'},
+			type: 'POST',
 	        error: ajaxError
 		});
 	});		
