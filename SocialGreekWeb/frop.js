@@ -56,7 +56,6 @@ var event_id;
 	        success: function(data, textStatus, jqXHR) {
 				console.log(data);
 	       		$( "#badge_detail_template" ).tmpl( data ).appendTo( "#badge_detail" );
-	       		$( "#badge_head_title" )[0].innerHTML = data.NAME;
 	        },
 	        error: ajaxError
 		});
