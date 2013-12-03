@@ -248,22 +248,22 @@ var event_id;
 	$(document).on("click", "#event_approve_button", function(event, ui) {
 		console.log("Approve Event Button");
 
-		// "api/events/"+event_id+"/a/1"
 		$.ajax({
 			url: "api/events/"+event_id+"/a/1",
 			dataType: "json",
 	        async: false,
-/*
-			data: {
-				// 'event_id': event_id,
-				'approved': 1
-			},
-*/
+	        error: ajaxError
+		});
+	});
+	
+	//Bind the event disapproval button
+	$(document).on("click", "#event_disapprove_button", function(event, ui) {
+		console.log("Disapprove Event Button");
 
-/* Commenting for testing GET approval method
-			headers: {'X-HTTP-Method-Override': 'PUT'},
-			type: 'POST',
-*/
+		$.ajax({
+			url: "api/events/"+event_id+"/d/2",
+			dataType: "json",
+	        async: false,
 	        error: ajaxError
 		});
 	});		
