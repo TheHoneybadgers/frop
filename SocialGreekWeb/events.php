@@ -1,6 +1,9 @@
 <?php
 	include 'db_helper.php';
 	
+	// TODO list events only approved events
+	// events/1/{approved,disapproved,waiting} combine with /a or /d
+	
 	function listEvents() {
 		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS`");
 		$result = getDBResultsArray($dbQuery);
