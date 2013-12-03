@@ -9,6 +9,7 @@
         <!-- API 14 theme customizations can go here. -->
          <item name="android:actionBarStyle">@style/MyActionBar</item>
          <item name="android:windowActionBarOverlay">true</item>
+         <item name="android:editTextColor">@android:color/white</item>
         
     </style>
     
@@ -21,8 +22,7 @@
     
     <style name="FormTheme" parent="android:Theme.Holo">
         
-         <item name="android:actionBarStyle">@style/MyActionBar</item>
-         <item name="android:windowActionBarOverlay">true</item>
+            <item name="android:editTextColor">#ffffff</item>
                 
     </style>
     
