@@ -18,7 +18,7 @@ var event_id;
 
 	//Bind to the create so the list badges page gets updated with the listing
 	$(document).on("pagebeforeshow", "#badge_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+		console.log("badge list page");
 	
 		//Remove the old rows
 		$( ".badge_list_row" ).remove();
@@ -65,11 +65,11 @@ var event_id;
 /* -- GOV ORGS FUNCTIONS -- */
 
 	// Bind to the create so the list gov orgs page gets updated with the listing
-	$(document).on("pagebeforeshow", "#gov_orgs_list_page", function(event, ui) {
-		console.log("pagebeforeshow");
+	$(document).on("pagebeforeshow", "#gov_org_list_page", function(event, ui) {
+		console.log("gov org list page");
 	
 		//Remove the old rows
-		$( ".gov_orgs_list" ).remove();
+		$( ".gov_org_list" ).remove();
 		
 		//JQuery Fetch The New Ones
 		$.ajax({
@@ -79,19 +79,76 @@ var event_id;
 	        success: function(data, textStatus, jqXHR) {
 				console.log(data);
 	        	//Create The New Rows From Template
-	        	$( "#gov_orgs_list_row_template" ).tmpl( data ).appendTo( "#gov_orgs_list" );
+	        	$( "#gov_org_list_row_template" ).tmpl( data ).appendTo( "#gov_org_list" );
 	        },
 	        error: ajaxError
 		});
 		
-		$("#gov_orgs_list").listview("refresh");
+		$("#gov_org_list").listview("refresh");
 	});
 
+
+
+/* -- ORGS FUNCTIONS -- */
+
+	//Bind to the create so the list orgs page gets updated with the listing
+	$(document).on("pagebeforeshow", "#org_list_page", function(event, ui) {
+		console.log("Org List Page");
+	
+		//Remove the old rows
+		$( ".org_list_row" ).remove();
+		
+		var url = "api/orgs";
+		var gov_org = $.url().fparam("gov_org_id");
+		if (gov_org > 0) {
+			url = "api/gov_orgs/"+gov_org+"/orgs/1";
+		}
+		//JQuery Fetch The New Ones
+		$.ajax({
+			url: "api/orgs",
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(data);
+	        	//Create The New Rows From Template
+	        	$( "#org_list_row_template" ).tmpl( data ).appendTo( "#org_list" ); // TODO is there a way to check for nulls?
+				gov_org = -1;
+	        },
+	        error: ajaxError
+		});
+		$("#org_list").listview("refresh");
+	});
+		
+	//Bind the org detail page init text
+	$(document).on("pagebeforeshow", "#org_detail_page", function(event, ui) {
+		console.log("Org Detail Page");
+		var org_id = $.url().fparam("org_id");
+		var urls="api/orgs/"+org_id;
+		
+		//Remove the old rows
+		$( ".org_detail_row" ).remove();
+		
+		//Instead of passing around in JS I am doing AJAX so direct links work
+		//JQuery Fetch The Event
+		$.ajax({
+			url: "api/orgs/"+org_id,
+			dataType: "json",
+	        async: false,
+	        success: function(data, textStatus, jqXHR) {
+				console.log(urls);
+				console.log(data);
+	        	$( "#org_detail_template" ).tmpl( data ).appendTo( "#org_detail" ); // TODO is there a way to check for nulls?
+	        },
+	        error: ajaxError
+		});
+	});
+		
+		
 /* -- EVENT FUNCTIONS -- */
 
 	//Bind to the create so the list events page gets updated with the listing
 	$(document).on("pagebeforeshow", "#event_list_page", function(event, ui) {
-		console.log("pagebeforeshow #event_list_page");
+		console.log("event list page");
 	
 		//Remove the old rows
 		$( ".event_list_row" ).remove();
@@ -274,7 +331,7 @@ var event_id;
 		
 	//Bind the event detail page init text
 	$(document).on("pagebeforeshow", "#event_detail_page", function(event, ui) {
-		console.log("pagebeforeshow #event_detail_page");
+		console.log("event detail page");
 		console.log("Current Event ID: ");
 		console.log(event_id);
 

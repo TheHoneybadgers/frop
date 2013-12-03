@@ -22,8 +22,8 @@
 					<h1>Badges</h1><p>Earn fun badges!</p>
 				</a>
 			</li>
-			<li class="page_list_row list_theme" id="gov_orgs_list_page">
-				<a href="#gov_orgs_list_page" data-transition="slide">
+			<li class="page_list_row list_theme" id="gov_org_list_page">
+				<a href="#gov_org_list_page" data-transition="slide">
 					<h1>Governing Organizations</h1><p>Check out the organizations that run the show</p>
 				</a>
 			</li>
@@ -37,7 +37,7 @@
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Badges</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
-        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a>
+        <a id="badge_add_page_button" href="#badge_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- style="visibility:hidden"></a>  TODO should be hidden by default (unless logged in) -->
    	</div>
 	
 	<div id="badge_list_page_content" data-role="content">
@@ -59,7 +59,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#badge_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
         <h1 class="head_title" id="badge_detail_head_title">Badge Detail</h1>
-        <!-- <a id="save_button" href="#list_events_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+        <!-- <a id="badge_edit_button" href="#badge_edit_page&badge_id=${BADGE_ID}" data-direction="reverse" data-icon="plus" data-theme="d" data-iconpos="notext" style="visibility:hidden">Edit</a> --> <!-- TODO make this edit button -->
     </div>
     
 	<div id="badge_detail_content" data-role="content">
@@ -85,7 +85,7 @@
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
 		<div class="ui-btn-right">
 			<a id="event_approval_page_button" href="#event_approval_page" data-transition="slide" data-icon="grid" data-role="button">Approvals</a>
-			<a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-role="button">Registration</a>
+			<a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-role="button">Registration</a><!-- style="visibility:hidden"></a> TODO should be hidden by default (unless logged in) -->
 		</div>
    	</div>
 	
@@ -160,7 +160,7 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
         <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
-        <!-- <a id="save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a> --> <!-- TODO make this edit button -->
+        <!-- <a id="event_edit_button" href="#event_edit_page&event_id=${event_id}" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext" style="visibility:hidden" >Edit</a> --> <!-- TODO make this edit button -->
     </div>
     
 	<div id="event_detail_content" data-role="content">
@@ -189,7 +189,8 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Add Event</h1>
-        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="check" data-iconpos="right" data-theme="d">Submit</a>
+        <a id="event_add_page_submit_button" href="#event_list_page" data-direction="reverse" data-icon="check" data-iconpos="left" data-theme="d">Submit</a>
+
     </div>
 	<div id="event_add_content" data-role="content">
 		<div class="event_add_form">
@@ -317,11 +318,11 @@
 
 <!-- --- -->
 
-<div data-role="page" id="event_edit_page">
+<div data-role="page" id="event_edit_page"> <!-- TODO Can this and the event add page be merged, since they are very very similar? -->
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_list_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Cancel</a>
         <h1 class="head_title">Edit Event</h1>
-        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d">Save</a>
+        <a id="event_edit_save_button" href="#event_list_page" data-direction="reverse" data-icon="plus" data-theme="d" > <!-- style="visibility:hidden" >-->Save</a>
     </div>
 	<div id="event_edit_content" data-role="content">		
 		<div class="event_form">
@@ -380,18 +381,18 @@
 
 <!-- ------ Gov_Org Pages ------ -->
 
-<div data-role="page" id="gov_orgs_list_page">
+<div data-role="page" id="gov_org_list_page">
     <div data-role="header" data-position="inline" data-theme="d">
 	    <h1 class="head_title">Gov Org List</h1>
 		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
         <!-- <a id="event_add_page_button" href="#event_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> -->
    	</div>
 	
-	<div id="gov_orgs_list_page_content" data-role="content">
-		<ul id="gov_orgs_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
-			<script id="gov_orgs_list_row_template" type="text/x-jquery-tmpl">
-				<li class="gov_orgs_list_row" id="gov_orgs_${GOV_ORGS_ID}">
-					<a href="#gov_orgs_detail_page&gov_orgs_id=${GOV_ORGS_ID}" data-transition="slide">
+	<div id="gov_org_list_page_content" data-role="content">
+		<ul id="gov_org_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="gov_org_list_row_template" type="text/x-jquery-tmpl">
+				<li class="gov_org_list_row" id="gov_org_${GOV_ORG_ID}">
+					<a href="#org_list_page&gov_org_id=${GOV_ORG_ID}" data-transition="slide">
 						<h1>${ACRONYM}</h1>
 						<p>${GOV_ORG_ID} - ${NAME}</p>
 					</a>
@@ -402,6 +403,62 @@
 </div>
 
 <!-- ------ Org Pages ------ -->
+
+<div data-role="page" id="org_list_page">
+    <div data-role="header" data-position="inline" data-theme="d">
+	    <h1 class="head_title">Organizations</h1>
+		<a href="#home_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <a id="org_add_button" href="#org_add_page" data-transition="slide" data-icon="add" data-iconpos="notext" class="ui-btn-right"></a> <!-- style="visibility:hidden"></a> -->
+   	</div>
+	
+	<div id="org_list_page_content" data-role="content">
+		<ul id="org_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="org_list_row_template" type="text/x-jquery-tmpl">
+				<li class="org_list_row" id="org_${ORG_ID}">
+					<a href="#org_detail_page&org_id=${ORG_ID}" data-transition="slide">
+						<h1>${NICKNAME}</h1><p>${LETTERS} - ${CHAPTER}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>
+
+<!-- --- -->
+
+<div data-role="page" id="org_detail_page">
+	<div data-role="header" data-position="inline" data-theme="d">
+		<a href="#org_list_page" data-direction="reverse" data-icon="back" data-theme="d">Back</a>
+        <h1 class="head_title" id="org_detail_head_title">Organization Detail</h1>
+        <a id="org_edit_button" href="#org_edit_page" data-direction="reverse" data-icon="gear" data-theme="d" data-iconpos="notext"></a> <!-- style="visibility:hidden" /> -->
+    </div>
+    
+	<div id="org_detail_content" data-role="content">
+		<ul id="org_detail" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
+			<script id="org_detail_template" type="text/x-jquery-tmpl">
+				<li class="org_detail_row list_theme ui-corner-tl ui-corner-tr ui-corner-bl ui-corner-br ui-corner-top ui-corner-bottom ui-corner-right ui-corner-left ui-corner-all" id="org_detail_${ORG_ID}">
+					<h1>${NICKNAME}</h1>
+					<h3>${LETTERS}</h3>
+					<h3>${CHAPTER}</h3>
+					<h3>${GOV_ORG_ID}</h3>
+					<img src="${CUSTOM_PIC_URL}" />
+					<p>${TYPE}</p>
+					<p>${FOCUS}</p>
+					<p>Founded in ${YEAR_FOUNDED}, Chapter Founded in ${YEAR_CHAPTER_FOUNDED}</p>
+					<p>${BLURB}</p>
+					<em id="org_detail_address">${ADDRESS}</em></br></br>
+					<a href="http://foursquare.com/v/${FOURSQUARE}">Foursquare Venue Page</a>
+					<a href="$HOMEPAGE_URL">${HOMEPAGE_URL}</a>
+					<h6><em>Org Id: ${ORG_ID} </br> Date changed: ${DATE_CHANGED}</em></h6>
+
+				</li>
+			</script>
+		</ul>
+
+	</div>
+</div>
+
+<!-- ------ Error Dialog ------ -->
 
 <div data-role="dialog" id="error_dialog" >
 	<div data-role="header" data-position="inline" data-theme="d">

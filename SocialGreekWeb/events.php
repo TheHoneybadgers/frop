@@ -15,18 +15,19 @@
 		echo json_encode($result);
 	}
 	
-	// TODO list events only approved events
-	// events/1/{approved,disapproved,waiting} combine with /a or /d
-	
-	function listEvents() {
-		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS`");
+	function listEvents($approved) {
+		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `APPROVED` = '%s'",
+			mysql_real_escape_string($approved)
+		);
 		$result = getDBResultsArray($dbQuery);
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
 	
-	function listCurrentEvents() {
-		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `DATE` > CURDATE()");
+	function listCurrentEvents($approved) { // TODO why do we have this and get this week, important to have both?
+		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `DATE` > CURDATE() AND `APPROVED` = '%s'",
+			mysql_real_escape_string($approved)
+		);
 		$result = getDBResultsArray($dbQuery);
 		header("Content-type: application/json");
 		echo json_encode($result);
@@ -41,15 +42,17 @@
 		echo json_encode($result);
 	}
 	
-	function getThisWeek() {
-		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `DATE` > CURDATE() AND `DATE` < CURDATE() + 7");
+	function getThisWeek($approved) {
+		$dbQuery = sprintf("SELECT `EVENT_ID`, `DATE`, `ORG_ID`, `TITLE`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `APPROVED_DATE`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`,`DATE_CHANGED` FROM `EVENTS` WHERE `DATE` > CURDATE() AND `DATE` < CURDATE() + 7",
+			mysql_real_escape_string($approved)
+		);
 		$result=getDBResultsArray($dbQuery);
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
   
 	function addEvent($title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol) {
-		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`, `CREATED_BY`, `DELETED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+		$dbQuery = sprintf("INSERT INTO EVENTS (`TITLE`, `DATE`, `ORG_ID`, `FOURSQUARE`, `ADDRESS`, `START_TIME`, `END_TIME`, `SUMMARY`, `TYPE`, `SPECIAL_NOTES`, `ALCOHOL`, `CREATED_DATE`, `CREATED_BY`, `DELETED`, `APPROVED`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
 			mysql_real_escape_string($title),
 			mysql_real_escape_string($date),
 			mysql_real_escape_string($org_id),
@@ -61,19 +64,36 @@
 			mysql_real_escape_string($type),
 			mysql_real_escape_string($special_notes),
 			mysql_real_escape_string($alcohol),
-			"CURRENT_TIMESTAMP()",
+			mysql_real_escape_string("CURRENT_TIMESTAMP()"),
 			mysql_real_escape_string($_USER['uid']),
-			"false"
+			mysql_real_escape_string("false"),
+			mysql_real_escape_string("0")
 		);
 	
 		$result = getDBResultInserted($dbQuery,'`EVENT_ID`');
 		header("Content-type: application/json");
-		echo json_encode($result);// . "</br>";
+		echo json_encode($result);
 	}
 
-	function approveEvent($id) {
-		$dbQuery = sprintf("UPDATE EVENTS SET APPROVED = 1 WHERE id = '%s'",
-			mysql_real_escape_string($id));
+	// TODO Decide between approve/disapprove and update 
+	// taylor
+	function approveEvent($event_id, $approval_level) {
+		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
+			mysql_real_escape_string($approval_level),
+			mysql_real_escape_string($_USER['uid']),
+			mysql_real_escape_string($event_id));
+
+		$result = getDBResultAffected($dbQuery);
+		
+		header("Content-type: application/json");
+		echo json_encode($result);
+	}
+	
+	function disapproveEvent($event_id, $approval_level) {
+		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
+			mysql_real_escape_string($approval_level),
+			mysql_real_escape_string($_USER['uid']),
+			mysql_real_escape_string($event_id));
 		
 		$result = getDBResultAffected($dbQuery);
 		
@@ -81,7 +101,7 @@
 		echo json_encode($result);
 	}
 
-	// TODO decide what to be able to update
+	// devin
 	function updateEvent($id, $approved/*, $title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol*/) {
 		$dbQuery = sprintf("UPDATE EVENTS SET `APPROVED`='%s'/*, `TITLE`='%s', `DATE`='%s', `ORG_ID`='%s', `FOURSQUARE`='%s', `ADDRESS`='%s', `START_TIME`='%s', `END_TIME`='%s', `SUMMARY`='%s', `TYPE`='%s', `SPECIAL_NOTES`='%s', `ALCOHOL`='%s', `DATE_CHANGED`='%s'*/ WHERE `EVENT_ID`='%s'",
 			mysql_real_escape_string($approved),
@@ -111,5 +131,5 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-
+	
 ?>
