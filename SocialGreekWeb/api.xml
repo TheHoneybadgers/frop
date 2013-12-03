@@ -66,7 +66,8 @@
 			<description><![CDATA[This returns a listing of all events that are approved.]]>
 			</description>
 			
-			<action file='events.php'><![CDATA[listEvents();]]></action>
+			<!-- <action file='events.php'><![CDATA[listEvents(1);]]></action> -->
+			<action file='events.php'><![CDATA[listApprovedEvents();]]></action>
 		</index>
 		
 		<get>
@@ -129,14 +130,15 @@
 		</post>
 		
 		<put>
-			<description><![CDATA[This is how you can update an event.]]></description>
+			<description><![CDATA[This is how you can update an event.]]></description> <!-- TODO -->
 			
-			<action file='events.php'><![CDATA[updateEvent($_REST['events'],$_POST['eventsText']);]]></action>
-			
-			<param id='eventsText'>
-				<description><![CDATA[event Text To update]]></description>
-				<defaultValue><![CDATA[some default event text update]]></defaultValue>
-				<exampleValue><![CDATA[some example event text update]]></exampleValue>
+			<action file='events.php'><![CDATA[updateEvent($_REST['events'], $_POST['approved']);]]></action>
+			<!-- Currently unused parameters
+			, $_POST['title'], $_POST['date'], $_POST['org_id'], $_POST['foursquare'], $_POST['address'], $_POST['start_time'], $_POST['end_time'], $_POST['summary'], $_POST['type'], $_POST['special_notes'], $_POST['alcohol']
+			-->
+			<param id='approved'>
+				<description><![CDATA[If event is approved]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
 			</param>
 		</put>
 		
@@ -146,8 +148,7 @@
 			<action file='events.php'><![CDATA[deleteEvent($_REST['events']);]]></action>
 		</delete>
 		
-		
-		<!-- EVENTS/ORGS API -->
+		<!-- EVENTS/ORGS API --> <!-- TODO this is a fine method, but doesn't seem to work as advertised -->
 		<command id='orgs' security='public'>
 			<description><![CDATA[This section allows you to see event details of specific organizations. Events that are not approved (either dissapproved or simply not approved yet) will not show up unless you are authorized to edit them.]]></description>
 		
@@ -157,10 +158,74 @@
 				<action file='orgs.php'><![CDATA[getOrg($_REST['orgs']);]]></action>
 			</get>
 		</command> <!-- Closes nested orgs -->
+		
+		
+		<!-- EVENTS APPROVE API -->
+		<command id='a' security='public'> <!-- TODO secure this -->
+			<description><![CDATA[Method for approving an event.]]></description>
+			
+			<get>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/a/[anything]', allows you to approve an event.]]></description>
+			
+				<action file='events.php'><![CDATA[approveEvent($_REST['events'], 1);]]></action>
+			</get>
+		</command> <!-- Closes nested approve -->
+		<!-- EVENTS DISAPPROVE API -->
+		<command id='d' security='public'> <!-- TODO secure this -->
+			<description><![CDATA[Method for approving an event.]]></description>
+			
+			<get>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/a/[anything]', allows you to disapprove an event.]]></description>
+			
+				<action file='events.php'><![CDATA[approveEvent($_REST['events'], 2);]]></action>
+			</get>
+		</command> <!-- Closes nested disapprove -->
+		<!-- EVENTS WAITING API -->
+		<command id='w' security='public'> <!-- TODO secure this -->
+			<description><![CDATA[Method for marking an event as awaiting approval.]]></description>
+			
+			<get>
+				<description><![CDATA[This method, 'events/{EVENT_ID}/a/[anything]', allows you to disapprove an event.]]></description>
+			
+				<action file='events.php'><![CDATA[approveEvent($_REST['events'], 0);]]></action>
+			</get>
+		</command> <!-- Closes nested disapprove -->
 	
 	</command> <!-- Closes events -->
 
+	<!-- EVENTS/APPROVALS API -->
+	<command id='approvals' security='public'>
+		<description><![CDATA[This section allows you to see a list of unapproved events.]]></description>
+	
+		<index>
+			<description><![CDATA[This returns a listing of all events that are not approved.]]>
+			</description>
+			
+			<action file='events.php'><![CDATA[listUnapprovedEvents();]]></action>
+		</index>
 
+		<get>
+			<description><![CDATA[By designating 'approvals/{EVENT_ID}', a specific event will be returned along with its details, whether it has happened already or not.]]>
+			</description>
+			
+			<action file='events.php'><![CDATA[getEvent($_REST['approvals']);]]></action>
+		</get>
+
+		<put>
+			<description><![CDATA[This is how you can update an event.]]></description>
+			
+			<action file='events.php'><![CDATA[updateEvent($_REST['approvals'], $_POST['approved']);]]></action>
+			<!-- 
+			, $_POST['title'], $_POST['date'], $_POST['org_id'], $_POST['foursquare'], $_POST['address'], $_POST['start_time'], $_POST['end_time'], $_POST['summary'], $_POST['type'], $_POST['special_notes'], $_POST['alcohol']
+			-->
+			<param id='approved'>
+				<description><![CDATA[If event is approved]]></description>
+				<exampleValue><![CDATA[1]]></exampleValue>
+			</param>
+		</put>
+
+	</command> <!-- Closes approvals -->		
+	
 <!-- GOV_ORGS API -->
 	<command id='gov_orgs' security='public'>
 		<description><![CDATA[This allows you to see, add, and remove governing organizations if you have permissions.]]></description>
@@ -227,8 +292,6 @@
 		<post>
 			<description><![CDATA[The post method allows the posting of new organizations if the user is logged in and authorized to submit events.]]>
 			</description>
-			
-			`ORG_ID`, `LETTERS`, `GOV_ORG_ID`, `CHAPTER`, `NICKNAME`, `TYPE`, `FOCUS`, `YEAR_FOUNDED`, `YEAR_CHAPTER_FOUNDED`, `BLURB`, `FOURSQUARE`, `ADDRESS`, `HOMEPAGE_URL`, `CUSTOM_PIC_URL`
 			
 			<action file='orgs.php'><![CDATA[addOrg($_POST['orgLetters'], $_POST['orgGovOrgId'], $_POST['orgChapter'], $_POST['orgNickname'], $_POST['orgType'], $_POST['orgFocus'], $_POST['orgYearFounded'], $_POST['orgYearChapterFounded'], $_POST['orgBlurb'], $_POST['orgFoursquare'], $_POST['orgAddress'], $_POST['orgHomepageUrl'], $_POST['orgCustomPicUrl']);]]></action>
 
