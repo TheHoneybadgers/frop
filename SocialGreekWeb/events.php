@@ -75,12 +75,10 @@
 		echo json_encode($result);
 	}
 
-	// TODO Decide between approve/disapprove and update 
-	// taylor
 	function approveEvent($event_id, $approval_level) {
-		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
+		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '0', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
 			mysql_real_escape_string($approval_level),
-			mysql_real_escape_string($_USER['uid']),
+//			mysql_real_escape_string($_USER['uid']),
 			mysql_real_escape_string($event_id));
 
 		$result = getDBResultAffected($dbQuery);
@@ -88,20 +86,8 @@
 		header("Content-type: application/json");
 		echo json_encode($result);
 	}
-	
-	function disapproveEvent($event_id, $approval_level) {
-		$dbQuery = sprintf("UPDATE `EVENTS` SET `APPROVED` = '%s', `APPROVED_BY` = '%s', `APPROVED_DATE` = CURRENT_TIMESTAMP() WHERE `EVENT_ID` = '%s'",
-			mysql_real_escape_string($approval_level),
-			mysql_real_escape_string($_USER['uid']),
-			mysql_real_escape_string($event_id));
-		
-		$result = getDBResultAffected($dbQuery);
-		
-		header("Content-type: application/json");
-		echo json_encode($result);
-	}
 
-	// devin
+	// TODO this should update the approved status to 0 (awaiting approval)
 	function updateEvent($id, $approved/*, $title, $date, $org_id, $foursquare, $address, $start_time, $end_time, $summary, $type, $special_notes, $alcohol*/) {
 		$dbQuery = sprintf("UPDATE EVENTS SET `APPROVED`='%s'/*, `TITLE`='%s', `DATE`='%s', `ORG_ID`='%s', `FOURSQUARE`='%s', `ADDRESS`='%s', `START_TIME`='%s', `END_TIME`='%s', `SUMMARY`='%s', `TYPE`='%s', `SPECIAL_NOTES`='%s', `ALCOHOL`='%s', `DATE_CHANGED`='%s'*/ WHERE `EVENT_ID`='%s'",
 			mysql_real_escape_string($approved),
