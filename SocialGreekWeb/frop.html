@@ -415,7 +415,7 @@
 		<ul id="org_list" data-role="listview" data-inset="true" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="org_list_row_template" type="text/x-jquery-tmpl">
 				<li class="org_list_row" id="org_${ORG_ID}">
-					<a href="#org_detail_page&org_id=${ORG_ID}" data-transition="slide">
+					<a class="org_list_row_link" id="org_list_row_link_${ORG_ID}" href="#org_detail_page&org_id=${ORG_ID}" data-transition="slide">
 						<h1>${NICKNAME}</h1><p>${LETTERS} - ${CHAPTER}</p>
 					</a>
 				</li>
