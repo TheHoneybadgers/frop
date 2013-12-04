@@ -44,7 +44,7 @@
             <DatePicker
                 android:id="@+id/datePicker1"
                 android:layout_width="fill_parent"
-                android:layout_height="85dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:calendarViewShown="false" />
 
@@ -150,7 +150,7 @@
                 <TimePicker
                     android:id="@+id/timeStart"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -175,7 +175,7 @@
                 <TimePicker
                     android:id="@+id/timeStop"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView

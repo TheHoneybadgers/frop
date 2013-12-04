@@ -3,36 +3,15 @@ package com.honeybadgers.fropandroid;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.maps.GeoPoint;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -42,6 +21,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class DetailEvent extends FragmentActivity {
 	CheckBox save;
@@ -54,6 +41,8 @@ public class DetailEvent extends FragmentActivity {
 	// private static final String TAG_FOURSQUARE = "FOURSQUARE";
 	private static final String TAG_ADDRESS = "ADDRESS";
 	private static final String TAG_SUMMARY = "SUMMARY";
+	private static final String TAG_START_TIME = "START_TIME";
+	private static final String TAG_END_TIME = "END_TIME";
 	private GoogleMap map;
 	SupportMapFragment mapFrag;
 	static double longitute;
@@ -70,12 +59,14 @@ public class DetailEvent extends FragmentActivity {
 		HashMap<String, String> event = (HashMap<String, String>) in
 				.getSerializableExtra("hashmap");
 
-		String name = event.get(TAG_TITLE);
+		final String name = event.get(TAG_TITLE);
 		final String eventId = event.get(TAG_EVENT_ID);
-		String date = event.get(TAG_DATE);
+		final String date = event.get(TAG_DATE);
 		String orgId = event.get(TAG_ORG_ID);
-		String address = event.get(TAG_ADDRESS);
-		String description = event.get(TAG_SUMMARY);
+		final String address = event.get(TAG_ADDRESS);
+		final String description = event.get(TAG_SUMMARY);
+		final String startTime = event.get(TAG_START_TIME);
+		final String endTime = event.get(TAG_END_TIME);
 
 		TextView lblName = (TextView) findViewById(R.id.name_label);
 		TextView lblEventId = (TextView) findViewById(R.id.eventId_label);
@@ -131,10 +122,31 @@ public class DetailEvent extends FragmentActivity {
 		save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			   @Override
 			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+				   
+				   Date fulldate = null;
+
+			        try {
+			            fulldate = new SimpleDateFormat("yyyy-MM-dd-HH:mm").parse(date+"-"+"12:00");
+			            Log.d("date", fulldate.toString()+ " Starttime:"+ startTime);
+			        } catch (ParseException e) {
+			            e.printStackTrace();
+			        }
+				   
 				   if (save.isChecked()){
 					   MainActivity.user.likedEvents.add(eventId);
 					   Serial(MainActivity.user);
 					   Log.d("Check Box", "Box was checked Item was added");
+					   Calendar cal = Calendar.getInstance();              
+					   Intent intent = new Intent(Intent.ACTION_EDIT);
+					   intent.setType("vnd.android.cursor.item/event");
+					   intent.putExtra("beginTime", fulldate.getTime());
+					   intent.putExtra("allDay", false);
+					   //intent.putExtra("rrule", "FREQ=YEARLY");
+					   intent.putExtra("endTime", fulldate.getTime()+60*60*1000);
+					   intent.putExtra("eventLocation", address);
+					   intent.putExtra("description", description);
+					   intent.putExtra("title", name);
+					   startActivity(intent);
 				   }
 				   else {
 					   if (MainActivity.user.likedEvents.contains(eventId))
