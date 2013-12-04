@@ -54,11 +54,24 @@
         android:textColor="#ffffff"
         android:textStyle="italic" />
 
-    <CheckBox
-        android:id="@+id/checkInterested"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Interested" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/approveB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Approve" />
+
+        <Button
+            android:id="@+id/unapproveB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reject" />
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/map"

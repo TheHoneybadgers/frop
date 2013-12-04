@@ -32,16 +32,16 @@ import android.widget.Toast;
 
 public class SubForm extends Fragment {
 	
-	EditText title,address;
+	EditText title,address,zip,details;
 	TimePicker start, end;
 	Button submit;
 	DatePicker cal;
-	Spinner spin;
+	Spinner spin, state;
 	CheckBox alc;
     Date date = new Date();
     
     private static final String TAG_ORG_ID = "ORG_ID";
-    String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal,orgID;
+    String  titleVal, dateVal, addressVal,start_timeVal ,end_timeVal ,typeVal,orgID, summary;
     int alcohol_present = 0;
     // url's to make request
   		private String base_url = MainActivity.base_url;
@@ -67,7 +67,7 @@ public class SubForm extends Fragment {
  				nameValuePairs.add(new BasicNameValuePair("address",addressVal));
  				nameValuePairs.add(new BasicNameValuePair("start_time",start_timeVal));
  				nameValuePairs.add(new BasicNameValuePair("end_time",end_timeVal));
- 				nameValuePairs.add(new BasicNameValuePair("summary","This is a summary"));
+ 				nameValuePairs.add(new BasicNameValuePair("summary",summary));
  				nameValuePairs.add(new BasicNameValuePair("type",typeVal));
  				nameValuePairs.add(new BasicNameValuePair("special_notes	","none"));
  				nameValuePairs.add(new BasicNameValuePair("alcohol",Integer.toString(alcohol_present)));
@@ -132,12 +132,18 @@ public class SubForm extends Fragment {
 		title = (EditText) getView().findViewById(R.id.titleText);
 		Log.d("here", "here");
 		address = (EditText)getView().findViewById(R.id.addressText);
+		details = (EditText)getView().findViewById(R.id.detailText);
+
+		state = (Spinner)getView().findViewById(R.id.spinnerState);
+		state.setSelection(10);
+		zip = (EditText)getView().findViewById(R.id.zipText);
 
 		start = (TimePicker)getView().findViewById(R.id.timeStart);
 		end = (TimePicker)getView(). findViewById(R.id.timeStop);
 		
 		cal = (DatePicker) getView().findViewById(R.id.datePicker1);
 		spin = (Spinner)getView(). findViewById(R.id.spinner1);
+		
 		
 		alc = (CheckBox)getView().findViewById(R.id.AlcoholBox);
 		
@@ -154,10 +160,7 @@ public class SubForm extends Fragment {
 	    cal.setMinDate(c.getTimeInMillis());								//Set the minimum choosable date as today
 	     c.add(Calendar.YEAR, 1);														
 	    cal.setMaxDate(c.getTimeInMillis());						  //Set the maximum choosable date as 1 year after today
-	    
-	    
-		
-       		
+	    	
 		Button submit = (Button) getView().findViewById(R.id.submitButton);
 
 		submit.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +170,9 @@ public class SubForm extends Fragment {
 				dateVal = cal.getYear()+"-"+cal.getMonth()+"-"+cal.getDayOfMonth();
 				start_timeVal = dateVal+"T"+start.getCurrentHour() + ":"+ start.getCurrentMinute()+":00";
 				end_timeVal = dateVal+"T"+end.getCurrentHour() + ":"+ end.getCurrentMinute()+":00";
-				addressVal = address.getText().toString();
+				addressVal = address.getText().toString() + " " + state.getSelectedItem() + " " + zip.getText();
 				typeVal =  spin.getSelectedItem().toString();
+				summary = details.getText().toString();
 				if(alc.isChecked()){
 					alcohol_present = 1;
 				}

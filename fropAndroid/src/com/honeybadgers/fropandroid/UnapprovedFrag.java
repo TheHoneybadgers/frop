@@ -20,10 +20,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class EventFragment extends ListFragment {
+public class UnapprovedFrag extends ListFragment {
 	
 	// url to make request
-		private static String url = MainActivity.base_url+"events";
+		private static String url = MainActivity.base_url+"approvals";
 				
 		// JSON Node names
 		private static final String TAG_EVENT_ID = "EVENT_ID";
@@ -114,7 +114,7 @@ public class EventFragment extends ListFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.d("Position of clicked item", Integer.toString(position));
 				
-				Intent in = new Intent(getActivity().getApplicationContext(), DetailEvent.class);
+				Intent in = new Intent(getActivity().getApplicationContext(), DetailUnapprovedEvent.class);
 				
 				//pass the hashmap entry for an event to the detailevent class
 				in.putExtra("hashmap", eventList.get(position));

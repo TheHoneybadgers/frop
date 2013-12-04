@@ -18,7 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -38,12 +37,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailEvent extends FragmentActivity {
+public class DetailUnapprovedEvent extends FragmentActivity {
 	CheckBox save;
 
 	// JSON node keys
@@ -62,7 +63,7 @@ public class DetailEvent extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.event_details);
+		setContentView(R.layout.unapproved_details);
 
 		// getting intent data
 		Intent in = getIntent();
@@ -84,7 +85,9 @@ public class DetailEvent extends FragmentActivity {
 		TextView lblAddress = (TextView) findViewById(R.id.address_label);
 		TextView lblSummary = (TextView) findViewById(R.id.summary_label);
 		save = (CheckBox) findViewById(R.id.checkInterested);
-		
+		Button approve = (Button) findViewById(R.id.approveB);
+		Button disapprove = (Button) findViewById(R.id.unapproveB);
+
 		LatLong latLong = new LatLong(address);
 		latLong.getLocationInfo(); //latLong now should have a lat and long for the address
 		
@@ -94,13 +97,14 @@ public class DetailEvent extends FragmentActivity {
 			// Loading map
 			initilizeMap();
 			
-//			Marker mark = map.addMarker(new MarkerOptions().position(new LatLng(latLong.lat, latLong.lon))
-//			        .title("Hamburg"));
+			Marker mark = map.addMarker(new MarkerOptions().position(new LatLng(latLong.lat, latLong.lon))
+			        .title("Hamburg"));
 			    Marker kiel = map.addMarker(new MarkerOptions()
 			        .position(new LatLng(latLong.lat, latLong.lon))
-			        .title(name)
-			        .snippet(orgId));
-			       
+			        .title("CIC")
+			        .snippet("CIC")
+			        .icon(BitmapDescriptorFactory
+			            .fromResource(R.drawable.ic_launcher)));
 
 			    // Move the camera instantly to hamburg with a zoom of 15.
 			    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latLong.lat, latLong.lon), 15));
@@ -128,22 +132,46 @@ public class DetailEvent extends FragmentActivity {
 		lblAddress.setText(address);
 		lblSummary.setText(description);
 		
-		save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			   @Override
-			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-				   if (save.isChecked()){
-					   MainActivity.user.likedEvents.add(eventId);
-					   Serial(MainActivity.user);
-					   Log.d("Check Box", "Box was checked Item was added");
-				   }
-				   else {
-					   if (MainActivity.user.likedEvents.contains(eventId))
-						   MainActivity.user.likedEvents.remove(eventId);
-					   		Serial(MainActivity.user);
-					   		Log.d("Check Box", "Box was unchecked Item was deleted");
-				   }
-			   }
-			});
+		approve.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				HttpGet httppost = new HttpGet(
+						MainActivity.base_url + "events/" + eventId + "/a/1");
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				try {
+					response = client.execute(httppost);
+					Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+					v.getContext().startActivity(myIntent);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		disapprove.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				HttpGet httppost = new HttpGet(
+						MainActivity.base_url + "events/" + eventId + "/d/2");
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				try {
+					response = client.execute(httppost);
+					Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+					v.getContext().startActivity(myIntent);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
 	}
 
 	@Override
