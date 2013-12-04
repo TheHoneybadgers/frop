@@ -117,11 +117,28 @@ var event_id;
 		});
 		$("#org_list").listview("refresh");
 	});
-		
+
+	//Bind the org list row links
+	$(document).on("click", ".org_list_row_link", function(event, ui) {
+		console.log("Org List Row Link clicked");
+
+		var target = event.target || event.srcElement;
+		while (target && !target.id) {
+		    target = target.parentNode;
+		}
+
+		// Substring: remove ID prefix to get event_id
+		org_id = target.id.substring(18, target.id.length);
+		console.log("New ORG ID from clicked element:");
+		console.log(org_id);
+	});		
+
 	//Bind the org detail page init text
 	$(document).on("pagebeforeshow", "#org_detail_page", function(event, ui) {
 		console.log("Org Detail Page");
-		var org_id = $.url().fparam("org_id");
+
+		// var org_id = $.url().fparam("org_id");
+		
 		var urls="api/orgs/"+org_id;
 		
 		//Remove the old rows
