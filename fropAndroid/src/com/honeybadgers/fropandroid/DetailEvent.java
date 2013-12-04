@@ -122,10 +122,10 @@ public class DetailEvent extends FragmentActivity {
 		Log.d("MAP", String.valueOf(latitude) + " " + String.valueOf(longitute));
 
 		lblName.setText(name);
-		lblEventId.setText(eventId);
-		lblDate.setText(date);
-		lblOrgID.setText(orgId);
-		lblAddress.setText(address);
+		//lblEventId.setText( eventId);
+		lblDate.setText("When: "+date);
+		lblOrgID.setText("Hosted by: " + orgId);
+		lblAddress.setText("Where: " + address);
 		lblSummary.setText(description);
 		
 		save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
