@@ -126,7 +126,7 @@ public class DetailEvent extends FragmentActivity {
 				   Date fulldate = null;
 
 			        try {
-			            fulldate = new SimpleDateFormat("yyyy-MM-dd-HH:mm").parse(date+"-"+"12:00");
+			            fulldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startTime);
 			            Log.d("date", fulldate.toString()+ " Starttime:"+ startTime);
 			        } catch (ParseException e) {
 			            e.printStackTrace();
