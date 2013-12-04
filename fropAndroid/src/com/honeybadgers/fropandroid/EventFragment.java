@@ -69,9 +69,11 @@ public class EventFragment extends ListFragment {
 				String descrip = c.getString(TAG_SUMMARY);
 				String title = c.getString(TAG_TITLE);
 				String type = c.getString(TAG_TYPE);
+				String startTime = c.getString(TAG_START_TIME);
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put(TAG_EVENT_ID, eventId);//add the tag and variable to the HASH
 				map.put(TAG_DATE, date);
+				map.put(TAG_START_TIME, startTime);
 				map.put(TAG_ORG_ID, orgId);
 				map.put(TAG_FOURSQUARE, fourSquare);
 				map.put(TAG_ADDRESS, address);
