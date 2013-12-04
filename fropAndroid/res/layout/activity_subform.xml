@@ -29,8 +29,9 @@
                     android:layout_height="wrap_content"
                     android:background="#33000000"
                     android:text="Event Title"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#ff9e00" />
+                    android:textColor="#ff9e00"
+        			android:textSize="18sp"
+            android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/titleText"
@@ -56,9 +57,10 @@
                 android:layout_marginTop="10dip"
                 android:background="#33000000"
                 android:text="Event Summary"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ff9e00" >
-            </TextView>
+                android:textColor="#ff9e00"
+        		android:textSize="18sp"
+            android:textStyle="bold" />
+            
 
             <EditText
                 android:id="@+id/detailText"
@@ -81,8 +83,9 @@
                     android:layout_height="wrap_content"
                     android:background="#33000000"
                     android:text="Zip Code"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#ff9e00" />
+                    android:textColor="#ff9e00"
+        			android:textSize="18sp"
+            android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -110,9 +113,10 @@
                     android:layout_marginTop="10dip"
                     android:background="#33000000"
                     android:text="Address"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#ff9e00" >
-                </TextView>
+                    android:textColor="#ff9e00"
+        			android:textSize="18sp"
+            android:textStyle="bold" />
+                
 
                 <EditText
                     android:id="@+id/addressText"
@@ -139,8 +143,9 @@
                     android:layout_marginTop="10dip"
                     android:background="#33000000"
                     android:text="Start Time"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#ff9e00" />
+                    android:textColor="#ff9e00"
+        			android:textSize="18sp"
+            android:textStyle="bold"/>
 
                 <TimePicker
                     android:id="@+id/timeStart"
@@ -163,8 +168,9 @@
                     android:layout_marginTop="10dip"
                     android:background="#33000000"
                     android:text="End Time"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#ff9e00" />
+                    android:textColor="#ff9e00"
+        			android:textSize="18sp"
+            android:textStyle="bold" />
 
                 <TimePicker
                     android:id="@+id/timeStop"
@@ -179,10 +185,10 @@
                 android:layout_marginTop="10dip"
                 android:background="#33000000"
                 android:text="Type"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ff9e00" />
-
-            <Spinner
+                android:textColor="#ff9e00"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+			<Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

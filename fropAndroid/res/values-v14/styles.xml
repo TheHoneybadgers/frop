@@ -10,6 +10,7 @@
          <item name="android:actionBarStyle">@style/MyActionBar</item>
          <item name="android:windowActionBarOverlay">true</item>
          <item  name="android:editTextColor">@android:color/white</item>
+         <item name= "android:spinnerItemStyle">@style/spinnerTheme</item>
         
     </style>
     
@@ -17,6 +18,11 @@
     <style name="MyActionBar"
            parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@android:color/transparent</item>
+        
+    </style>
+    
+    <style name ="spinnerTheme" parent="android:Theme.Holo.Light">
+        <item name="android:textColor">#ffffff</item>
         
     </style>
     
