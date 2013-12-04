@@ -44,8 +44,8 @@ public class MainActivity extends FragmentActivity {
 	String userName; // The GT username recieved from the API
 	String sessionId; // The session ID received after logging in
 	static UserCache user = new UserCache();
-	static String base_url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/";
-	
+	//static String base_url = "http://dev.m.gatech.edu/d/tpeet3/api/fropWeb/";
+	static String base_url = "http://dev.m.gatech.edu/d/tpeet3/api/sg/";	
 	
 	
 	@Override
@@ -208,6 +208,12 @@ public class MainActivity extends FragmentActivity {
 				return fragment;
 
 			}
+			else if (position == 3) {
+
+				Fragment fragment = new UnapprovedFrag();
+				return fragment;
+
+			}
 			else {
 				Fragment fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
@@ -239,6 +245,8 @@ public class MainActivity extends FragmentActivity {
 				return getString(R.string.title_section2).toUpperCase(l);
 			case 2:
 				return getString(R.string.title_section3).toUpperCase(l);
+			case 3:
+				return getString(R.string.title_section4).toUpperCase(l);
 			}
 			return null;
 		}

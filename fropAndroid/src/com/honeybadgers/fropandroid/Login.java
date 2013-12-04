@@ -30,7 +30,7 @@ public class Login extends Activity {
 			
 Log.d("Enter", "Logging out");
 			
-			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://dev.m.gatech.edu/logout"));
+			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://login.gatech.edu/cas/logout"));
 			myIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);    					  //So that when you press back from the main activity, it dosent go back to the browser
 			startActivity(myIntent);
 			
