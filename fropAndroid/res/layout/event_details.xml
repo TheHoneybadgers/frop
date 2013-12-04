@@ -7,16 +7,21 @@
     android:paddingTop="?android:attr/actionBarSize" >
 
     <!-- Name Label -->
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#33000000" 
+    android:padding="5dip">
     <TextView
         android:id="@+id/name_label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
+        android:padding="10dip"
         android:textColor="#ff9e00"
         android:textSize="25dip"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="#33000000" />
 
     <!-- Description Label -->
 
@@ -59,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Interested" />
+    </LinearLayout>
 
     <fragment
         android:id="@+id/map"

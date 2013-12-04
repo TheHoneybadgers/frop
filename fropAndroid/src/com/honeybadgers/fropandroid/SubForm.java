@@ -51,6 +51,43 @@ public class SubForm extends Fragment {
 
  		
  		public void postData(){
+ 			
+ 			//Pass the URL to the JSON parser and get a JSON Array in response
+ 			JsonParser jParser = new JsonParser();
+ 			
+ 			user_details = jParser.getJSONFromUrl(user_url + MainActivity.session.getName(), MainActivity.session.getSessId());
+ 			
+ 			JSONObject o;
+ 			
+ 			
+ 			try {
+ 				o = user_details.getJSONObject(0);
+ 				Log.d("length of Json array",Integer.toString(user_details.length()));
+ 				orgID = o.getString(TAG_ORG_ID);					//Extract the user's org id from the returned JSON
+ 			} catch (JSONException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}catch(NullPointerException n){
+ 				Log.d("exception", "NullPointer");
+ 				Toast.makeText(getActivity(), "Not logged In, Please login to create an event", Toast.LENGTH_SHORT).show();
+ 				Intent i = new Intent(getActivity(), Login.class);
+ 				i.setAction("LOGIN");
+
+ 				// Closing all the Activities
+ 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+ 				// Add new Flag to start new Activity
+ 				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+ 				/*
+ 				 * Keep no record that login was started, so that when you press
+ 				 * back after logging in, you don't go back to the Login page
+ 				 */
+ 				i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+ 				getActivity().finish();
+ 				startActivity(i);
+ 			}
+ 			
+ 			
  			HttpClient client = new DefaultHttpClient();
  			HttpPost post = new HttpPost(post_url);
  			
@@ -93,40 +130,6 @@ public class SubForm extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		//Pass the URL to the JSON parser and get a JSON Array in response
-		JsonParser jParser = new JsonParser();
-		
-		user_details = jParser.getJSONFromUrl(user_url + MainActivity.session.getName(), MainActivity.session.getSessId());
-		
-		JSONObject o;
-		
-		
-		try {
-			o = user_details.getJSONObject(0);
-			Log.d("length of Json array",Integer.toString(user_details.length()));
-			orgID = o.getString(TAG_ORG_ID);					//Extract the user's org id from the returned JSON
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch(NullPointerException n){
-			Log.d("exception", "NullPointer");
-			Toast.makeText(getActivity(), "Not logged In, Please login to create an event", Toast.LENGTH_SHORT).show();
-			Intent i = new Intent(getActivity(), Login.class);
-			i.setAction("LOGIN");
-
-			// Closing all the Activities
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-			// Add new Flag to start new Activity
-			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			/*
-			 * Keep no record that login was started, so that when you press
-			 * back after logging in, you don't go back to the Login page
-			 */
-			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-			getActivity().finish();
-			startActivity(i);
-		}
 		
 		
 		title = (EditText) getView().findViewById(R.id.titleText);
