@@ -131,8 +131,10 @@
 	<div data-role="header" data-position="inline" data-theme="d">
 		<a href="#event_approval_page" data-direction="reverse" data-icon="back" data-theme="d" data-transition="slide">Back</a>
         <h1 class="head_title" id="event_detail_head_title">Event Detail</h1>
-        <a id="event_disapprove_button" href="#event_approval_page" data-direction="reverse" data-icon="delete" data-theme="d">Reject</a>
-        <a id="event_approve_button" href="#event_approval_page" data-direction="reverse" data-icon="check" data-theme="d">Approve</a> <!-- Should this go to the approval page or the event list page? -->
+        <div class="ui-btn-right">
+        	<a id="event_disapprove_button" href="#event_approval_page" data-direction="reverse" data-icon="delete" data-theme="d" data-role="button">Reject</a>
+        	<a id="event_approve_button" href="#event_approval_page" data-direction="reverse" data-icon="check" data-theme="d" data-role="button" >Approve</a> <!-- Should this go to the approval page or the event list page? -->
+        </div>
     </div>
     
 	<div id="event_approval_detail_content" data-role="content">
